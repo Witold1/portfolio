@@ -1,0 +1,10 @@
+title: 🌐 Population of Alternative Asia
+suptitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 1000m2 Kontur Population dataset - 2022/June (data from Kontur Population dataset)
+date: 2023-03
+categories: [cartography]
+tags: [Alternative Asia, Population, Chart, Kontur Population dataset]
+type: carousel
+slides:
+  - src: gallery/population-charts-alternative-asia/population-charts-alternative-asia--ice.webp
+  - src: gallery/population-charts-alternative-asia/population-charts-alternative-asia--plasma.webp
+  - src: gallery/population-charts-alternative-asia/population-charts-alternative-asia--white.webp

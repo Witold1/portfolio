@@ -1,0 +1,213 @@
+---
+kind: post
+title: "🏢 Building taxonomy"
+subtitle: "Simplified building taxonomy of selected cities"
+date: "2024-11-01"
+version: "draft"
+excerpt: "A minimalist small-multiple grid visualizing the 100 most geometrically complex buildings in each city, computed from OpenStreetMap building geometries."
+tags:
+  - geospatial
+  - osm
+  - visualization
+  - python
+major: true
+coverImage: "gallery/experiment-osm-building-taxonomy/experiment-osm-building-taxonomy.webp"
+---
+
+<Carousel
+  caption="Simplified building taxonomy of selected cities (animation)"
+  items={[
+    { type: "video", src: "gallery/experiment-osm-building-taxonomy/experiment-osm-building-taxonomy.mp4", alt: "Building taxonomy animation (mp4)" }
+  ]}
+/>
+
+## Introduction
+
+Plot simplified taxonomies of buildings across selected cities using PyData, QuackOSM and Metaflow.
+
+> **[#30DayMapChallenge | Day 3: Polygons | 2024](https://30daymapchallenge.com/)** (see: ["30DayMapChallenge" official Github repo ](https://github.com/tjukanovt/30DayMapChallenge))
+>
+> Recently I saw a post by Daniel Gorokhov who illustrated building taxonomy of "interesting buildings" in Milano, Italy, Stockholm, Sweden and Amsterdam, Nethedlands. Here is my extension for that post, with some more cities, mostly in USA, but also in Europe.
+>
+> <p>Chart type is <a href="https://en.wikipedia.org/wiki/Small_multiple">"small multiple" (a.k.a. "grid chart")</a>. How was it made? I run a script that loaded all mapped buildings within city area and counted exterior vertices (nodes) for all of them. Still, I did not explicitly count inner polygons, like courtyards or patios. Then, I took one hundred of buildings with the most nodes to plot them.</p>
+> 
+> <ol class="mdx-list-circled">
+>  <li>Yet, it happened that under current methodology, quite often, "interesting" buildings are repetitive because of construction nature (for example - neighborhoods of apartment buildings or high-rise housing projects; industrial structures, like water treatment ponds, fuel storages, dockside cranes)</li>
+>  <li>Yet, it happened that under current methodology, quite often, "interesting" buildings are repetitive because of construction nature (for example - neighborhoods of apartment buildings or high-rise housing projects; industrial structures, like water treatment ponds, fuel storages, dockside cranes)</li>
+> </ol>
+>
+> ---
+> Made with #Python  
+> Data: #OSM, #OpenStreetMap retrieved with [QuackOSM ](https://kraina-ai.github.io/quackosm/0.12.0/examples/advanced_examples/osm_extracts/#query-osm-extract-by-name)  
+> #dataviz #datavisualization
+
+**Inspiration:** ["building taxonomy of Milano, Stockholm and Amsterdam" ](https://www.linkedin.com/posts/daniel-gorokhov_30daymapchallenge-geospatial-maps-activity-7259234326775521280-melE?utm_source=share&utm_medium=member_desktop) by [Daniel Gorokhov ](https://thisisdaniel.co/)
+
+**Further works:** ["Visualizing a building shapes taxonomy - The City Summit 🏙️🗻 project" ](https://kamilraczycki.com/blog/City-Summit) by [Kamil Raczycki ](https://kamilraczycki.com/)
+
+## Method ?
+
+The chart is a **small multiple** (grid chart):
+
+- Extract all mapped buildings within each city boundary.
+- Count exterior vertices (nodes) for each building polygon (inner courtyards/patios not explicitly counted).
+- Plot the 100 buildings with the most nodes.
+
+Key caveats:
+
+1. Under this methodology, “interesting” buildings can be repetitive due to construction patterns (housing projects, industrial structures, etc.).
+2. Some truly complex structures aren’t mapped well and require case-by-case handling (multi-buildings, connections, etc.).
+
+<CollapsibleSection title="🏗️ How-to: Make this product" level={2} defaultOpen={false}>
+
+  <CodeSnippet
+    title="★ Click to see code snippets"
+    language="python"
+    collapsible
+    defaultOpen={false}
+    code={`import metaflow
+    from metaflow import FlowSpec, Parameter, JSONType, step, NBRunner, pypi
+
+    import quackosm as qosm
+
+    import time
+    import datetime
+
+    import numpy as np
+    import geopandas as gpd
+    import matplotlib
+    import matplotlib.pyplot as plt`}
+  />
+
+  <CodeSnippet
+    title="Pipeline sketch (Metaflow)"
+    language="python"
+    collapsible
+    defaultOpen={false}
+    code={`def _func_count_vertices(row_index, row_values_series):
+      """
+          * https://gis.stackexchange.com/questions/328884/counting-number-of-vertices-in-geopandas
+          * https://gis.stackexchange.com/questions/388606/counting-vertices-and-adding-it-as-number-to-column-using-shapely
+      """
+      geometry = row_values_series.geometry
+      geom_type = geometry.geom_type
+
+      n_vertices = 0
+      #try:
+      if geom_type == "Polygon":
+          n_vertices = len(geometry.exterior.coords)
+      elif geom_type == "MultiPolygon":
+          for inner_geometry in list(geometry.geoms):
+              n_vertices += len(inner_geometry.exterior.coords)
+      else:
+          None
+          #print("- Other type of geometry: ", geom_type, row_index)
+      #except:
+          #print("- There was unexpected error with row: ", row_index)
+
+      return n_vertices`}
+  />
+
+  <CodeSnippet
+    title="Pipeline sketch (Metaflow)"
+    language="python"
+    collapsible
+    defaultOpen={false}
+    code={`def _func_count_vertices(row_index, row_values_series):
+      """
+          * https://gis.stackexchange.com/questions/328884/counting-number-of-vertices-in-geopandas
+          * https://gis.stackexchange.com/questions/388606/counting-vertices-and-adding-it-as-number-to-column-using-shapely
+      """
+      geometry = row_values_series.geometry
+      geom_type = geometry.geom_type
+
+      n_vertices = 0
+      #try:
+      if geom_type == "Polygon":
+          n_vertices = len(geometry.exterior.coords)
+      elif geom_type == "MultiPolygon":
+          for inner_geometry in list(geometry.geoms):
+              n_vertices += len(inner_geometry.exterior.coords)
+      else:
+          None
+          #print("- Other type of geometry: ", geom_type, row_index)
+      #except:
+          #print("- There was unexpected error with row: ", row_index)
+
+      return n_vertices`}
+  />
+
+  <CodeSnippet
+    title="Pipeline sketch (Metaflow)"
+    language="python"
+    collapsible
+    defaultOpen={false}
+    code={`def _func_count_vertices(row_index, row_values_series):
+      """
+          * https://gis.stackexchange.com/questions/328884/counting-number-of-vertices-in-geopandas
+          * https://gis.stackexchange.com/questions/388606/counting-vertices-and-adding-it-as-number-to-column-using-shapely
+      """
+      geometry = row_values_series.geometry
+      geom_type = geometry.geom_type
+
+      n_vertices = 0
+      #try:
+      if geom_type == "Polygon":
+          n_vertices = len(geometry.exterior.coords)
+      elif geom_type == "MultiPolygon":
+          for inner_geometry in list(geometry.geoms):
+              n_vertices += len(inner_geometry.exterior.coords)
+      else:
+          None
+          #print("- Other type of geometry: ", geom_type, row_index)
+      #except:
+          #print("- There was unexpected error with row: ", row_index)
+
+      return n_vertices`}
+  />
+
+</CollapsibleSection>
+
+## Method ?
+
+The chart is a **small multiple** (grid chart):
+
+ 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, nunc eu interdum pharetra, turpis mi pellentesque mi, ac eleifend nunc orci eu diam. Phasellus consequat sed ipsum non suscipit. Sed tortor leo, pulvinar in odio quis, condimentum lacinia dui. Suspendisse ligula risus, iaculis vel sapien at, pretium tristique mauris. Nulla ac nunc fermentum, aliquet tortor quis, aliquam sapien. Nunc sodales lacinia ante eget maximus. Nullam placerat ligula vel tellus blandit porttitor. Nullam quis tempor orci. Proin non orci vel lectus finibus pellentesque quis at elit. In ultricies diam a mauris porta, porta scelerisque felis lacinia. Nulla ligula arcu, interdum at felis id, ultricies facilisis orci. Ut sollicitudin hendrerit est quis congue. Nullam auctor auctor ligula.
+ 2. Cras in mauris ut quam ullamcorper mollis. Sed augue diam, suscipit eu ex quis, rhoncus tempus nisi. Sed purus purus, consequat in mattis eu, mattis nec lorem. Vivamus imperdiet hendrerit leo, at varius sapien tempor ut. Fusce ut leo sit amet nunc suscipit vulputate. Integer nec pretium mi. Morbi in nisi velit. Nam a semper purus.
+ 3. Generated 5 paragraphs, 369 words, 2457 bytes of Lorem Ipsum
+
+ [example link](building-taxonomy)
+
+***
+
+<MediaPresence
+  items={[
+    {
+      label: "LinkedIn post ",
+      href: "https://www.linkedin.com/posts/vital-yevtushenko_30daymapchallenge-python-osm-activity-7261763492032991234-c244"
+    },
+    {
+      label: "kaggle notebook ",
+      href: "https://www.kaggle.com/code/witold1/building-taxonomy-visualization-of-urban-shapes"
+    },
+    {
+      label: "imgur storage ",
+      href: "https://imgur.com/a/post-building-taxonomy-of-rK4hLzF"
+    },
+    {
+      label: "'Data Visualization Picks / Nov 17, 2024' by BI Bites 🍪  (weekly news of dataviz and BI)",
+      href: "https://nastengraph.substack.com/i/151770350/data-visualization-picks"
+    },
+    {
+      label: "Example lynk to inner website",
+      href: "building-taxonomy"
+    }
+  ]}
+/>
+
+
+<CitationBox
+  title="How to cite this work"
+  citation="Visualization “Ukraine's bloody tool” (2025), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/small-project-blood-tool/post"
+/>

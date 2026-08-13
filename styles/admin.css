@@ -1,0 +1,128 @@
+/* /admin - minimalist local preference controls */
+.admin-settings {
+  border-top: 1px solid var(--border);
+}
+
+.admin-setting-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-setting-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.admin-setting-below {
+  width: 100%;
+}
+
+.admin-setting-label {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--page-fg);
+}
+
+.admin-setting-hint {
+  margin: 0.25rem 0 0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--page-fg);
+}
+
+.admin-setting-control {
+  flex-shrink: 0;
+}
+
+.admin-calendar-example {
+  margin: 0;
+  width: 100%;
+}
+
+.admin-select {
+  min-width: 11rem;
+  padding: 0.4rem 0.55rem;
+  font-size: 0.875rem;
+  color: var(--page-fg);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+html.dark .admin-select {
+  background: var(--surface);
+}
+
+.admin-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.admin-switch-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.admin-switch-track {
+  --switch-track: var(--border-strong);
+  --switch-track-on: var(--text-secondary);
+  --switch-knob: rgb(255 255 255);
+  position: relative;
+  width: 2.5rem;
+  height: 1.375rem;
+  border-radius: var(--radius-full);
+  background: var(--switch-track);
+  transition: background-color 0.2s ease;
+}
+
+.admin-switch-track::after {
+  content: '';
+  position: absolute;
+  top: 0.125rem;
+  left: 0.125rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: var(--radius-full);
+  background: var(--switch-knob);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+.admin-switch-input:checked + .admin-switch-track {
+  background: var(--switch-track-on);
+}
+
+.admin-switch-input:checked + .admin-switch-track::after {
+  transform: translateX(1.125rem);
+}
+
+.admin-switch-input:focus-visible + .admin-switch-track {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+html.dark .admin-switch-track {
+  --switch-track: var(--border-strong);
+  --switch-track-on: var(--border);
+  --switch-knob: rgb(255 255 255);
+}
+
+html.dark .admin-switch-input:checked + .admin-switch-track::after {
+  background: var(--page-bg);
+}

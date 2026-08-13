@@ -1,0 +1,10 @@
+title: Breckenridge, CO and its alpine resort, USA
+suptitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)
+categories: [other]
+tags: [USA, Colorado, Breckenridge, ski resort, LiDAR, 3D elevation]  
+type: carousel
+slides:
+  - src: gallery/lidar-breckenridge-colorado/lidar-breckenridge-colorado.webp
+  - src: gallery/lidar-breckenridge-colorado/lidar-breckenridge-colorado.mp4
+    type: video
+    poster: gallery/lidar-breckenridge-colorado/lidar-breckenridge-colorado.poster.webp

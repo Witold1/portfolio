@@ -1,4 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { SITE_ORGANIZATION } from '../lib/site';
+import { themeInitScript } from '../lib/theme';
 
 class MyDocument extends Document {
   render() {
@@ -6,10 +8,9 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta property="og:type" content="website" />
-          <meta property="og:site_name" content="Your Portfolio" />
-          <meta property="og:image" content="/default-image.jpg" />
-          <meta property="og:image:width" content="1200" />
-          <meta property="og:image:height" content="630" />
+          <meta property="og:site_name" content={SITE_ORGANIZATION} />
+          <meta name="color-scheme" content="light dark" />
+          <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
         </Head>
         <body>
           <Main />

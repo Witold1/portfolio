@@ -1,0 +1,21 @@
+name: my-next-app-dev
+services:
+  app:
+    image: my-next-app-dev:local
+    pull_policy: never
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../:/app
+      - node_modules:/app/node_modules
+      - npm_cache:/root/.npm
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+
+volumes:
+  node_modules:
+  npm_cache:

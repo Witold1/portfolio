@@ -1,0 +1,13 @@
+title: 🌐 Population of South America
+suptitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 1000m2 Kontur Population dataset - 2022/June
+date: 2023-04
+categories:
+  - cartography
+tags:
+  - South America
+  - population
+type: carousel
+slides:
+  - src: gallery/population-charts-south-america/population-charts-south-america--ice.webp
+  - src: gallery/population-charts-south-america/population-charts-south-america--plasma.webp
+  - src: gallery/population-charts-south-america/population-charts-south-america--coloredterrain.webp

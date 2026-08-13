@@ -1,0 +1,127 @@
+---
+kind: project
+title: "Project \"Surnames of the World\""
+subtitle: "Meta page for regional surname wordcloud posts"
+excerpt: "A navigation hub for regional surname wordcloud visualizations, with methodology notes and a legacy-style grid."
+date: "2024-06-15"
+year: 2024
+version: draft-beta
+coverImage: "projects/project-surnames-navigator-meta/figures/banner.webp"
+tags:
+  - dataviz
+  - wordcloud
+  - geography
+  - metadata
+---
+
+This is a **meta-post** to ease navigation across surname wordcloud visualizations by world region.
+
+Political boundaries are mostly shown according to their “de facto” status<FootnoteRef id="ref 1" />.
+Raw data came from [Forebears.io](https://forebears.io/).
+
+## Regions
+
+<NavigatorGrid
+  title="Click a tile to open"
+  items={[
+    {
+      href: "/blog/project-surnames/viz-surnames-central-asia",
+      image: "blogposts/project-surnames/viz-surnames-central-asia/viz-surnames-central-asia--merged.webp",
+      label: "Central Asia",
+      flags: "🇰🇿 🇰🇬 🇹🇲 🇹🇯 🇺🇿",
+      subtitle: "Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan"
+    },
+    {
+      href: "/blog/project-surnames/viz-surnames-middle-east",
+      image: "blogposts/project-surnames/viz-surnames-middle-east/viz-surnames-middle-east--merged.webp",
+      label: "Middle East",
+      flags: "🇮🇶 🇮🇷 🇸🇦 🇯🇴 🇾🇪 🇪🇬 🇴🇲 🇦🇪 🇶🇦 🇰🇼 🇸🇾 🇵🇰 🇦🇫 🇮🇱 🇵🇸 🇱🇧 🇹🇷",
+      subtitle: "Arabian peninsula, Levant, Egypt, Iraq, Iran, Türkiye, Afghanistan, Pakistan"
+    },
+    {
+      href: "/blog/project-surnames/viz-surnames-central-america",
+      image: "blogposts/project-surnames/viz-surnames-central-america/viz-surnames-central-america--merged.webp",
+      label: "Central America",
+      flags: "🇬🇹 🇧🇿 🇸🇻 🇭🇳 🇳🇮 🇨🇷 🇵🇦",
+      subtitle: "Guatemala, Belize, El Salvador, Honduras, Nicaragua, Costa Rica, Panama"
+    },
+    {
+      href: "/blog/project-surnames/viz-surnames-indian-subcontinent",
+      image: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--merged.webp",
+      label: "Indian Subcontinent",
+      flags: "🇧🇩 🇧🇹 🇮🇳 🇳🇵 🇵🇰 🇱🇰",
+      subtitle: "Bangladesh, Bhutan, India, Nepal, Pakistan, Sri Lanka"
+    },
+    {
+      href: "/blog/project-surnames/viz-surnames-central-europe",
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--merged.webp",
+      label: "Central Europe",
+      flags: "🇩🇪 🇵🇱 🇨🇿 🇨🇭 🇦🇹 🇸🇰 🇸🇮 🇭🇺",
+      subtitle: "Germany, Poland, Czechia, Switzerland, Austria, Slovakia, Slovenia, Hungary"
+    },
+    {
+      href: "/blog/project-surnames/viz-surnames-iberian-peninsula",
+      image: "blogposts/project-surnames/viz-surnames-iberian-peninsula/viz-surnames-iberian-peninsula--merged.webp",
+      label: "Iberian Peninsula",
+      flags: "🇪🇸 🇵🇹 🇦🇩",
+      subtitle: "Spain, Portugal, Andorra"
+    },
+    {
+      href: "/blog/project-surnames/viz-surnames-balkan-peninsula",
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--merged.webp",
+      label: "Balkan Peninsula",
+      flags: "🇦🇱 🇧🇦 🇧🇬 🇭🇷 🇽🇰 🇲🇪 🇲🇰 🇷🇴 🇷🇸 🇸🇮 🇬🇷 🇲🇩",
+      subtitle: "Albania, Bosnia and Herzegovina, Bulgaria, Croatia, Kosovo, Montenegro, North Macedonia, Romania, Serbia, Slovenia, Greece, Moldova"
+    },
+    {
+      href: "/blog/project-surnames/viz-surnames-baltic-states",
+      image: "blogposts/project-surnames/viz-surnames-baltic-states/viz-surnames-baltic-states--merged.webp",
+      label: "Baltic States",
+      flags: "🇪🇪 🇱🇻 🇱🇹",
+      subtitle: "Estonia, Latvia, Lithuania"
+    },
+    {
+      href: "#",
+      image: "https://picsum.photos/800/500?random=777",
+      label: "More regions upcoming soon",
+      flags: "☺️",
+      subtitle: "Additional regional surname maps are in progress."
+    }
+  ]}
+/>
+
+## FAQ
+
+<CollapsibleSection title="How to read these wordcloud maps?" level={2} defaultOpen={false}>
+  The bigger the word, the more frequent the surname. Wordclouds are built from aggregated surname frequencies by administrative unit.
+  
+  
+  Interactive reference example: <a className="mdx-link" href="https://gallery.pyecharts.org/#/WordCloud/wordcloud_diamond" target="_blank" rel="noreferrer">Apache ECharts wordcloud demo</a>.
+</CollapsibleSection>
+
+## References
+
+<Footnotes>
+  <FootnoteDefinition id="ref 1">
+    _Natural Earth’s editorial policy is to show political boundaries according to their de facto status. 
+    We show disputed areas and boundaries, too, so you can repurpose to suit your needs. 
+    This policy has been in place since the project launch in 2009._
+
+    [Natural Earth’s Disputed boundaries policy](https://www.naturalearthdata.com/about/disputed-boundaries-policy/)
+  </FootnoteDefinition>
+  <FootnoteDefinition id="2">
+    Good editorial use: move low-priority details (naming debates, one-off caveats, timeline precision) into notes so the main paragraph stays clear.
+  </FootnoteDefinition>
+</Footnotes>
+
+- Forebears article (archived): “Accuracy of Surname Statistics on Forebears”
+- Naming customs: [FamilySearch Europe](https://www.familysearch.org/en/wiki/Europe)
+
+<MediaPresence items={[]} />
+
+<CitationBox
+  title="How to cite this work"
+  citation="Project “Surnames of …” (2024), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/project-surnames-navigator/post"
+/>
+

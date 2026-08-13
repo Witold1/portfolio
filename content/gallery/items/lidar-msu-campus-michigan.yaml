@@ -1,0 +1,11 @@
+title: 🏙️ Michigan State University campus in East Lansing, MI, USA 🇺🇸
+suptitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)
+date: 2023-03-03
+categories: [other]
+tags: [USA, Michigan, East Lansing, Michigan State University, LiDAR, 3D elevation]
+type: carousel
+slides:
+  - src: gallery/lidar-msu-campus-michigan/lidar-msu-campus-michigan.webp
+  - src: gallery/lidar-msu-campus-michigan/lidar-msu-campus-michigan.mp4
+    type: video
+    poster: gallery/lidar-msu-campus-michigan/lidar-msu-campus-michigan.poster.webp

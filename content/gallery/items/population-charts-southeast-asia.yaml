@@ -1,0 +1,11 @@
+title: 🌐 Population of Southeast Asia
+suptitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 1000m2 Kontur Population dataset - 2022/June
+date: 2023-05
+categories: [cartography]
+tags: [Southeast Asia, population]
+type: carousel
+slides:
+  - src: gallery/population-charts-southeast-asia/population-charts-southeast-asia--hot.webp
+  - src: gallery/population-charts-southeast-asia/population-charts-southeast-asia--ice.webp
+  - src: gallery/population-charts-southeast-asia/population-charts-southeast-asia--plasma.webp
+  - src: gallery/population-charts-southeast-asia/population-charts-southeast-asia--white.webp

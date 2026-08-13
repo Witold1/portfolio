@@ -1,15 +1,11 @@
-FROM node:18
+# syntax=docker/dockerfile:1.7
+FROM node:20
 
 WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
-RUN npm run build
+RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund --prefer-offline
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

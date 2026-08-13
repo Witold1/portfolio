@@ -1,0 +1,9 @@
+title: 🇱🇹🇱🇻🇪🇪 Baltic States Hillshaded Elevation
+suptitle: OSM-based road network and COP-DEM/Copernicus DEM-based hillshaded terrain
+date: 2023-07
+categories: [cartography]
+tags: [Baltic States, road network, hillshaded terrain]
+type: carousel
+slides:
+  - src: gallery/hillshaded-road-network-baltic-states/hillshaded-road-network-baltic-states--terrain.mp4
+  - src: gallery/hillshaded-road-network-baltic-states/hillshaded-road-network-baltic-states--roads.mp4

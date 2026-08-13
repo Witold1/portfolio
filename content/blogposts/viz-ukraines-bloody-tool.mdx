@@ -1,0 +1,65 @@
+---
+kind: post
+title: "Ukraine's bloody tool"
+subtitle: "Visualizing official casualty cross-reports since Feb 2022"
+date: "2025-04-01"
+version: "draft"
+excerpt: "A visualization of cross-reported casualties from daily briefings, with notes on definitions, limitations, and methodology."
+tags:
+  - dataviz
+  - open-source-intelligence
+  - selenium
+  - scraping
+  - ai
+major: true
+coverImage: "gallery/dataset-ukraine-bloody-toll/dataset-ukraine-bloody-toll.webp"
+---
+
+## Introduction
+
+Visualize official casualty reports from the active stage of the Russia–Ukraine war using PyData, Selenium, BeautifulSoup4, and LLM-assisted extraction.
+
+<Carousel
+  caption="Officially reported casualties in Russia–Ukraine war, since Feb 2022"
+  items={[
+    { src: "gallery/dataset-ukraine-bloody-toll/dataset-ukraine-bloody-toll.webp", alt: "Casualty chart preview" }
+  ]}
+/>
+
+## Notes on interpretation
+
+<details>
+  <summary><b>What’s important to understand before reading the numbers?</b></summary>
+
+  1. These are **casualties**, not fatalities. A “casualty” can include killed, wounded, captured, missing, etc., and can be counted multiple times across time depending on reporting practices.
+  2. These are **cross-reported** figures (Country A reporting Country B losses, and vice-versa). They are best thought of as official propaganda signals rather than ground truth.
+  3. Quantification is uncertain; a plausible “ground truth” could be far from cross-reports for any given day.
+  4. You can apply your own wounded-to-killed ratios if you want to reason about fatalities, but assumptions will dominate.
+
+</details>
+
+## Sources and data access (legacy summary)
+
+- Aggregated secondary tables (claimed to be based on official briefings):
+  - `minfin.com.ua`
+  - `mskvremya.ru`
+- Examples of primary sources:
+  - Russian MoD briefing example: `https://briefing-mo.ru/...`
+  - Ukrainian operational update example: `https://www.zsu.gov.ua/...`
+
+Dataset:
+
+- [Google Sheets dataset (“Bloody tool”)](https://docs.google.com/spreadsheets/d/1zthDwswqgwaYF823zvGDj5EslY3XWL24VyfgiP9t7Q8/edit?usp=sharing)
+
+Inspiration:
+
+- ["Iraq’s bloody toll" (Simon Scarr)](https://www.simonscarr.com/iraqs-bloody-toll)
+
+<MediaPresence items={[]} />
+
+<CitationBox
+  title="How to cite this work"
+  citation="Visualization “Ukraine's bloody tool” (2025), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/small-project-blood-tool/post"
+/>
+

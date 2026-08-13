@@ -1,0 +1,10 @@
+title: 🚙 Presentation on CAV (AV) triage
+suptitle: Take-home with an ad-hoc-collected dataset on connected and autonomous vehicles (CAV/AV) controlled testing operations (self-driving triage)
+date: 2022
+categories: [analytics, other]
+tags: [Presentation, General, CAV, AV, testing operations, self-driving triage]
+type: carousel
+slides:
+  - src: gallery/dataset-self-driving-triage/dataset-self-driving-triage--mixed.webp
+  - src: gallery/dataset-self-driving-triage/dataset-self-driving-triage--lines.webp
+  - src: gallery/dataset-self-driving-triage/dataset-self-driving-triage--clouds.webp

@@ -1,0 +1,134 @@
+---
+kind: post
+hidden: true
+title: "Surnames of the Balkan Peninsula"
+subtitle: "Regional surname wordcloud maps"
+date: "2024-06-15"
+version: "draft"
+excerpt: "Surname frequency wordclouds for the Balkan Peninsula and nearby states."
+tags:
+  - dataviz
+  - wordcloud
+  - geography
+  - surnames
+major: true
+coverImage: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--merged.webp"
+---
+
+<Carousel
+  caption="Surnames of the Balkan Peninsula (merged region)"
+  items={[
+    {
+      type: "image",
+      src: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--merged.webp",
+      alt: "Merged surname wordcloud map of the Balkan Peninsula"
+    }
+  ]}
+/>
+
+Surname frequency wordclouds for the Balkan Peninsula, by administrative unit.
+Political boundaries are shown according to their “de facto” status.
+Data came from [Forebears.io](https://forebears.io/).
+
+Hub: [Project “Surnames of the World”](/projects/project-surnames-navigator-meta).
+
+## Maps
+
+<MediaGrid
+  title="Countries (click a tile)"
+  items={[
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--ALB.svg",
+      label: "Albania",
+      flags: "🇦🇱",
+      subtitle: "Albania"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--BIH.svg",
+      label: "Bosnia and Herzegovina",
+      flags: "🇧🇦",
+      subtitle: "Bosnia and Herzegovina"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--BGR.svg",
+      label: "Bulgaria",
+      flags: "🇧🇬",
+      subtitle: "Bulgaria"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--HRV.svg",
+      label: "Croatia",
+      flags: "🇭🇷",
+      subtitle: "Croatia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--XX.svg",
+      label: "Kosovo",
+      flags: "🇽🇰",
+      subtitle: "Kosovo (asset code XX — processor fallback; not ISO-assigned)"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--MNE.svg",
+      label: "Montenegro",
+      flags: "🇲🇪",
+      subtitle: "Montenegro"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--MKD.svg",
+      label: "North Macedonia",
+      flags: "🇲🇰",
+      subtitle: "North Macedonia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--ROU.svg",
+      label: "Romania",
+      flags: "🇷🇴",
+      subtitle: "Romania"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--SRB.svg",
+      label: "Serbia",
+      flags: "🇷🇸",
+      subtitle: "Serbia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--SVN.svg",
+      label: "Slovenia",
+      flags: "🇸🇮",
+      subtitle: "Slovenia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--GRC.svg",
+      label: "Greece",
+      flags: "🇬🇷",
+      subtitle: "Greece"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--MDA.svg",
+      label: "Moldova",
+      flags: "🇲🇩",
+      subtitle: "Moldova"
+    }
+  ]}
+/>
+
+## FAQ
+
+<CollapsibleSection title="How to read these wordcloud maps?" level={2} defaultOpen={false}>
+  The bigger the word, the more frequent the surname. Wordclouds are built from aggregated surname frequencies by administrative unit.
+
+  Interactive reference example: <a className="mdx-link" href="https://gallery.pyecharts.org/#/WordCloud/wordcloud_diamond" target="_blank" rel="noreferrer">Apache ECharts wordcloud demo</a>.
+</CollapsibleSection>
+
+## References
+
+- Forebears article (archived): “Accuracy of Surname Statistics on Forebears”
+- Naming customs: [FamilySearch Europe](https://www.familysearch.org/en/wiki/Europe)
+
+<MediaPresence items={[]} />
+
+<CitationBox
+  title="How to cite this work"
+  citation="Project “Surnames of the Balkan Peninsula” (2024), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/project-surnames-navigator/post"
+/>

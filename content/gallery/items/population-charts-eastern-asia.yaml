@@ -1,0 +1,12 @@
+title: 🌐 Population of Eastern Asia
+suptitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 400m2 Kontur Population dataset - 2022/June
+date: 2023-03
+src: gallery/population-charts-eastern-asia/population-charts-eastern-asia--hot.webp
+categories: [cartography]
+tags: [Eastern Asia, population]
+type: carousel
+slides:
+  - src: gallery/population-charts-eastern-asia/population-charts-eastern-asia--hot.webp
+  - src: gallery/population-charts-eastern-asia/population-charts-eastern-asia--ice.webp
+  - src: gallery/population-charts-eastern-asia/population-charts-eastern-asia--plasma.webp
+  - src: gallery/population-charts-eastern-asia/population-charts-eastern-asia--white.webp

@@ -1,0 +1,11 @@
+title: 🌐 Population of Central Asia
+suptitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 1000m2 Kontur Population dataset - 2022/June
+date: 2023-03
+categories: [cartography]
+tags: [Central Asia, population]
+type: carousel
+slides:
+  - src: gallery/population-charts-central-asia/population-charts-central-asia--hot.webp
+  - src: gallery/population-charts-central-asia/population-charts-central-asia--ice.webp
+  - src: gallery/population-charts-central-asia/population-charts-central-asia--plasma.webp
+  - src: gallery/population-charts-central-asia/population-charts-central-asia--white.webp

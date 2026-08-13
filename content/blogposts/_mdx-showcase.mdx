@@ -1,0 +1,311 @@
+---
+kind: post
+title: "MDX Showcase: Custom Components + Design Language"
+subtitle: "Prose and lists, footnotes, carousels, collapsible sections, WIP reveal, ToC, and media presence"
+citationAuthor: "Yevtushenko, Vitaliy"
+date: "1900-01-01"
+excerpt: "A working reference post demonstrating our MDX components, styles, and authoring patterns."
+coverImage: "https://picsum.photos/1200/600?random=99"
+tags:
+  - mdx
+  - docs
+  - design
+hidden: true
+---
+
+This post is a **living reference**: copy/paste any of the snippets below into other posts.
+
+On blog and project pages, a **collapsible table of contents** is rendered automatically above the article (from `##`–`####` headings plus `<CitatiоnBox>` and `<MediaPresence>` section titles). You normally should **not** add a second `<Toc />` inside the MDX. Use `<Toc items={[…]} />` only when you need a fully manual list inside the body.
+
+## Design language
+
+- **Layout**: legacy-inspired blog cards, dashed borders, calm typography.
+- **Dark mode**: everything should remain readable, with preserved hierarchy.
+- **MDX blocks**: framed “content widgets” that don’t fight the article text.
+
+## Prose examples: paragraphs and lists
+
+  ### H3
+  #### H4
+  ##### H5
+  ###### H6
+
+
+  Plain paragraphs are the default: they inherit spacing and color from the article body. Use *emphasis*, **strong**, and `inline code` in the flow of a sentence.
+
+  A second paragraph shows the usual gap between blocks. For the same underline style as MDX components, use a normal markdown link: [example.com](https://example.com).
+
+  **Unordered list** (bullets, GFM):
+
+  - First item with **bold** and a nested level:
+    - Nested bullet one
+    - Nested bullet two
+  - Second top-level item
+  - Third item with a [link inside the list](https://example.com)
+
+  **Ordered list** (numbered):
+
+  1. First step. Numbering is automatic.
+  2. Second step; lines can wrap when the column is narrow, like this longer sentence that demonstrates wrapping in the article layout.
+  3. Third step to finish the sequence.
+
+  **Circled numbers** (no component; plain HTML in MDX). Same padding and spacing as other lists; markers are ①–⑳, then decimal if you go past 20:
+
+  <ol class="mdx-list-circled">
+    <li>Yet, it happened that under the current methodology, “interesting” buildings are often repetitive because of construction patterns (housing blocks, industrial sites, etc.).</li>
+    <li>Some of the <em>actually most complex</em> structures are not mapped well and need case-by-case handling.</li>
+  </ol>
+
+  Mixed idea: after a list, another short paragraph resets the rhythm before the next heading.
+
+## Optional collapsible section and paragraphs, blocks, lists, and carousels inside collapsibles
+
+  <CollapsibleSection title="Optional collapsible section" level={3} defaultOpen={false}>
+    Longer sections can live inside **`CollapsibleSection`**: native `<details>` behavior, with a real heading (`level` **2**, **3**, or **4**) for outline and ToC. The sidebar ToC picks up `title` and `level` from the opening tag, using the same slug as the rendered heading.
+
+    - `defaultOpen={true}` starts expanded.
+    - Default hints: **Click or tap to open/close section**; override with `hintOpen` / `hintClose` or hide with `showHint={false}`.
+    - Omit duplicate markdown `###` with the same text, or you will get two ToC entries.  
+  </CollapsibleSection>
+
+  MDX mixes **markdown** and **JSX**. Block-level JSX (`<div>…</div>` split across lines) must sit in its own “paragraph” in the AST: put **blank lines** before the opening tag and after the closing tag. If you glue `<div>` to prose without a blank line, you can get compile errors like `Expected a closing tag for <div> … before the end of paragraph`. **Do not put `<div>` inside a markdown paragraph.** The renderer wraps prose in `<p>…</p>`, and `<p>` cannot contain `<div>`, which breaks HTML and can cause hydration errors like `Expected server HTML to contain a matching <div> in <p>`. For **inline** chips or highlights, use `<span style={{ display: 'inline-block', … }}>` (or plain `<span>`) instead; reserve `<div>` for blocks separated by blank lines.
+
+  Long posts often put **several paragraphs**, **markdown lists**, **`<NavigatorGrid />`**, and **`<Carousel />`** in the same `<CollapsibleSection>`. Use a **blank line** between paragraphs, between a paragraph and a list, and **before and after** block JSX so MDX does not merge invalid nesting.
+
+  Open the **parent** section below for copy-pasteable **`level={4}`** demos (all under one **`level={3}`** parent). Nested `<details>` is valid HTML.
+
+  <CollapsibleSection title="Prose, blocks, NavigatorGrid, lists, and carousels" level={3} defaultOpen={false}>
+
+    <CollapsibleSection title="Plain markdown only (safest default)" level={4} defaultOpen={false}>
+
+      First paragraph as normal markdown.
+
+      Second paragraph with a [markdown link](https://example.com) and **strong**. External targets pick up the site link treatment when you use plain markdown: [MDN](https://developer.mozilla.org/).
+    </CollapsibleSection>
+
+    <CollapsibleSection title="Inline color and emphasis (no Tailwind in MDX)" level={4} defaultOpen={false}>
+
+      Tailwind does not scan `content/**/*.mdx`, so prefer **inline styles** or existing global classes for one-off accents. Example: <span style={{ color: '#b45309' }}>amber callout text</span> beside normal body copy. Combine with <em>italics</em> and `code` as needed.
+    </CollapsibleSection>
+
+    <CollapsibleSection title="Links with explicit classes (internal vs external)" level={4} defaultOpen={false}>
+
+      Same-origin paths behave as internal navigation: <a className="mdx-link" href="/blog/">Blog index</a>. External URLs can use the shared external pattern: <a className="mdx-link mdx-link--external" href="https://example.com" target="_blank" rel="noopener noreferrer">Example.com</a> (marker and new tab come from your global styles + attributes).
+    </CollapsibleSection>
+
+    <CollapsibleSection title="Multiline block &lt;div&gt; (note blank lines)" level={4} defaultOpen={false}>
+
+      The line above this callout is blank so MDX does not merge the `<div>` into a paragraph.
+
+      <div style={{ borderLeft: '3px solid #64748b', paddingLeft: '0.75rem', margin: '0.5rem 0' }}>
+        Callout or sidebar-style block: put real sentences here. You can wrap multiple lines inside one div; 
+        keep blank lines <strong>outside</strong> the div so MDX does not treat the block as part of a markdown paragraph.
+      </div>
+
+      The line below the closing `</div>` is blank, then this paragraph continues normally.
+    </CollapsibleSection>
+
+    <CollapsibleSection title="Single-line block (compact)" level={4} defaultOpen={false}>
+
+      Inline with text: <span style={{ display: 'inline-block', background: '#f4f4f5', padding: '0 0.25rem', borderRadius: '2px' }}>highlight strip</span> - use `<span>` (not `<div>`) inside markdown paragraphs so the output stays valid `<p>…</p>`. For a full-width strip, use a block `<div>` with blank lines above and below.
+    </CollapsibleSection>
+
+    <CollapsibleSection title="NavigatorGrid nested inside a collapsible" level={4} defaultOpen={false}>
+
+      Short intro in markdown. Block components like `<NavigatorGrid />` and `<MediaGrid />` need the same blank-line discipline: isolate the grid from paragraphs above and below. The **grid** control defaults to **Uniform** (square tiles, like **`/gallery`**). Default **`imageFit` is `none`** for uniform tiles; use **`imageFit="cover"`** to match the gallery, **`imageFit="contain"`** to letterbox (e.g. maps), or set **`grid="variable"`** (or the toolbar) for masonry.
+
+      <NavigatorGrid
+        title="Toy tiles (styleguide only)"
+        mode="link"
+        size="md"
+        imageFit="contain"
+        items={[
+          {
+            href: "/blog/",
+            image: "https://picsum.photos/400/250?random=501",
+            label: "Blog index",
+            subtitle: "Internal route example",
+            flags: "📚"
+          },
+          {
+            href: "https://example.com",
+            image: "https://picsum.photos/400/250?random=502",
+            label: "Example.com",
+            subtitle: "External tile",
+            flags: "⎋"
+          }
+        ]}
+      />
+
+      <MediaGrid
+        title="Compact modal image grid (inline content pattern)"
+        size="sm"
+        showGridToggle={false}
+        imageFit="contain"
+        items={[
+          {
+            image: "https://picsum.photos/500/350?random=511",
+            label: "Figure A",
+            subtitle: "Opens in modal"
+          },
+          {
+            image: "https://picsum.photos/500/350?random=512",
+            label: "Figure B",
+            subtitle: "Compact layout"
+          },
+          {
+            type: "video",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            label: "Video tile",
+            subtitle: "Video also opens in modal"
+          }
+        ]}
+      />
+
+      After the grid, resume normal markdown. This pattern works in project MDX pages too.
+    </CollapsibleSection>
+
+    <CollapsibleSection title="Several paragraphs + markdown list" level={4} defaultOpen={false}>
+
+      Start with a short opener that sets context.
+
+      Add a second paragraph so you can see vertical rhythm and line length in the collapsible body. Inline links work: [Wikipedia - Markdown](https://en.wikipedia.org/wiki/Markdown).
+
+      What to verify before you publish:
+
+      - The list starts after a **blank line** (markdown block boundary), not glued to the previous sentence.
+      - Nested bullets when you need hierarchy:
+        - Child item A
+        - Child item B
+      - A final item with `inline code` and a [link inside the list](https://example.com).
+
+      Close with a wrap-up paragraph so the section does not end abruptly on a list. That reads better in print and in screen readers.
+    </CollapsibleSection>
+
+    <CollapsibleSection title="Ordered list, then carousel, then prose" level={4} defaultOpen={false}>
+
+      Use a numbered list when order matters, then show figures:
+
+      1. Pick stills with different aspect ratios if you want to stress-test layout.
+      2. Keep captions short; **click an image** to open the lightbox (same behavior as a top-level carousel).
+
+      <Carousel
+        caption="Carousel nested inside CollapsibleSection (click image for modal)"
+        aspect="wide"
+        items={[
+          { src: "https://picsum.photos/1200/800?random=701", alt: "Wide still 1" },
+          { src: "https://picsum.photos/800/1200?random=702", alt: "Portrait still 2" },
+          { src: "https://picsum.photos/1000/1000?random=703", alt: "Square still 3" }
+        ]}
+      />
+
+      After the carousel, explain what the reader should take away from the figures. If you add another list, separate it with a blank line:
+
+      - Keep blank lines around `<Carousel />` and other block components.
+      - Prefer GFM markdown lists here; use raw `<ul>` only when you need custom markup.
+    </CollapsibleSection>
+
+    <CollapsibleSection title="Prose, then square carousel, then closing paragraph" level={4} defaultOpen={false}>
+
+      Square framing works well for thumbnails, UI screenshots, or maps where width and height should feel balanced. Intro paragraph ends here.
+
+      <Carousel
+        caption="Square aspect carousel for uniform tiles"
+        aspect="square"
+        items={[
+          { src: "https://picsum.photos/900/900?random=801", alt: "Square frame 1" },
+          { src: "https://picsum.photos/900/900?random=802", alt: "Square frame 2" }
+        ]}
+      />
+
+      Closing paragraph: choose `aspect="wide"` (16:9) vs `aspect="square"` (1:1) deliberately so captions line up with your narrative and the figure does not feel cropped or floating.
+    </CollapsibleSection>
+
+    <CollapsibleSection title="Very nested CollapsibleSection" level={4} defaultOpen={false}>
+      <CollapsibleSection title="Deeper" level={5} defaultOpen={false}>
+        <CollapsibleSection title="Deepst shown" level={6} defaultOpen={false}>
+          You made it?
+        </CollapsibleSection>
+      </CollapsibleSection>    
+    </CollapsibleSection>
+
+  </CollapsibleSection>
+
+## Under construction cover (WipReveal)
+
+  Blog and project **detail** pages automatically wrap the article body in this cover when frontmatter has `wip: true`, or a `version` that looks like a draft (`draft`, `draft article`, `draft-beta`, …). Title and meta stay clear; click the frosted overlay once to peek. Set `wip: false` to opt out even if `version` mentions draft.
+
+  You can also wrap **any block** in MDX (blank lines before and after the tags):
+
+  <WipReveal title="Sample chart section still in progress">
+
+    Pretend this is unfinished work: a short paragraph, a list, and a small image strip sit behind the cover until you click.
+
+    - Blurred preview of the body
+    - Kicker: **Under construction**
+    - Hint: **Click to peek anyway**
+
+    <Carousel
+      caption="Placeholder media behind the WIP cover"
+      items={[
+        { src: "https://picsum.photos/1200/800?random=41", alt: "WIP demo 1" },
+        { src: "https://picsum.photos/1200/800?random=42", alt: "WIP demo 2" }
+      ]}
+    />
+
+  </WipReveal>
+
+  Optional props: `kicker`, `title`, `hint`, and `active` (default `true`; use `active={false}` to render children with no cover).
+
+## Optional Interactive footnotes
+
+  Footnotes can show a preview popover on hover/focus and still work as normal jump links.<FootnoteRef id="1" /> In longer writing, they are useful for source links, caveats, and small side notes that would otherwise interrupt the paragraph rhythm.<FootnoteRef id="2" />
+
+  Imagine you are describing a migration from legacy HTML to MDX: the main text can stay focused on decisions and outcomes, while footnotes hold implementation details, dates, and external references.<FootnoteRef id="3" /> This keeps the narrative readable on first pass, but still gives power users context one hover away.
+
+  You can also use footnotes for "method notes" in data posts: sample size assumptions, API limits, and timing windows.<FootnoteRef id="4" /> In practice, readers who need those details can open them instantly, and readers who do not can keep moving without losing flow.
+
+  <Footnotes>
+    <FootnoteDefinition id="1">
+      Basic behavior: hover or focus the superscript reference to preview this text inline. Click still jumps to the footnotes section as a normal anchor.
+    </FootnoteDefinition>
+    <FootnoteDefinition id="2">
+      Good editorial use: move low-priority details (naming debates, one-off caveats, timeline precision) into notes so the main paragraph stays clear.
+    </FootnoteDefinition>
+    <FootnoteDefinition id="3">
+      External references work too. Example:{' '} <a className="mdx-link" href="https://tools.simonwillison.net/footnotes-experiment" target="_blank" rel="noreferrer">interactive footnotes demo</a>.
+    </FootnoteDefinition>
+    <FootnoteDefinition id="4">
+      Data-method note example: "Aggregation uses daily snapshots from 2024-01-01 to 2024-03-31; missing dates are forward-filled for visualization continuity."
+    </FootnoteDefinition>
+  </Footnotes>
+
+## Optional Carousel section with modal window
+
+  Click an image to open it in a modal.
+
+  <Carousel
+    caption="Example carousel (images)"
+    items={[
+      { src: "https://picsum.photos/1200/800?random=10", alt: "Example 1" },
+      { src: "https://picsum.photos/600/1400?random=100", alt: "Example 2" }
+    ]}
+  />
+
+<MediaPresence
+  items={[
+    { label: "Example link (announcement)", href: "https://example.com", note: "(placeholder)" },
+    { label: "Another mention", href: "https://example.com/2" }
+  ]}
+/>
+
+Manual attribution while BibTeX still comes from **page frontmatter** (`title`, `date`, `citationAuthor`, optional `citationUrl`):
+
+<CitationBox
+  title="How to cite this page"
+  citation="Yevtushenko, V. (2026). MDX Showcase: Custom Components + Design Language. Witold's Data Consulting."
+/>
+
+Fully automatic (same frontmatter - no `citation` / `url` props):
+
+<CitationBox title="Auto-generated from frontmatter" />

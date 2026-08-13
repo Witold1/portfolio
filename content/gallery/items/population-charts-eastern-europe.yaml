@@ -1,0 +1,13 @@
+title: 🌐 Population of Eastern Europe
+suptitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 1000m2 Kontur Population dataset - 2022/June
+date: 2023-04
+categories:
+  - cartography
+tags:
+  - Eastern Europe
+  - population
+type: carousel
+slides:
+  - src: gallery/population-charts-eastern-europe/population-charts-eastern-europe--ice.webp
+  - src: gallery/population-charts-eastern-europe/population-charts-eastern-europe--plasma.webp
+  - src: gallery/population-charts-eastern-europe/population-charts-eastern-europe--coloredterrain.webp

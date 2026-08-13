@@ -1,0 +1,98 @@
+---
+kind: post
+hidden: true
+title: "Surnames of the Indian Subcontinent"
+subtitle: "Regional surname wordcloud maps"
+date: "2024-06-15"
+version: "draft"
+excerpt: "Surname frequency wordclouds for Bangladesh, Bhutan, India, Nepal, Pakistan, and Sri Lanka."
+tags:
+  - dataviz
+  - wordcloud
+  - geography
+  - surnames
+major: true
+coverImage: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--merged.webp"
+---
+
+<Carousel
+  caption="Surnames of the Indian Subcontinent (merged region)"
+  items={[
+    {
+      type: "image",
+      src: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--merged.webp",
+      alt: "Merged surname wordcloud map of the Indian Subcontinent"
+    }
+  ]}
+/>
+
+Surname frequency wordclouds for the Indian Subcontinent, by administrative unit.
+Political boundaries are shown according to their “de facto” status.
+Data came from [Forebears.io](https://forebears.io/).
+
+Hub: [Project “Surnames of the World”](/projects/project-surnames-navigator-meta).
+
+## Maps
+
+<MediaGrid
+  title="Countries (click a tile)"
+  items={[
+    {
+      image: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--BGD.svg",
+      label: "Bangladesh",
+      flags: "🇧🇩",
+      subtitle: "Bangladesh"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--BTN.svg",
+      label: "Bhutan",
+      flags: "🇧🇹",
+      subtitle: "Bhutan"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--IND.svg",
+      label: "India",
+      flags: "🇮🇳",
+      subtitle: "India"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--NPL.svg",
+      label: "Nepal",
+      flags: "🇳🇵",
+      subtitle: "Nepal"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--PAK.svg",
+      label: "Pakistan",
+      flags: "🇵🇰",
+      subtitle: "Pakistan"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--LKA.svg",
+      label: "Sri Lanka",
+      flags: "🇱🇰",
+      subtitle: "Sri Lanka"
+    }
+  ]}
+/>
+
+## FAQ
+
+<CollapsibleSection title="How to read these wordcloud maps?" level={2} defaultOpen={false}>
+  The bigger the word, the more frequent the surname. Wordclouds are built from aggregated surname frequencies by administrative unit.
+
+  Interactive reference example: <a className="mdx-link" href="https://gallery.pyecharts.org/#/WordCloud/wordcloud_diamond" target="_blank" rel="noreferrer">Apache ECharts wordcloud demo</a>.
+</CollapsibleSection>
+
+## References
+
+- Forebears article (archived): “Accuracy of Surname Statistics on Forebears”
+- Naming customs: [FamilySearch Europe](https://www.familysearch.org/en/wiki/Europe)
+
+<MediaPresence items={[]} />
+
+<CitationBox
+  title="How to cite this work"
+  citation="Project “Surnames of the Indian Subcontinent” (2024), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/project-surnames-navigator/post"
+/>

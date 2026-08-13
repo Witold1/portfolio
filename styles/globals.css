@@ -2,96 +2,177 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  @apply bg-gray-100 text-gray-900;
+@import './gallery.css';
+@import './content.css';
+@import './home.css';
+@import './mdx.css';
+@import './admin.css';
+@import './debug-section.css';
+
+/*
+ * Site design tokens (zinc). Prefer these over raw gray/slate hex.
+ * Domain accents (blockquote teal, pipeline red, code syntax) stay local.
+ */
+:root {
+  --page-bg: rgb(255 255 255);
+  --page-fg: rgb(24 24 27); /* zinc-900 */
+  --text-secondary: rgb(63 63 70); /* zinc-700 */
+  --text-muted: rgb(82 82 91); /* zinc-600 */
+  --text-faint: rgb(113 113 122); /* zinc-500 */
+  --border: rgb(228 228 231); /* zinc-200 */
+  --border-strong: rgb(212 212 216); /* zinc-300 */
+  --surface: rgb(244 244 245); /* zinc-100 */
+  --surface-elevated: rgb(250 250 250); /* zinc-50 */
+  --surface-hover: rgba(0, 0, 0, 0.04);
+  --surface-wash: rgba(0, 0, 0, 0.035);
+  --chrome-bg: rgb(244 244 245 / 0.75); /* zinc-100 */
+  --focus-ring: rgb(113 113 122); /* zinc-500 */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+  --font-ui: Arial, Helvetica, sans-serif;
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino,
+    'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  --shadow-sm: 0 1px 2px rgba(24, 24, 27, 0.06);
 }
+
 html.dark {
-  @apply bg-gray-900 text-gray-100;
+  --page-bg: rgb(9 9 11); /* zinc-950 */
+  --page-fg: rgb(244 244 245); /* zinc-100 */
+  --text-secondary: rgb(212 212 216); /* zinc-300 */
+  --text-muted: rgb(161 161 170); /* zinc-400 */
+  --text-faint: rgb(161 161 170); /* zinc-400 */
+  --border: rgb(63 63 70); /* zinc-700 */
+  --border-strong: rgb(82 82 91); /* zinc-600 */
+  --surface: rgb(39 39 42); /* zinc-800 */
+  --surface-elevated: rgb(24 24 27); /* zinc-900 */
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --surface-wash: rgb(39 39 42);
+  --chrome-bg: rgb(24 24 27 / 0.55); /* zinc-900 */
+  --focus-ring: rgb(161 161 170); /* zinc-400 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
-body, .min-h-screen {
-  @apply bg-gray-100 dark:bg-gray-900;
+html {
+  background-color: var(--page-bg);
+  color: var(--page-fg);
 }
 
-.transition-all {
-  transition: all 0.3s ease-in-out;
+body,
+.min-h-screen {
+  background-color: var(--page-bg);
 }
 
-.masonry-grid {
-  width: auto;
-  padding: 0 8px;
-}
-@media (min-width: 1400px) {
-  .masonry-grid {
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+/* Shared header / footer wash */
+.site-chrome {
+  background-color: var(--chrome-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.masonry-grid.columns-1 {
-  columns: 1;
-}
-.masonry-grid.md\\:columns-2 {
-  @media (min-width: 768px) {
-    columns: 2;
-  }
-}
-.masonry-grid.xl\\:columns-3 {
-  @media (min-width: 1400px) {
-    columns: 3;
-  }
-}
-
-.masonry-grid > * {
-  break-inside: avoid;
-  margin-bottom: 8px;
-  width: 100%;
-  min-height: 100px;
-}
-
-.square-grid {
-  width: auto;
-  padding: 0 8px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
+/* Shared zinc chrome control (buttons, floating actions) */
+.site-chrome-btn {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-}
-@media (min-width: 640px) {
-  .square-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1024px) {
-  .square-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (min-width: 1400px) {
-  .square-grid {
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.square-grid > * {
-  margin-bottom: 8px;
-  width: 100%;
-  min-height: 100px;
+  margin: 0;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--chrome-bg);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.carousel-container {
-  position: relative;
-  width: 100%;
-  min-height: 100px;
+.site-chrome-btn:hover {
+  color: var(--page-fg);
+  background-color: var(--surface-hover);
+  border-color: var(--border-strong);
 }
-.carousel-container img, .carousel-container video {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  display: block;
+
+.site-chrome-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Fixed “back to top” control */
+.scroll-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}
+
+.scroll-to-top__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/*
+ * Underscore filter / toggle chip (blog tags, gallery cats, grid toggles).
+ * Keep legacy class names as aliases so markup stays unchanged.
+ */
+.chrome-underline-chip,
+.blog-tag-chip,
+.gallery-cat-chip,
+.gallery-grid-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.125rem 0.125rem 0.3125rem;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.blog-tag-chip {
+  display: inline-block;
+  white-space: normal;
+}
+
+.chrome-underline-chip:hover,
+.blog-tag-chip:hover,
+.gallery-cat-chip:hover:not(:disabled),
+.gallery-grid-toggle:hover {
+  color: var(--page-fg);
+}
+
+.chrome-underline-chip--active,
+.blog-tag-chip--active,
+.gallery-cat-chip--active,
+.gallery-grid-toggle--active,
+.gallery-grid-toggle--active:hover {
+  color: var(--page-fg);
+  font-weight: 600;
+  border-bottom-color: var(--page-fg);
+}
+
+.gallery-cat-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

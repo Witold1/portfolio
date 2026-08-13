@@ -1,0 +1,9 @@
+title: Downtown Detroit, MI, USA
+suptitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)  
+categories: [other]
+tags: [USA, downtowns, LiDAR, 3D elevation]
+type: carousel
+slides:
+  - src: gallery/lidar-downtown-detroit-michigan/lidar-downtown-detroit-michigan.mp4
+    type: video
+    poster: gallery/lidar-downtown-detroit-michigan/lidar-downtown-detroit-michigan.poster.webp

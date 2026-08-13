@@ -1,0 +1,273 @@
+---
+kind: post
+title: "Blog with grid inside"
+subtitle: "Meta page for regional surname wordcloud posts"
+date: "2024-06-15"
+version: "draft"
+excerpt: "A navigation hub for regional surname wordcloud visualizations, with methodology notes and a legacy-style grid."
+tags:
+  - dataviz
+  - wordcloud
+  - geography
+  - metadata
+major: true
+coverImage: "https://gridmaker.vercel.app/gridmakersharelink.png"
+---
+
+This is a **meta-post** to ease navigation across surname wordcloud visualizations by world region.
+Political boundaries are shown according to their “de facto” status.
+Data came from [Forebears.io](https://forebears.io/).
+
+## Regions
+
+<MediaGrid
+  title="Grid modal (click a tile)"
+  items={[
+    {
+      href: "/blog/project-surnames-central-asia",
+      image: "gallery/project-parks-and-parkings/project-parks-and-parkings.gif",
+      label: "Central Asia",
+      flags: "🇰🇿 🇰🇬 🇹🇲 🇹🇯 🇺🇿",
+      subtitle: "Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan"
+    },
+    {
+      href: "/blog/project-surnames-middle-east",
+      video: "gallery/experiment-osm-building-taxonomy/experiment-osm-building-taxonomy.mp4",
+      label: "Middle East",
+      flags: "🇮🇶 🇮🇷 🇸🇦 🇯🇴 🇾🇪 🇪🇬 🇴🇲 🇦🇪 🇶🇦 🇰🇼 🇸🇾 🇵🇰 🇦🇫 🇮🇱 🇵🇸 🇱🇧 🇹🇷",
+      subtitle: "Arabian peninsula, Levant, Egypt, Iraq, Iran, Türkiye, Afghanistan, Pakistan"
+    },
+    {
+      href: "/blog/project-surnames-central-america",
+      image: "blogposts/project-surnames/viz-surnames-central-america/viz-surnames-central-america--merged.webp",
+      label: "Central America",
+      flags: "🇬🇹 🇧🇿 🇸🇻 🇭🇳 🇳🇮 🇨🇷 🇵🇦",
+      subtitle: "Guatemala, Belize, El Salvador, Honduras, Nicaragua, Costa Rica, Panama"
+    },
+    {
+      href: "/blog/project-surnames-indian-subcontinent",
+      image: "blogposts/project-surnames/viz-surnames-indian-subcontinent/viz-surnames-indian-subcontinent--merged.webp",
+      label: "Indian Subcontinent",
+      flags: "🇧🇩 🇧🇹 🇮🇳 🇳🇵 🇵🇰 🇱🇰",
+      subtitle: "Bangladesh, Bhutan, India, Nepal, Pakistan, Sri Lanka"
+    },
+    {
+      href: "/blog/project-surnames-central-europe",
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--merged.webp",
+      label: "Central Europe",
+      flags: "🇩🇪 🇵🇱 🇨🇿 🇨🇭 🇦🇹 🇸🇰 🇸🇮 🇭🇺",
+      subtitle: "Germany, Poland, Czechia, Switzerland, Austria, Slovakia, Slovenia, Hungary"
+    },
+    {
+      href: "/blog/project-surnames-iberian-peninsula",
+      image: "blogposts/project-surnames/viz-surnames-iberian-peninsula/viz-surnames-iberian-peninsula--merged.webp",
+      label: "Iberian Peninsula",
+      flags: "🇪🇸 🇵🇹 🇦🇩",
+      subtitle: "Spain, Portugal, Andorra"
+    },
+    {
+      href: "/blog/project-surnames-iberian-peninsula",
+      image: "projects/project-surnames-navigator-meta/figures/banner.webp",
+      label: "Filler image",
+      flags: "🇪🇸 🇵🇹 🇦🇩",
+      subtitle: "Spain, Portugal, Andorra"
+    },
+    {
+      href: "/blog/project-surnames-balkan-peninsula",
+      image: "blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--merged.webp",
+      label: "Balkan Peninsula",
+      flags: "🇦🇱 🇧🇦 🇧🇬 🇭🇷 🇽🇰 🇲🇪 🇲🇰 🇷🇴 🇷🇸 🇸🇮 🇬🇷 🇲🇩",
+      subtitle: "Albania, Bosnia and Herzegovina, Bulgaria, Croatia, Kosovo, Montenegro, North Macedonia, Romania, Serbia, Slovenia, Greece, Moldova"
+    },
+    {
+      href: "/blog/project-surnames-baltic-states",
+      image: "blogposts/project-surnames/viz-surnames-baltic-states/viz-surnames-baltic-states--merged.webp",
+      label: "Baltic States",
+      flags: "🇪🇪 🇱🇻 🇱🇹",
+      subtitle: "Estonia, Latvia, Lithuania"
+    },
+    {
+      href: "#",
+      image: "https://picsum.photos/800/500?random=777",
+      label: "More regions upcoming soon",
+      flags: "☺️",
+      subtitle: "Additional regional surname maps are in progress."
+    }
+  ]}
+/>
+
+## FAQ
+
+<CollapsibleSection title="FAQ" level={3} defaultOpen={false}>
+
+  <div>Test paragraph</div>
+
+  <div>Big chungus.</div>
+  <div>Big chungus.</div>
+
+  <div>
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus consequat at sapien vel eleifend. Ut in nibh vel mi gravida viverra. Cras ultricies rhoncus mi, ac aliquam odio eleifend ac. Morbi ante libero, sodales auctor dui vel, mollis rutrum tortor.
+    </div>
+    <div>
+      Nulla pretium sed odio vitae volutpat. Pellentesque in ipsum tortor. Curabitur et congue quam. Nam lobortis, ligula ut ultrices ullamcorper, est velit suscipit risus, non volutpat est dui egestas nibh. Quisque semper euismod ante. Quisque condimentum placerat condimentum.
+    </div>
+    <div>
+      Aenean vitae mattis neque. Donec at purus eros. Nunc porttitor justo consequat laoreet luctus.
+    </div>
+  </div>
+
+  <div>
+    
+      The bigger the "word" size, the more common the respective surname is
+    . 
+    Databases of global surnames aggregated by admin units were used to access raw data on surname frequencies. Then, surnames were allocated within their respective admin units to create easier-to-read visuals in the form of "word clouds" (aka "tag clouds"). Below, (Fig. 1.1), one can see an interactive example with a random list of strings.
+  </div>
+
+  <Carousel
+    caption="Simplified building taxonomy of selected cities (animation)"
+    items={[
+      {
+        type: "image",
+        src: "projects/project-surnames-navigator-meta/figures/wordcloud-example.webp",
+        alt: "Tag (word) is Surname. Tag size is Surname frequency. Interactive wordcloud example."
+      }
+    ]}
+  />
+
+  <ul>
+    <li>Data Source &amp; Dataset Description</li>
+    <li>Data Format &amp; Columns</li>
+    <li>References &amp; Sources</li>
+  </ul>
+
+  <CollapsibleSection title="💬 How-to: Read this wordcloud maps" level={3} defaultOpen={false} />
+
+  <CollapsibleSection title="🧮 Methodology details" level={3} defaultOpen={false} />
+
+  <CollapsibleSection title="🛠️ Technical details" level={3} defaultOpen={false} />
+
+  <CollapsibleSection title="📋 Next steps and TODO" level={3} defaultOpen={false}>
+
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac lorem nec felis maximus elementum a et ante. Pellentesque ultrices faucibus neque id fermentum. Donec elit risus, tincidunt vitae vehicula vitae, molestie non ex. Duis et elit a nisl scelerisque lacinia sit amet vitae nisl. Cras bibendum commodo orci eu tristique. Donec vestibulum ac enim vitae commodo. Duis quis posuere orci, tempus finibus justo. Nulla at ultricies ipsum. Sed efficitur eget tortor eget congue. Duis fermentum varius imperdiet. Aenean ante tellus, laoreet ac mollis vel, ultrices eu mauris. Morbi condimentum est sit amet neque sagittis, elementum varius neque faucibus. Suspendisse in quam at arcu pulvinar mollis eget vitae mi. Nunc egestas erat quis orci tincidunt scelerisque. Suspendisse efficitur nibh ut tellus posuere commodo.
+    </div>
+
+    <div style={{ textAlign: "center", marginBottom: "5px" }}>
+      Fig. 3.1 <b>Processing graph (DAG).</b>
+    </div>
+
+    <img
+      src="projects/project-surnames-navigator-meta/figures/dag-hide-inputs.svg"
+      alt="Functional overview of pipeline, processing graph (DAG). Made with Hamilton."
+      style={{
+        display: "block",
+        margin: "0 auto",
+        backgroundColor: "#f2f3f4",
+        boxShadow: "1px 2px 2px silver",
+        width: "100%"
+      }}
+      loading="lazy"
+    />
+
+    <hr />
+
+    <blockquote>
+      <div>
+        Python is a programming language that lets you work quickly and integrate systems more effectively.
+      </div>
+      <div>
+        See:{" "}
+        <a href="https://www.python.org/">Python official site/</a>
+      </div>
+    </blockquote>
+
+    <blockquote>
+      <div>
+        GeoPandas is an open source project to make working with geospatial data in Python easier. It extends pandas with spatial operations using shapely, pyogrio, and matplotlib.
+      </div>
+      <div>
+        See:{" "}
+        <a href="https://geopandas.org/en/stable/">geopandas website</a>
+      </div>
+    </blockquote>
+
+    <blockquote>
+      <div>
+        Hamilton is a general-purpose framework to write dataflows using regular Python functions. Each function defines a transformation and its dependencies.
+      </div>
+      <div>
+        See:{" "}
+        <a href="https://hamilton.dagworks.io/en/latest/">hamiltondagworks</a>
+      </div>
+    </blockquote>
+
+    <hr />
+
+    <div style={{ textAlign: "center", marginBottom: "5px" }}>
+      Fig. 3.2 <b>High-level overview of pipeline, illustrated.</b>
+    </div>
+
+    <img
+      src="projects/project-surnames-navigator-meta/figures/pipeline-overview.webp"
+      alt="High-level overview of pipeline, illustrated."
+      style={{
+        display: "block",
+        margin: "0 auto",
+        backgroundColor: "#f2f3f4",
+        boxShadow: "1px 2px 2px silver",
+        width: "98%"
+      }}
+      loading="lazy"
+    />
+
+    <hr />
+
+    <div>
+      Some description about "raster vs vector" formats, georeferencing in general and current geo-referencing for vector images.
+    </div>
+
+    <blockquote>
+      <div>
+        Raster files are images built from pixels - tiny color squares that form detailed images. More pixels = higher quality.
+      </div>
+      <div>
+        Vector files use mathematical equations (lines and curves), so they scale without losing quality.
+      </div>
+      <div>
+        See:{" "}
+        <a href="https://www.adobe.com/creativecloud/file-types/image/comparison/raster-vs-vector.html">
+          adobe com/creativecloud/file-types/image/comparison/raster-vs-vector
+        </a>
+      </div>
+    </blockquote>
+
+    <blockquote>
+      <div>
+        Georeferencing (or georegistration) is the process of aligning spatial data (raster or vector) to real-world coordinates.
+      </div>
+      <div>
+        See:{" "}
+        <a href="https://en.wikipedia.org/wiki/Georeferencing">
+          Georeferencing wiki
+        </a>
+      </div>
+    </blockquote>
+  </CollapsibleSection>
+
+
+</CollapsibleSection>
+
+## References
+
+- Forebears article (archived): “Accuracy of Surname Statistics on Forebears”
+- Naming customs: [FamilySearch Europe](https://www.familysearch.org/en/wiki/Europe)
+
+<MediaPresence items={[]} />
+
+<CitationBox
+  title="How to cite this work"
+  citation="Project “Surnames of …” (2024), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/project-surnames-navigator/post"
+/>
+

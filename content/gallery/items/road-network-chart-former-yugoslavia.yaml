@@ -1,0 +1,11 @@
+title: 🇷🇸 🇸🇮 🇭🇷 🇲🇪 🇽🇰 🇧🇦 🇲🇰 Road network of former Yugoslavia 🛣️
+suptitle: OSM-based road network of the former Yugoslavia
+date: 2023-08
+categories: [cartography] 
+tags: [Europe, Balkans, Yugoslavia, road network]
+type: carousel
+slides:
+  - src: gallery/road-network-chart-former-yugoslavia/road-network-chart-former-yugoslavia--1.webp
+  - src: gallery/road-network-chart-former-yugoslavia/road-network-chart-former-yugoslavia--2.webp
+  - src: gallery/road-network-chart-former-yugoslavia/road-network-chart-former-yugoslavia--3.webp
+  - src: gallery/road-network-chart-former-yugoslavia/road-network-chart-former-yugoslavia--4.webp

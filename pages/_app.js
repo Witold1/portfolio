@@ -2,22 +2,43 @@ import '../styles/globals.css';
 import { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import DebugSectionGate from '../components/DebugSectionGate';
+import ScrollToTop from '../components/ScrollToTop';
+import { AdminPrefsProvider } from '../components/admin/AdminPrefsProvider';
+import {
+  applyThemePreference,
+  readStoredPreference,
+} from '../lib/theme';
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
-    // Apply saved theme on initial load
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-    console.log('Theme applied:', savedTheme); // Debug theme application
+    applyThemePreference(readStoredPreference());
+
+    const media = window.matchMedia('(prefers-color-scheme: light)');
+    const onSystemChange = () => {
+      if (readStoredPreference() === 'system') {
+        applyThemePreference('system');
+      }
+    };
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', onSystemChange);
+      return () => media.removeEventListener('change', onSystemChange);
+    }
+    media.addListener(onSystemChange);
+    return () => media.removeListener(onSystemChange);
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <div className="flex-grow">
-        <Component {...pageProps} />
+    <AdminPrefsProvider>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <div className="flex-grow">
+          <Component {...pageProps} />
+        </div>
+        <DebugSectionGate />
+        <Footer />
+        <ScrollToTop />
       </div>
-      <Footer />
-    </div>
+    </AdminPrefsProvider>
   );
 }

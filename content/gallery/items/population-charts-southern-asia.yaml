@@ -1,0 +1,11 @@
+title: 🌐 Population of Southern Asia
+suptitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 1000m2 Kontur Population dataset - 2022/June
+date: 2023-05
+categories: [cartography]
+tags: [Southern Asia, population]
+type: carousel
+slides:
+  - src: gallery/population-charts-southern-asia/population-charts-southern-asia--hot.webp
+  - src: gallery/population-charts-southern-asia/population-charts-southern-asia--ice.webp
+  - src: gallery/population-charts-southern-asia/population-charts-southern-asia--plasma.webp
+  - src: gallery/population-charts-southern-asia/population-charts-southern-asia--coloredterrain.webp

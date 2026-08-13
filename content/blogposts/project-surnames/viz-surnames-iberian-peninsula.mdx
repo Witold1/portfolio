@@ -1,0 +1,80 @@
+---
+kind: post
+hidden: true
+title: "Surnames of the Iberian Peninsula"
+subtitle: "Regional surname wordcloud maps"
+date: "2024-06-15"
+version: "draft"
+excerpt: "Surname frequency wordclouds for Spain and Portugal."
+tags:
+  - dataviz
+  - wordcloud
+  - geography
+  - surnames
+major: true
+coverImage: "blogposts/project-surnames/viz-surnames-iberian-peninsula/viz-surnames-iberian-peninsula--merged.webp"
+---
+
+<Carousel
+  caption="Surnames of the Iberian Peninsula (merged region)"
+  items={[
+    {
+      type: "image",
+      src: "blogposts/project-surnames/viz-surnames-iberian-peninsula/viz-surnames-iberian-peninsula--merged.webp",
+      alt: "Merged surname wordcloud map of the Iberian Peninsula"
+    }
+  ]}
+/>
+
+Surname frequency wordclouds for the Iberian Peninsula, by administrative unit.
+Political boundaries are shown according to their “de facto” status.
+Data came from [Forebears.io](https://forebears.io/).
+
+Hub: [Project “Surnames of the World”](/projects/project-surnames-navigator-meta).
+
+## Maps
+
+<MediaGrid
+  title="Countries (click a tile)"
+  items={[
+    {
+      image: "blogposts/project-surnames/viz-surnames-iberian-peninsula/viz-surnames-iberian-peninsula--ESP.svg",
+      label: "Spain",
+      flags: "🇪🇸",
+      subtitle: "Spain"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-iberian-peninsula/viz-surnames-iberian-peninsula--PRT.svg",
+      label: "Portugal",
+      flags: "🇵🇹",
+      subtitle: "Portugal"
+    },
+    {
+      image: "https://picsum.photos/800/500?random=778",
+      label: "Andorra",
+      flags: "🇦🇩",
+      subtitle: "Not in source data (too small for Forebears coverage)"
+    }
+  ]}
+/>
+
+## FAQ
+
+<CollapsibleSection title="How to read these wordcloud maps?" level={2} defaultOpen={false}>
+  The bigger the word, the more frequent the surname. Wordclouds are built from aggregated surname frequencies by administrative unit.
+
+  Interactive reference example: <a className="mdx-link" href="https://gallery.pyecharts.org/#/WordCloud/wordcloud_diamond" target="_blank" rel="noreferrer">Apache ECharts wordcloud demo</a>.
+</CollapsibleSection>
+
+## References
+
+- Forebears article (archived): “Accuracy of Surname Statistics on Forebears”
+- Naming customs: [FamilySearch Europe](https://www.familysearch.org/en/wiki/Europe)
+
+<MediaPresence items={[]} />
+
+<CitationBox
+  title="How to cite this work"
+  citation="Project “Surnames of the Iberian Peninsula” (2024), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/project-surnames-navigator/post"
+/>

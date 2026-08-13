@@ -1,0 +1,13 @@
+title: NYC MTA Turnstile Usage Dataset, hourly trends
+suptitle: NYC MTA Turnstile Usage Dataset, hourly trends (data from NYC Open Data)
+date: 2021
+categories: [analytics]
+tags: [NYC, MTA, Turnstile Usage, Dataset, hourly trends]
+type: carousel
+slides:
+  - src: gallery/dataset-mta-turnstile-usage/dataset-mta-turnstile-usage--DA6.webp
+    type: image
+  - src: gallery/dataset-mta-turnstile-usage/dataset-mta-turnstile-usage--VIZ5.webp
+    type: image
+  - src: gallery/dataset-mta-turnstile-usage/dataset-mta-turnstile-usage--DA4.webp
+    type: image

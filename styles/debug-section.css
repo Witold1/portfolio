@@ -1,0 +1,128 @@
+/**
+ * Debug section layout (editorial chrome).
+ * Tokens inherit site zinc vars; local aliases keep the panel self-contained.
+ */
+
+.debug-section {
+  --debug-border: var(--border);
+  --debug-surface-2: var(--surface);
+  --debug-text: var(--page-fg);
+  --debug-text-secondary: var(--text-muted);
+  --debug-text-muted: var(--text-faint);
+  --debug-font: inherit;
+  --debug-mono: var(--font-mono);
+  --debug-radius: var(--radius-md);
+  --debug-focus-ring: 0 0 0 2px var(--page-bg), 0 0 0 4px var(--focus-ring);
+  --debug-label-tracking: 0.06em;
+
+  width: 100%;
+  max-width: none;
+  margin: 0.75rem 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.debug-section-inner {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--debug-border);
+}
+
+.debug-toggle {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--debug-font);
+  font-size: 0.75rem;
+  color: var(--debug-text-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.debug-toggle:hover {
+  color: var(--debug-text-secondary);
+}
+
+.debug-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--debug-focus-ring);
+}
+
+.debug-panel {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  padding: 0.75rem 0.85rem;
+  background: var(--debug-surface-2);
+  border: 1px solid var(--debug-border);
+  border-radius: var(--debug-radius);
+  font-family: var(--debug-mono);
+  font-size: 0.6875rem;
+  color: var(--debug-text-secondary);
+  overflow-x: auto;
+}
+
+.debug-block + .debug-block {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--debug-border);
+}
+
+.debug-block-heading {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--debug-font);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--debug-label-tracking);
+  color: var(--debug-text-muted);
+}
+
+.debug-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.debug-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+}
+
+.debug-key {
+  flex-shrink: 0;
+  color: var(--debug-text-muted);
+}
+
+.debug-value {
+  word-break: break-all;
+  color: var(--debug-text-secondary);
+}
+
+.debug-error-actions {
+  margin-top: 0.5rem;
+}
+
+.debug-link {
+  margin: 0.5rem 0.75rem 0 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--debug-mono);
+  font-size: 0.6875rem;
+  color: var(--debug-text-secondary);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.debug-link:hover {
+  color: var(--debug-text);
+}
+
+.debug-link:focus-visible {
+  outline: none;
+  box-shadow: var(--debug-focus-ring);
+}

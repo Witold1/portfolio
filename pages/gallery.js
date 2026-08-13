@@ -1,73 +1,93 @@
-'use client';
-
 import { useState, useMemo, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
-import GalleryGridVariable from '../components/Gallery.Grid.Variable';
-import GalleryGridUniform from '../components/Gallery.Grid.Uniform';
-import Modal from '../components/Modal';
-import { getGalleryCategories, filterGalleryItems } from '../lib/galleryUtils';
-import galleryData from '../data/gallery-data.json';
+import GalleryGridLayoutToolbar from '../components/gallery/GalleryGridLayoutToolbar';
+import GalleryGrid from '../components/gallery/GalleryGrid';
+import GalleryLightbox from '../components/gallery/GalleryLightbox';
+import {
+  getGalleryCategories,
+  filterGalleryItems,
+  filterVisibleGalleryItems,
+  galleryNotesToMetaString,
+  formatGalleryCategoryLabel,
+  useGalleryLightbox,
+} from '../lib/gallery';
+import { useAdminPrefs } from '../components/admin/AdminPrefsProvider';
+import ContentBreadcrumb from '../components/content/ContentBreadcrumb';
+import { SITE_ORGANIZATION } from '../lib/site';
+
+const galleryBreadcrumbItems = [
+  { href: '/', label: 'Home' },
+  { label: 'Gallery', title: 'Data and information visualization pond ⛵' },
+];
 
 export async function getStaticProps() {
-  console.log('getStaticProps: galleryData length:', galleryData.length);
-  return {
-    props: {
-      galleryData,
-    },
-  };
+  try {
+    const { loadGallery } = await import('../lib/gallery/server');
+    const { items: galleryData, categories: galleryCategories } = loadGallery();
+    return {
+      props: {
+        galleryData,
+        galleryCategories,
+        galleryLoadError: null,
+      },
+    };
+  } catch (err) {
+    console.error('gallery getStaticProps:', err);
+    return {
+      props: {
+        galleryData: [],
+        galleryCategories: [],
+        galleryLoadError: err?.message || 'Could not load gallery data',
+      },
+    };
+  }
 }
 
-export default function Gallery({ galleryData }) {
-  console.log('Gallery: galleryData length:', galleryData.length);
-  const router = useRouter();
-  const { item: itemId } = router.query; // Read item ID from query parameter
+export default function Gallery({ galleryData, galleryCategories, galleryLoadError }) {
+  const loadError = galleryLoadError;
+  const { showHiddenGallery } = useAdminPrefs();
   const [gridType, setGridType] = useState('uniform');
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState(() => ['all']);
   const [page, setPage] = useState(1);
-  const [showTopButton, setShowTopButton] = useState(false);
-  const [modalItem, setModalItem] = useState(null);
-  const itemsPerPage = 25;
+  const itemsPerPage = 15;
 
-  const categories = useMemo(() => getGalleryCategories(galleryData), [galleryData]);
-  const filteredItems = useMemo(() => filterGalleryItems(galleryData, filter), [galleryData, filter]);
-  const paginatedItems = useMemo(
-    () => filteredItems.slice(0, page * itemsPerPage),
-    [filteredItems, page]
+  const visibleItems = useMemo(
+    () => filterVisibleGalleryItems(galleryData, { showHidden: showHiddenGallery }),
+    [galleryData, showHiddenGallery],
   );
 
-  // Open modal based on query parameter
+  const { item: modalItem, isOpen, open: openModal, close: closeModal } = useGalleryLightbox({
+    syncQuery: true,
+    catalog: visibleItems,
+  });
+
   useEffect(() => {
-    if (itemId) {
-      const item = galleryData.find((item) => item.id.toString() === itemId);
-      setModalItem(item || null);
-    } else {
-      setModalItem(null);
-    }
-  }, [itemId, galleryData]);
+    setPage(1);
+  }, [filter.join('\0')]);
 
-  // Handle scroll to show/hide "to the top" button
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowTopButton(window.scrollY > 300);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const categories = useMemo(
+    () => getGalleryCategories(visibleItems, galleryCategories),
+    [visibleItems, galleryCategories],
+  );
+  const filteredItems = useMemo(() => filterGalleryItems(visibleItems, filter), [visibleItems, filter]);
+  const paginatedItems = useMemo(
+    () => filteredItems.slice(0, page * itemsPerPage),
+    [filteredItems, page],
+  );
 
-  // Scroll to top function
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const modalDescription = modalItem ? galleryNotesToMetaString(modalItem.notes) : '';
+  const showingAll = filter.includes('all') || filter.length === 0;
 
-  // Modal handlers
-  const openModal = (item) => {
-    setModalItem(item);
-    router.push(`/gallery?item=${item.id}`, undefined, { shallow: true }); // Update URL
-  };
-  const closeModal = () => {
-    setModalItem(null);
-    router.push('/gallery', undefined, { shallow: true }); // Clear query parameter
+  const toggleCategory = (cat) => {
+    setFilter((prev) => {
+      if (cat === 'all') return ['all'];
+      const specifics = prev.filter((c) => c !== 'all');
+      if (specifics.includes(cat)) {
+        const next = specifics.filter((c) => c !== cat);
+        return next.length === 0 ? ['all'] : next;
+      }
+      return [...specifics, cat];
+    });
   };
 
   return (
@@ -76,12 +96,12 @@ export default function Gallery({ galleryData }) {
         {modalItem ? (
           <>
             <title>{modalItem.title || `Gallery Item ${modalItem.id}`}</title>
-            <meta name="description" content={modalItem.notes || 'View this item from my gallery'} />
+            <meta name="description" content={modalDescription} />
             <meta property="og:title" content={modalItem.title || `Gallery Item ${modalItem.id}`} />
-            <meta property="og:description" content={modalItem.notes || 'View this item from my gallery'} />
-            <meta property="og:image" content={modalItem.src} />
+            <meta property="og:description" content={modalDescription} />
+            {modalItem.src ? <meta property="og:image" content={modalItem.src} /> : null}
             <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="Your Portfolio" />
+            <meta property="og:site_name" content={SITE_ORGANIZATION} />
           </>
         ) : (
           <>
@@ -89,108 +109,91 @@ export default function Gallery({ galleryData }) {
             <meta name="description" content="Explore my gallery of data and information visualizations" />
             <meta property="og:title" content="Data and Information Visualization Pond" />
             <meta property="og:description" content="Explore my gallery of data and information visualizations" />
-            <meta property="og:image" content="/default-image.jpg" />
             <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="Your Portfolio" />
+            <meta property="og:site_name" content={SITE_ORGANIZATION} />
           </>
         )}
       </Head>
-      <div className="container mx-auto px-4 py-8 max-w-7xl relative">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-            Data and information visualization pond ⛵
-          </h1>
-          <p className="mb-2 text-gray-700 dark:text-gray-300">
-            ⇱ Click preview images to enlarge in better quality
-          </p>
-          <p className="mb-2 text-gray-700 dark:text-gray-300">
-            ⟳ Check github project repositories to see raw code
-          </p>
-          <p className="text-gray-700 dark:text-gray-300">
-            ⛟ Some elements may display differently across platforms (desktop, smartphone, etc)
-          </p>
-        </div>
-        <div className="mb-6 flex flex-wrap gap-4 items-center gallery-controls">
-          <div className="flex gap-2">
-            <label className="font-semibold text-gray-900 dark:text-gray-100">Filter:</label>
-            <select
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              className="border rounded px-2 py-1 bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </option>
-              ))}
-            </select>
+      <div className="content-page flex flex-col">
+        <div className="content-main flex-grow">
+          <div className="content-reading relative">
+            <div className="content-breadcrumb-rail">
+              <ContentBreadcrumb items={galleryBreadcrumbItems} />
+            </div>
+            <div className="content-index-body">
+              <div className="mb-6 gallery-controls flex flex-col gap-3 max-w-full">
+                <div
+                  role="group"
+                  aria-label="Filter by category; multiple categories combine with OR"
+                  className="gallery-cat-row"
+                >
+                  {categories.map((category) => {
+                    const pressed =
+                      category === 'all' ? showingAll : !showingAll && filter.includes(category);
+                    return (
+                      <button
+                        key={category}
+                        type="button"
+                        aria-pressed={pressed}
+                        disabled={!!loadError}
+                        onClick={() => toggleCategory(category)}
+                        className={`gallery-cat-chip${pressed ? ' gallery-cat-chip--active' : ''}`}
+                      >
+                        {formatGalleryCategoryLabel(category)}
+                      </button>
+                    );
+                  })}
+                </div>
+                <GalleryGridLayoutToolbar
+                  gridType={gridType}
+                  onUniform={() => setGridType('uniform')}
+                  onVariable={() => setGridType('variable')}
+                />
+              </div>
+              {loadError && (
+                <p className="text-red-600 dark:text-red-400" role="alert">
+                  {loadError}
+                </p>
+              )}
+              {!loadError && paginatedItems.length > 0 ? (
+                <>
+                  <GalleryGrid
+                    items={paginatedItems}
+                    onCardClick={openModal}
+                    layout={gridType}
+                  />
+                  {paginatedItems.length < filteredItems.length && (
+                    <button
+                      type="button"
+                      onClick={() => setPage(page + 1)}
+                      className="gallery-load-more"
+                    >
+                      Load more
+                      <svg
+                        className="gallery-load-more__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  )}
+                </>
+              ) : null}
+              {!loadError && galleryData.length === 0 ? (
+                <p className="text-gray-700 dark:text-gray-300">No gallery items to display.</p>
+              ) : null}
+              {!loadError && visibleItems.length > 0 && paginatedItems.length === 0 ? (
+                <p className="text-gray-700 dark:text-gray-300">No items match the selected filter.</p>
+              ) : null}
+            </div>
+            <GalleryLightbox isOpen={isOpen} onClose={closeModal} item={modalItem} />
           </div>
-          <div className="flex gap-2">
-            <label className="font-semibold text-gray-900 dark:text-gray-100">Grid Type:</label>
-            <button
-              onClick={() => setGridType('variable')}
-              className={`px-3 py-1 rounded ${
-                gridType === 'variable'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-gray-100'
-              }`}
-            >
-              Variable
-            </button>
-            <button
-              onClick={() => setGridType('uniform')}
-              className={`px-3 py-1 rounded ${
-                gridType === 'uniform'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-gray-100'
-              }`}
-            >
-              Uniform
-            </button>
-          </div>
         </div>
-        {paginatedItems.length > 0 ? (
-          <>
-            {gridType === 'variable' ? (
-              <GalleryGridVariable items={paginatedItems} onCardClick={openModal} />
-            ) : (
-              <GalleryGridUniform items={paginatedItems} onCardClick={openModal} />
-            )}
-            {paginatedItems.length < filteredItems.length && (
-              <button
-                onClick={() => setPage(page + 1)}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded dark:bg-blue-600"
-              >
-                Load More
-              </button>
-            )}
-          </>
-        ) : (
-          <p className="text-gray-700 dark:text-gray-300">No items match the selected filter.</p>
-        )}
-        {showTopButton && (
-          <button
-            onClick={scrollToTop}
-            className="fixed bottom-8 right-8 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 transition-colors"
-            aria-label="Scroll to top"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 10l7-7m0 0l7 7m-7-7v18"
-              />
-            </svg>
-          </button>
-        )}
-        <Modal isOpen={!!modalItem} onClose={closeModal} item={modalItem} />
       </div>
     </>
   );

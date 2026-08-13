@@ -1,0 +1,18 @@
+title: Gallery YAML field showcase
+hidden: true
+subtitle: Every supported field in one tile (styleguide only)
+date: 2026-10-11
+categories: [visualizations, analytics, cartography, other]
+type: image
+src: https://picsum.photos/800/500?random=showcase
+link:
+  - /blog/_mdx-showcase
+  - /projects/no-project-page
+  - https://example.com/external-reference
+  - https://example.com/external-reference-2
+notes: |
+  This item demonstrates optional gallery metadata when there is no dedicated blog or project page.
+
+  Notes accept multiline YAML. The modal shows them below the image; on /gallery, social sharing uses this text for meta description when present.
+
+  Use `link` as a string or list. Blog/project paths appear in the toolbar; external URLs show under Show details as sources.

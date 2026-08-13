@@ -1,0 +1,80 @@
+---
+kind: post
+hidden: true
+title: "Surnames of the Baltic States"
+subtitle: "Regional surname wordcloud maps"
+date: "2024-06-15"
+version: "draft"
+excerpt: "Surname frequency wordclouds for Estonia, Latvia, and Lithuania."
+tags:
+  - dataviz
+  - wordcloud
+  - geography
+  - surnames
+major: true
+coverImage: "blogposts/project-surnames/viz-surnames-baltic-states/viz-surnames-baltic-states--merged.webp"
+---
+
+<Carousel
+  caption="Surnames of the Baltic States (merged region)"
+  items={[
+    {
+      type: "image",
+      src: "blogposts/project-surnames/viz-surnames-baltic-states/viz-surnames-baltic-states--merged.webp",
+      alt: "Merged surname wordcloud map of the Baltic States"
+    }
+  ]}
+/>
+
+Surname frequency wordclouds for the Baltic States, by administrative unit.
+Political boundaries are shown according to their “de facto” status.
+Data came from [Forebears.io](https://forebears.io/).
+
+Hub: [Project “Surnames of the World”](/projects/project-surnames-navigator-meta).
+
+## Maps
+
+<MediaGrid
+  title="Countries (click a tile)"
+  items={[
+    {
+      image: "blogposts/project-surnames/viz-surnames-baltic-states/viz-surnames-baltic-states--EST.svg",
+      label: "Estonia",
+      flags: "🇪🇪",
+      subtitle: "Estonia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-baltic-states/viz-surnames-baltic-states--LVA.svg",
+      label: "Latvia",
+      flags: "🇱🇻",
+      subtitle: "Latvia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-baltic-states/viz-surnames-baltic-states--LTU.svg",
+      label: "Lithuania",
+      flags: "🇱🇹",
+      subtitle: "Lithuania"
+    }
+  ]}
+/>
+
+## FAQ
+
+<CollapsibleSection title="How to read these wordcloud maps?" level={2} defaultOpen={false}>
+  The bigger the word, the more frequent the surname. Wordclouds are built from aggregated surname frequencies by administrative unit.
+
+  Interactive reference example: <a className="mdx-link" href="https://gallery.pyecharts.org/#/WordCloud/wordcloud_diamond" target="_blank" rel="noreferrer">Apache ECharts wordcloud demo</a>.
+</CollapsibleSection>
+
+## References
+
+- Forebears article (archived): “Accuracy of Surname Statistics on Forebears”
+- Naming customs: [FamilySearch Europe](https://www.familysearch.org/en/wiki/Europe)
+
+<MediaPresence items={[]} />
+
+<CitationBox
+  title="How to cite this work"
+  citation="Project “Surnames of the Baltic States” (2024), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/project-surnames-navigator/post"
+/>

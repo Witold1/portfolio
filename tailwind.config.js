@@ -5,7 +5,12 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        /* Plain white page canvas (see --page-bg in globals.css) */
+        canvas: 'rgb(255 255 255)',
+      },
+    },
   },
   plugins: [],
 };

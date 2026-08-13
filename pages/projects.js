@@ -1,64 +1,55 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import { useState } from 'react';
-import fs from 'fs';
-import path from 'path';
+import { useMemo } from 'react';
+import { getAllContent } from '../lib/content';
+import { filterVisibleContent } from '../lib/content/hidden';
+import ContentCard from '../components/content/ContentCard';
+import PageMeta from '../components/content/PageMeta';
+import ContentBreadcrumb from '../components/content/ContentBreadcrumb';
+import { useAdminPrefs } from '../components/admin/AdminPrefsProvider';
+
+const projectsBreadcrumbItems = [
+  { href: '/', label: 'Home' },
+  { label: 'Projects', title: 'Projects warehouse 📦' },
+];
 
 export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), 'public/data/projects.json');
-  try {
-    const posts = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    return { props: { posts } };
-  } catch (err) {
-    console.error('Failed to load projects data:', err);
-    return { props: { posts: [] } };
-  }
+  return { props: { projects: getAllContent('projects') } };
 }
 
-export default function Projects({ posts }) {
-  const [filter, setFilter] = useState('all');
-
-  const filteredPosts = filter === 'all' ? posts : posts.filter((post) => post.major && filter === 'major');
+export default function ProjectsIndex({ projects }) {
+  const { showHiddenGallery } = useAdminPrefs();
+  const visibleProjects = useMemo(
+    () => filterVisibleContent(projects, { showHidden: showHiddenGallery }),
+    [projects, showHiddenGallery],
+  );
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Head>
-        <title>Projects - Witold's Data Consulting</title>
-      </Head>
-      <div className="flex-grow bg-gray-100 dark:bg-gray-900 py-8">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">My Blog</h1>
-          <div className="flex justify-center gap-4 mb-6">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded ${filter === 'all' ? 'bg-blue-600 text-white dark:bg-blue-500' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
-            >
-              All Posts
-            </button>
-            <button
-              onClick={() => setFilter('major')}
-              className={`px-4 py-2 rounded ${filter === 'major' ? 'bg-blue-600 text-white dark:bg-blue-500' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
-            >
-              Major Posts
-            </button>
+    <div className="content-page flex flex-col">
+      <PageMeta
+        title="Projects - Witold's Data Consulting"
+        description="Selected projects and technical case studies."
+        pathname="/projects/"
+      />
+      <div className="content-main flex-grow">
+        <div className="content-reading">
+          <div className="content-breadcrumb-rail">
+            <ContentBreadcrumb items={projectsBreadcrumbItems} />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filteredPosts.map((post) => (
-              <Link href={`/projects/${post.slug}`} key={post.slug}>
-                <div className="border rounded-lg p-4 shadow-md bg-white dark:bg-gray-800 hover:shadow-lg transition cursor-pointer">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover rounded-lg mb-4"
-                  />
-                  <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">{post.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{post.subtitle}</p>
-                  <p className="text-gray-600 dark:text-gray-300 mb-2">{post.excerpt}</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{post.year}</p>
-                  <span className="text-blue-600 dark:text-blue-400 hover:underline">See more...</span>
-                </div>
-              </Link>
-            ))}
+          <div className="content-index-body">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {visibleProjects.map((project) => (
+                <ContentCard
+                  key={project.slug}
+                  kind="project"
+                  href={`/projects/${project.slug}`}
+                  title={project.title}
+                  subtitle={project.subtitle}
+                  excerpt={project.excerpt}
+                  date={project.date}
+                  year={project.year}
+                  image={project.coverImage}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

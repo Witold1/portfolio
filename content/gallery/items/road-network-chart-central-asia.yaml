@@ -1,0 +1,11 @@
+title: 🇰🇿 🇰🇬 🇺🇿 🇹🇯 🇹🇲 Road network of Central Asia 🛣️
+suptitle: OSM-based road network of Central Asia
+date: 2023-08
+categories: [cartography]
+tags: [Central Asia, road network]
+type: carousel
+slides:
+  - src: gallery/road-network-chart-central-asia/road-network-chart-central-asia--1.webp
+  - src: gallery/road-network-chart-central-asia/road-network-chart-central-asia--2.webp
+  - src: gallery/road-network-chart-central-asia/road-network-chart-central-asia--3.webp
+  - src: gallery/road-network-chart-central-asia/road-network-chart-central-asia--4.webp

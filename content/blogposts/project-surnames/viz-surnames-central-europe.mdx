@@ -1,0 +1,110 @@
+---
+kind: post
+hidden: true
+title: "Surnames of Central Europe"
+subtitle: "Regional surname wordcloud maps"
+date: "2024-06-15"
+version: "draft"
+excerpt: "Surname frequency wordclouds for Germany, Poland, Czechia, Switzerland, Austria, Slovakia, Slovenia, and Hungary."
+tags:
+  - dataviz
+  - wordcloud
+  - geography
+  - surnames
+major: true
+coverImage: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--merged.webp"
+---
+
+<Carousel
+  caption="Surnames of Central Europe (merged region)"
+  items={[
+    {
+      type: "image",
+      src: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--merged.webp",
+      alt: "Merged surname wordcloud map of Central Europe"
+    }
+  ]}
+/>
+
+Surname frequency wordclouds for Central Europe, by administrative unit.
+Political boundaries are shown according to their “de facto” status.
+Data came from [Forebears.io](https://forebears.io/).
+
+Hub: [Project “Surnames of the World”](/projects/project-surnames-navigator-meta).
+
+## Maps
+
+<MediaGrid
+  title="Countries (click a tile)"
+  items={[
+    {
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--DEU.svg",
+      label: "Germany",
+      flags: "🇩🇪",
+      subtitle: "Germany"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--POL.svg",
+      label: "Poland",
+      flags: "🇵🇱",
+      subtitle: "Poland"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--CZE.svg",
+      label: "Czechia",
+      flags: "🇨🇿",
+      subtitle: "Czechia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--CHE.svg",
+      label: "Switzerland",
+      flags: "🇨🇭",
+      subtitle: "Switzerland"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--AUT.svg",
+      label: "Austria",
+      flags: "🇦🇹",
+      subtitle: "Austria"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--SVK.svg",
+      label: "Slovakia",
+      flags: "🇸🇰",
+      subtitle: "Slovakia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--SVN.svg",
+      label: "Slovenia",
+      flags: "🇸🇮",
+      subtitle: "Slovenia"
+    },
+    {
+      image: "blogposts/project-surnames/viz-surnames-central-europe/viz-surnames-central-europe--HUN.svg",
+      label: "Hungary",
+      flags: "🇭🇺",
+      subtitle: "Hungary"
+    }
+  ]}
+/>
+
+## FAQ
+
+<CollapsibleSection title="How to read these wordcloud maps?" level={2} defaultOpen={false}>
+  The bigger the word, the more frequent the surname. Wordclouds are built from aggregated surname frequencies by administrative unit.
+
+  Interactive reference example: <a className="mdx-link" href="https://gallery.pyecharts.org/#/WordCloud/wordcloud_diamond" target="_blank" rel="noreferrer">Apache ECharts wordcloud demo</a>.
+</CollapsibleSection>
+
+## References
+
+- Forebears article (archived): “Accuracy of Surname Statistics on Forebears”
+- Naming customs: [FamilySearch Europe](https://www.familysearch.org/en/wiki/Europe)
+
+<MediaPresence items={[]} />
+
+<CitationBox
+  title="How to cite this work"
+  citation="Project “Surnames of Central Europe” (2024), Vitaliy Y from Witold's Data Consulting"
+  url="https://witold1.github.io/blog/posts/project-surnames-navigator/post"
+/>

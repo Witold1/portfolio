@@ -1,0 +1,10 @@
+name: my-next-app-prod
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.prod
+    ports:
+      - "3000:80"
+    restart: unless-stopped
