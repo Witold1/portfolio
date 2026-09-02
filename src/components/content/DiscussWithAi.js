@@ -2,6 +2,7 @@
 
 import { buildDiscussWithAiPrompt, discussWithAiLinks } from '../../lib/content/discussWithAi';
 import { useCopyToClipboard } from '../../lib/useCopyToClipboard';
+import { useSharePageUrl } from '../../lib/useSharePageUrl';
 
 const linkClass =
   'inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-inherit opacity-90 hover:opacity-100 hover:bg-black/5 dark:hover:bg-white/10 rounded px-1.5 py-1 transition-colors';
@@ -73,13 +74,16 @@ const ICONS = {
  * or copy the same prompt to the clipboard.
  */
 export default function DiscussWithAi({
-  pageUrl,
+  pageUrl: pageUrlProp,
+  pagePath,
   title,
   pageKind = 'article',
   label = 'Discuss with AI',
   className = '',
 }) {
   const { copied, copy } = useCopyToClipboard();
+  const pageUrlFromPath = useSharePageUrl(pagePath || null);
+  const pageUrl = pageUrlProp || pageUrlFromPath;
   const prompt = pageUrl ? buildDiscussWithAiPrompt({ pageUrl, title, pageKind }) : '';
 
   if (!pageUrl) return null;

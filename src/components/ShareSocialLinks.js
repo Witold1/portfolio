@@ -1,7 +1,9 @@
 'use client';
 
 import { cloneElement } from 'react';
+import ShareQrCodeButton from './ShareQrCodeButton';
 import { useCopyToClipboard } from '../lib/useCopyToClipboard';
+import { useSharePageUrl } from '../lib/useSharePageUrl';
 
 const iconBtnClass =
   'inline-flex items-center justify-center w-8 h-8 rounded text-inherit opacity-90 hover:opacity-100 hover:bg-black/5 dark:hover:bg-white/10 transition-colors';
@@ -49,13 +51,17 @@ function CopyLinkButton({ url, variant = 'default' }) {
  * Social share row (gallery modal, blog, projects).
  */
 export default function ShareSocialLinks({
-  shareUrl,
+  shareUrl: shareUrlProp,
+  sharePath,
   shareText,
   label = 'Share',
   hideLabel = false,
   variant = 'default',
   className = '',
 }) {
+  const shareUrlFromPath = useSharePageUrl(sharePath || null);
+  const shareUrl = shareUrlProp || shareUrlFromPath;
+
   if (!shareUrl) return null;
 
   const isLightbox = variant === 'lightbox';
@@ -140,6 +146,7 @@ export default function ShareSocialLinks({
             {cloneElement(item.icon, { className: svgClass })}
           </a>
         ))}
+        <ShareQrCodeButton url={shareUrl} variant={variant} />
         {isLightbox ? null : <CopyLinkButton url={shareUrl} variant={variant} />}
       </div>
     </div>

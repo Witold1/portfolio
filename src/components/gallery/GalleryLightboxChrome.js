@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import Link from 'next/link';
 import ShareSocialLinks from '../ShareSocialLinks';
+import { downloadSvgFromUrl } from '../../lib/downloadSvg';
 import { isExternalUrl } from '../../lib/isExternalUrl';
 import { useCopyToClipboard } from '../../lib/useCopyToClipboard';
 
@@ -32,11 +33,13 @@ export default function GalleryLightboxChrome({
 }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const [svgSaving, setSvgSaving] = useState(false);
   const { copied, copy } = useCopyToClipboard();
 
   useEffect(() => {
     setDetailsOpen(false);
     setShareOpen(false);
+    setSvgSaving(false);
   }, [item?.id]);
 
   const copyLink = () => {
@@ -51,13 +54,27 @@ export default function GalleryLightboxChrome({
     hasAbout,
     hasLinks,
     canShare,
+    canDownloadSvg,
+    svgDownloadUrl,
     showCaption,
     noteParagraphs,
     toolbarLinks,
     detailLinks,
     detailsLinkLabel,
   } = layers;
-  const showToolbar = hasAbout || hasLinks || canShare;
+  const showToolbar = hasAbout || hasLinks || canShare || canDownloadSvg;
+
+  const saveSvg = async () => {
+    if (!svgDownloadUrl || svgSaving) return;
+    setSvgSaving(true);
+    try {
+      await downloadSvgFromUrl(svgDownloadUrl);
+    } catch {
+      window.open(svgDownloadUrl, '_blank', 'noopener,noreferrer');
+    } finally {
+      setSvgSaving(false);
+    }
+  };
 
   return (
     <footer className="gallery-lightbox-chrome">
@@ -90,6 +107,20 @@ export default function GalleryLightboxChrome({
               aria-expanded={detailsOpen}
             >
               {detailsOpen ? 'Hide details' : 'Show details'}
+            </button>
+          ) : null}
+          {canDownloadSvg ? (
+            <button
+              type="button"
+              className="gallery-lightbox-toolbar-btn"
+              onClick={() => {
+                void saveSvg();
+                setShareOpen(false);
+                setDetailsOpen(false);
+              }}
+              disabled={svgSaving}
+            >
+              {svgSaving ? 'Downloading…' : 'Download SVG'}
             </button>
           ) : null}
           {canShare ? (

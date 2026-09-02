@@ -1,6 +1,6 @@
 'use client';
 
-import galleryConfig from '../../config/gallery-settings.json';
+import galleryConfig from '../../../config/gallery-settings.json';
 import { getMediaBaseUrl, resolveMediaUrl } from '../../lib/mediaUrl';
 
 /** MDX `img` — resolves CDN-relative keys via mediaBaseUrl. */

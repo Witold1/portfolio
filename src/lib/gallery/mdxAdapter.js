@@ -1,4 +1,4 @@
-import galleryConfig from '../../config/gallery-settings.json';
+import galleryConfig from '../../../config/gallery-settings.json';
 import { getMediaBaseUrl, resolveMediaUrl } from '../mediaUrl';
 import { getGalleryItemType } from './constants';
 

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import ImageLightbox from './ImageLightbox';
-import galleryConfig from '../../config/gallery-settings.json';
+import galleryConfig from '../../../config/gallery-settings.json';
 import { inferMediaTypeFromSrc } from '../../lib/inferMediaType';
 import { getMediaBaseUrl, resolveMediaUrl } from '../../lib/mediaUrl';
 

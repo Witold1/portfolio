@@ -9,7 +9,7 @@ import Toc from '../mdx/Toc';
 import { CitationProvider } from '../mdx/CitationContext';
 import ShareSocialLinks from '../ShareSocialLinks';
 import DiscussWithAi from './DiscussWithAi';
-import { SITE_ORGANIZATION, absolutePageUrl } from '../../lib/site';
+import { SITE_ORGANIZATION } from '../../lib/site';
 import { isWipContent } from '../../lib/content/wip';
 
 /**
@@ -31,7 +31,6 @@ export default function MdxDetailPage({
   afterShare = null,
 }) {
   const sharePath = `${pathPrefix}/${entry.slug}/`;
-  const shareUrl = absolutePageUrl(sharePath);
   const shareText = entry.title
     ? `${shareLead} "${entry.title}" on ${SITE_ORGANIZATION}!`
     : shareFallback;
@@ -78,11 +77,11 @@ export default function MdxDetailPage({
             </WipReveal>
             <div className="mt-10 border-t border-gray-200 pt-6 dark:border-gray-700 space-y-4">
               <DiscussWithAi
-                pageUrl={shareUrl}
+                pagePath={sharePath}
                 title={entry.title}
                 pageKind={pathPrefix === '/projects' ? 'page' : 'article'}
               />
-              <ShareSocialLinks shareUrl={shareUrl} shareText={shareText} />
+              <ShareSocialLinks sharePath={sharePath} shareText={shareText} />
             </div>
             {afterShare}
           </ContentLayout>

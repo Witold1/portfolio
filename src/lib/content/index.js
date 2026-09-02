@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import galleryConfig from '../../config/gallery-settings.json';
+import galleryConfig from '../../../config/gallery-settings.json';
 import { getMediaBaseUrl, resolveMediaUrl } from '../mediaUrl';
 
 /** @typedef {import('./types.js').ContentListEntry} ContentListEntry */

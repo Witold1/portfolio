@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useRouter } from 'next/router';
 import GalleryLightboxButton from './GalleryLightboxButton';
 import GalleryLightboxChrome from './GalleryLightboxChrome';
 import GalleryLightboxItemMedia from './GalleryLightboxItemMedia';
@@ -13,11 +12,9 @@ import {
 import { useEscapeToClose } from '../../lib/useEscapeToClose';
 
 export default function GalleryLightbox({ isOpen, onClose, item }) {
-  const router = useRouter();
-
   useEscapeToClose(onClose, { enabled: isOpen });
 
-  const shareUrl = useMemo(() => buildGalleryShareUrl(item, router), [router, item]);
+  const shareUrl = useMemo(() => buildGalleryShareUrl(item), [item]);
 
   if (!isOpen || !item) return null;
 

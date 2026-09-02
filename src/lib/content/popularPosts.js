@@ -1,4 +1,4 @@
-import popularEntries from '../../config/popular-posts.json';
+import popularEntries from '../../../config/popular-posts.json';
 
 /**
  * Editorial “popular” order (Phase A). Same slugs can later be merged with API stats in this module only.

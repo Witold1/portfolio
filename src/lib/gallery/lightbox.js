@@ -1,4 +1,5 @@
-import { SITE_ORGANIZATION } from '../site';
+import { sharePageUrl, SITE_ORGANIZATION } from '../site';
+import { isSvgMediaUrl } from '../downloadSvg';
 import { buildGalleryItemHref, getGalleryItemType } from './constants';
 import { normalizeGalleryNotesParagraphs } from './filters';
 import {
@@ -14,6 +15,8 @@ const EMPTY_LAYERS = {
   hasAbout: false,
   hasLinks: false,
   canShare: false,
+  canDownloadSvg: false,
+  svgDownloadUrl: '',
   showCaption: false,
   showChrome: false,
   noteParagraphs: [],
@@ -46,9 +49,11 @@ export function resolveGalleryLightboxLayers(item) {
       Array.isArray(item.slides) &&
       item.slides.length > 0 &&
       item.src);
+  const canDownloadSvg = type === 'image' && isSvgMediaUrl(item.src);
+  const svgDownloadUrl = canDownloadSvg ? String(item.src).trim() : '';
 
   const showCaption = Boolean(title || subtitle);
-  const showChrome = showCaption || hasAbout || hasLinks || canShare;
+  const showChrome = showCaption || hasAbout || hasLinks || canShare || canDownloadSvg;
 
   return {
     title,
@@ -56,6 +61,8 @@ export function resolveGalleryLightboxLayers(item) {
     hasAbout,
     hasLinks,
     canShare,
+    canDownloadSvg,
+    svgDownloadUrl,
     showCaption,
     showChrome,
     noteParagraphs,
@@ -65,18 +72,16 @@ export function resolveGalleryLightboxLayers(item) {
   };
 }
 
-/** Canonical share URL for a gallery item in context of the current page. */
-export function buildGalleryShareUrl(item, router) {
-  if (typeof window === 'undefined' || !item) return '';
+/** Share URL for a gallery item — localhost in dev, canonical production URL otherwise. */
+export function buildGalleryShareUrl(item) {
+  if (!item) return '';
   if (typeof item.shareUrl === 'string' && item.shareUrl.trim() !== '') {
     return item.shareUrl.trim();
   }
-  const baseUrl = window.location.origin;
-  const pathPrefix = router?.basePath || '';
-  if (router?.pathname === '/gallery' && item.id != null) {
-    return `${baseUrl}${pathPrefix}${buildGalleryItemHref(item.id)}`;
+  if (item.id != null) {
+    return sharePageUrl(buildGalleryItemHref(item.id));
   }
-  return window.location.href;
+  return sharePageUrl('/gallery/');
 }
 
 export function buildGalleryShareText(item, siteName = SITE_ORGANIZATION) {

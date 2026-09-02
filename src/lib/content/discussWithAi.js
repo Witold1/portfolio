@@ -7,7 +7,7 @@ function siteSearchScope() {
     const base = pathname.replace(/\/+$/, '');
     return base && base !== '/' ? `${hostname}${base}` : hostname;
   } catch {
-    return 'witold1.github.io/my-portfolio-test';
+    return 'witold1.github.io/portfolio';
   }
 }
 

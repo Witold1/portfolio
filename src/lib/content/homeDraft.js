@@ -1,4 +1,4 @@
-import mosaicConfig from '../../config/home-mosaic.json';
+import mosaicConfig from '../../../config/home-mosaic.json';
 import { filterVisibleContent } from './hidden';
 import { loadGallery } from '../gallery/server';
 import { cdnPreviewUrl } from '../mediaUrl';

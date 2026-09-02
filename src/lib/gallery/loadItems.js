@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parse as parseYaml } from 'yaml';
-import galleryConfig from '../../config/gallery-settings.json';
+import galleryConfig from '../../../config/gallery-settings.json';
 import { GALLERY_CONTENT_TYPE_SET } from './constants';
 import { normalizeGalleryNotesParagraphs } from './filters';
 import { normalizeGalleryItemLink } from './links';

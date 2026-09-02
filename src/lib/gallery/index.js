@@ -21,6 +21,7 @@ export {
 
 export {
   resolveGalleryLightboxLayers,
+  resolveGalleryShare,
   buildGalleryShareUrl,
   buildGalleryShareText,
 } from './lightbox';
