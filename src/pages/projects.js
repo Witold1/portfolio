@@ -59,7 +59,6 @@ export default function ProjectsIndex({ projects }) {
                     subtitle={project.subtitle}
                     excerpt={project.excerpt}
                     date={project.date}
-                    year={project.year}
                     image={project.coverImage}
                   />
                 ))}

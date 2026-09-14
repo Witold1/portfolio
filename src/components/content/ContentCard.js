@@ -4,8 +4,8 @@ import { cdnPreviewUrl } from '../../lib/mediaUrl';
 import ContentMetaLine from './ContentMetaLine';
 
 const CTA_BY_KIND = {
-  blog: 'Read →',
-  project: 'View →',
+  blog: 'read →',
+  project: 'view →',
 };
 
 export default function ContentCard({
@@ -13,7 +13,6 @@ export default function ContentCard({
   title,
   subtitle,
   excerpt,
-  year,
   date,
   image,
   featured = false,
@@ -75,7 +74,7 @@ export default function ContentCard({
         {!compact ? (
           <div className="content-card-meta">
             <span>
-              <ContentMetaLine date={date} year={year} />
+              <ContentMetaLine date={date} />
             </span>
             <Link href={href} className="content-card-cta">
               {ctaText}

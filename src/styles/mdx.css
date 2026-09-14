@@ -2,9 +2,15 @@
 .mdx-link,
 .content-link {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  /* Continuous stroke under text + inline-block brand icon (text-decoration skips those) */
+  text-decoration: none;
+  padding-bottom: 2px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  /* Long handles / repo names / URLs: wrap only when they would overflow */
+  overflow-wrap: break-word;
 }
 
 .mdx-link--external::after,
@@ -14,9 +20,29 @@
   vertical-align: baseline;
 }
 
+/* Brand glyphs before the label; continuous underline covers them too */
+.mdx-link-brand-icon.toolbar-icon,
+.content-link-brand-icon.toolbar-icon {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.28em;
+  vertical-align: -0.1em;
+  opacity: 0.88;
+}
+
+.mdx-link-brand-icon--wordmark.toolbar-icon,
+.content-link-brand-icon--wordmark.toolbar-icon {
+  width: 2.05em;
+  height: 0.86em;
+  margin-right: 0.32em;
+  vertical-align: -0.08em;
+}
+
 /* Sequential figure labels for <Carousel> captions (one counter per article body) */
 .mdx-article-body {
   counter-reset: mdx-figure;
+  overflow-wrap: break-word;
 }
 
 /*

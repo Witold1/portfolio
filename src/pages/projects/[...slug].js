@@ -3,6 +3,8 @@ import { getMdxStaticPaths, getMdxStaticProps } from '../../lib/content/mdxPage'
 import { citeMetaForProject } from '../../lib/content/citation';
 import MdxDetailPage from '../../components/content/MdxDetailPage';
 import ContentMetaLine from '../../components/content/ContentMetaLine';
+import BrandLinkIcon from '../../components/content/BrandLinkIcon';
+import { getLinkBrand } from '../../lib/isExternalUrl';
 
 export async function getStaticPaths() {
   return getMdxStaticPaths('projects');
@@ -19,25 +21,28 @@ export async function getStaticProps({ params }) {
 
 export default function ProjectPost({ entry, tocItems, citePageMeta }) {
   const metaLine =
-    entry.date || entry.year || entry.edited || entry.polished || entry.version ? (
+    entry.date || entry.edited || entry.polished || entry.version ? (
       <ContentMetaLine
         date={entry.date}
-        year={entry.year}
         edited={entry.edited}
         polished={entry.polished}
         version={entry.version}
       />
     ) : undefined;
 
+  const repoBrand = entry.repoUrl ? getLinkBrand(entry.repoUrl) : null;
   const afterShare = entry.repoUrl ? (
     <p className="mt-6">
       Repository:{' '}
       <Link
         href={entry.repoUrl}
-        className="content-link content-link--external"
+        className={`content-link content-link--external${repoBrand ? ` content-link--${repoBrand.modifier}` : ''}`}
         target="_blank"
         rel="noopener noreferrer"
       >
+        {repoBrand ? (
+          <BrandLinkIcon name={repoBrand.icon} wordmark={repoBrand.wordmark} variant="content" />
+        ) : null}
         {entry.repoUrl}
       </Link>
     </p>

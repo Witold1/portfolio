@@ -11,7 +11,7 @@ const CONTENT_DATE_CALENDAR_INTL = {
   persian: 'persian',
 };
 
-function parseContentDateParts(date, year) {
+function parseContentDateParts(date) {
   if (date instanceof Date && !Number.isNaN(date.getTime())) {
     return { year: date.getFullYear(), month: date.getMonth() + 1 };
   }
@@ -28,11 +28,6 @@ function parseContentDateParts(date, year) {
         };
       }
     }
-  }
-
-  if (year != null && year !== '') {
-    const y = Number(year);
-    if (Number.isFinite(y)) return { year: y, month: null };
   }
 
   return null;
@@ -73,7 +68,7 @@ export function formatContentPeriodLabel(
   fields = {},
   { calendar = DEFAULT_DATE_CALENDAR } = {},
 ) {
-  const parts = parseContentDateParts(fields.date, fields.year);
+  const parts = parseContentDateParts(fields.date);
   if (!parts) return '';
 
   let label = '';
@@ -122,7 +117,7 @@ export function formatContentEditedLabel(fields = {}, options = {}) {
   return polished ? `Polished during ${period}` : `Edited during ${period}`;
 }
 
-/** Page meta: created, optional edited/polished, optional project version (separate rows). */
+/** Page meta: created, optional edited/polished, optional version (separate rows). */
 export function formatContentMetaParts(fields = {}, options = {}) {
   const dateLabel = formatContentDateLabel(fields, options);
   const editedLabel = formatContentEditedLabel(fields, options);

@@ -1,15 +1,9 @@
 import { defaultCitationAuthor, pageCitationHref, SITE_ORGANIZATION } from '../site';
 
-function yearFromFrontmatter(data) {
-  if (data.year != null && data.year !== '') {
-    const y = Number(data.year);
-    return Number.isFinite(y) ? y : undefined;
-  }
-  if (data.date) {
-    const m = String(data.date).match(/^(\d{4})/);
-    if (m) return parseInt(m[1], 10);
-  }
-  return undefined;
+function yearFromDate(data) {
+  if (!data.date) return undefined;
+  const m = String(data.date).match(/^(\d{4})/);
+  return m ? parseInt(m[1], 10) : undefined;
 }
 
 /** Base BibTeX key segment (no `witold_`); `citationFormats` prefixes `witold_` when building BibTeX. */
@@ -27,7 +21,7 @@ export function citeMetaFromContent(data, { pathnamePrefix }) {
   const pathname = `${pathnamePrefix}/${data.slug}/`;
   const workTitle = data.title || 'Untitled';
   const author = data.citationAuthor || data.author || defaultCitationAuthor();
-  const year = yearFromFrontmatter(data);
+  const year = yearFromDate(data);
   const organization = data.citationOrganization ?? SITE_ORGANIZATION;
   const url = data.citationUrl || pageCitationHref(pathname);
   const citeKey = citeKeyFrom(data, pathnamePrefix.replace(/^\//, ''));

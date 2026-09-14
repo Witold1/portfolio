@@ -1,4 +1,5 @@
 import PageMeta from '../components/content/PageMeta';
+import BrandLinkIcon from '../components/content/BrandLinkIcon';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/vital-yevtushenko/';
 const GITHUB_URL = 'https://github.com/Witold1';
@@ -20,7 +21,13 @@ export default function About() {
             <div className="about-intro__copy">
               <p className="about-intro__body">
                 Hello,{' '}
-                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={LINKEDIN_URL}
+                  className="content-link content-link--external content-link--linkedin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <BrandLinkIcon name="brand-linkedin" variant="content" />
                   Witold1
                 </a>{' '}
                 is here. You might recognize me from analytical projects, blog comments, and data
@@ -37,11 +44,23 @@ export default function About() {
               <p className="about-intro__body">
                 If you&apos;re interested in collaborating on a project, don&apos;t hesitate to reach
                 out. Find me on{' '}
-                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={LINKEDIN_URL}
+                  className="content-link content-link--external content-link--linkedin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <BrandLinkIcon name="brand-linkedin" variant="content" />
                   LinkedIn
                 </a>{' '}
                 and{' '}
-                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={GITHUB_URL}
+                  className="content-link content-link--external content-link--git"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <BrandLinkIcon name="brand-git" wordmark variant="content" />
                   GitHub
                 </a>
                 .

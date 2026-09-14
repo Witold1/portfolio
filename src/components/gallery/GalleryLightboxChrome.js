@@ -4,19 +4,24 @@ import { Fragment, useEffect, useState } from 'react';
 import Link from 'next/link';
 import ShareSocialLinks from '../ShareSocialLinks';
 import { downloadSvgFromUrl } from '../../lib/downloadSvg';
-import { isExternalUrl } from '../../lib/isExternalUrl';
+import { isExternalUrl, getLinkBrand } from '../../lib/isExternalUrl';
 import { useCopyToClipboard } from '../../lib/useCopyToClipboard';
+import BrandLinkIcon from '../content/BrandLinkIcon';
 
 function TextLink({ href, label, ariaLabel, className }) {
   const external = isExternalUrl(href);
+  const brand = getLinkBrand(href);
   return (
     <Link
       href={href}
-      className={`${className}${external ? ' content-link--external' : ''}`}
+      className={`${className}${external ? ' content-link--external' : ''}${brand ? ` content-link--${brand.modifier}` : ''}`}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
       aria-label={ariaLabel}
     >
+      {brand ? (
+        <BrandLinkIcon name={brand.icon} wordmark={brand.wordmark} variant="content" />
+      ) : null}
       {label}
     </Link>
   );

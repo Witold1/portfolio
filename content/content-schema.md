@@ -27,7 +27,6 @@ Canonical field shapes also live as JSDoc in code:
 
 - `kind`: `project`
 - `subtitle`: string
-- `year`: number
 - `version`: string (display label only, e.g. `"draft"` / `draft-alpha` - not a visibility flag)
 - `repoUrl`: URL (optional)
 - `demoUrl`: URL (optional)

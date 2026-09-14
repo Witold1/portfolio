@@ -1,0 +1,14 @@
+title: Experiment "How Countries Use Their Land"
+subtitle: OECD land-use petal chart for the largest countries
+date: 2024-05
+series: experiment
+categories: [visualizations]
+tags: [land use, OECD, petal chart, small multiples]
+type: carousel
+src: gallery/experiment-petal-land-use-chart/experiment-petal-land-use-chart--light-petals.webp
+slides:
+  - src: gallery/experiment-petal-land-use-chart/experiment-petal-land-use-chart--light-petals.webp
+    alt: Light petals chart
+  - src: gallery/experiment-petal-land-use-chart/experiment-petal-land-use-chart--dark-squares.webp
+    alt: Dark squares chart
+link: /blog/viz-petal-land-use-chart/

@@ -22,7 +22,8 @@ function getMdxNavMediaSource(item) {
 }
 
 /**
- * Map an MDX MediaGrid entry into a normalized gallery grid item.
+ * Map an MDX MediaGrid / NavigatorGrid entry into a normalized gallery grid item.
+ * Prefer `notes` for lightbox Details (flags, caveats, etc.); `flags` is a legacy alias.
  */
 export function mdxNavItemToGalleryItem(entry, index, { interactionMode, imageFit = 'none' }) {
   const hrefString = typeof entry.href === 'string' ? entry.href : '';
@@ -30,6 +31,7 @@ export function mdxNavItemToGalleryItem(entry, index, { interactionMode, imageFi
     interactionMode === 'link' &&
     (hrefString === '#' || hrefString.toLowerCase().startsWith('javascript:'));
   const src = resolveMdxMedia(getMdxNavMediaSource(entry));
+  const notes = entry.notes ?? entry.flags;
 
   return {
     id: entry.id ?? `nav-${index}-${entry.label}`,
@@ -39,7 +41,7 @@ export function mdxNavItemToGalleryItem(entry, index, { interactionMode, imageFi
     title: entry.label,
     subtitle: entry.subtitle,
     link: interactionMode === 'link' ? (isPlaceholder ? undefined : entry.href) : entry.link,
-    notes: entry.notes ?? entry.subtitle,
+    notes,
     disabled: isPlaceholder,
     uniformObjectFit: NAV_IMAGE_FIT[imageFit] ?? 'none',
     showTitleBelow: true,

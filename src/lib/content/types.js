@@ -24,12 +24,10 @@
  * @typedef {ContentFrontmatterBase & {
  *   kind?: 'post' | string,
  *   major?: boolean,
- *   year?: number | string,
  * }} BlogFrontmatter
  *
  * @typedef {ContentFrontmatterBase & {
  *   kind?: 'project' | string,
- *   year?: number | string,
  *   version?: string,
  *   repoUrl?: string,
  *   demoUrl?: string,
