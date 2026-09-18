@@ -22,16 +22,14 @@
   color: var(--text-secondary);
 }
 
-.home-intro__lede a,
-.about-intro__body a {
+.home-intro__lede a {
   color: inherit;
   text-decoration: underline;
   text-decoration-color: var(--text-muted);
   text-underline-offset: 0.25em;
 }
 
-.home-intro__lede a:hover,
-.about-intro__body a:hover {
+.home-intro__lede a:hover {
   color: var(--page-fg);
   text-decoration-color: var(--text-faint);
 }

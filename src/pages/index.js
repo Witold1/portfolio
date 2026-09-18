@@ -19,7 +19,7 @@ export default function Home({ mosaicTiles }) {
       <div className="content-main content-main--home flex-grow">
         <div className="content-rail home-intro home-intro--banner">
           <h1 className="home-intro__lede">
-            Hello - this is a home for data products, and the notes behind them.
+            Hello - this is your home for data products, projects, and the ideas behind them.
           </h1>
         </div>
 
@@ -27,7 +27,7 @@ export default function Home({ mosaicTiles }) {
 
         <div className="content-rail home-intro">
           <p className="home-intro__lede">
-            We do data visualization, analysis, and small tools that help people see patterns and tell clearer stories.
+            We turn complex data into clear visuals, useful tools, and stories worth exploring.
           </p>
         </div>
 
