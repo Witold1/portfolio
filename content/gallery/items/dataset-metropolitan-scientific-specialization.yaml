@@ -1,5 +1,5 @@
-title: Metropolitan scientific specialization
-subtitle: ITS patent matrix of cities and Russia's scientific profile, 2013–2017
+title: Global metropolitan innovative and scientific specializations
+subtitle: Experimental visual ideas for technological specializations (patents) and regional scientific publication specializations
 date: 2019-08
 series: metropolitan-scientific-specialization
 categories: [visualizations, analytics]
@@ -8,6 +8,6 @@ type: carousel
 src: gallery/dataset-metropolitan-scientific-specialization/dataset-metropolitan-scientific-specialization--matrix.webp
 slides:
   - src: gallery/dataset-metropolitan-scientific-specialization/dataset-metropolitan-scientific-specialization--matrix.webp
-    alt: ITS matrix of metropolitan technological specialization
+    alt: Index of Technological Specialization (ITS) matrix chart, inspired by The Global 500 Matrix from Fortune Magazine, July 2016
   - src: gallery/dataset-metropolitan-scientific-specialization/dataset-metropolitan-scientific-specialization--one-line.webp
-    alt: Russia's scientific specialization, 2013–2017
+    alt: Scientific publication activity specialization line chart

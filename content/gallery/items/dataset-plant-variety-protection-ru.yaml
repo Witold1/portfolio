@@ -1,5 +1,5 @@
 title: Plant variety protection in Russia
-subtitle: Bar-chart race of patented oilseed varieties, Gossortkomissiya
+subtitle: Supporting visualizations for research on patented seed and plant varieties
 date: 2019-08
 series: dataset
 categories: [visualizations, analytics]
@@ -8,10 +8,10 @@ type: carousel
 src: gallery/dataset-plant-variety-protection-ru/dataset-plant-variety-protection-ru--banner.webp
 slides:
   - src: gallery/dataset-plant-variety-protection-ru/dataset-plant-variety-protection-ru.mp4
-    alt: Bar-chart race of patented oilseed varieties
+    alt: Bar-chart race of two selected plant varieties
   - src: gallery/dataset-plant-variety-protection-ru/dataset-plant-variety-protection-ru--oilseeds.webp
-    alt: Oilseed and essential-oil crop varieties
+    alt: Oilseed and essential-oil crop varieties wordcloud
   - src: gallery/dataset-plant-variety-protection-ru/dataset-plant-variety-protection-ru--grains.webp
-    alt: Cereal and forage crop varieties
+    alt: Cereal and forage crop varieties wordcloud
   - src: gallery/dataset-plant-variety-protection-ru/dataset-plant-variety-protection-ru--legumes.webp
-    alt: Grain-legume and forage-legume varieties
+    alt: Grain-legume and forage-legume varieties wordcloud
