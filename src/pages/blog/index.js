@@ -70,14 +70,14 @@ export default function BlogIndex({ posts }) {
   const otherPosts = useMemo(() => {
     const rest = filteredPosts.filter((p) => !pinnedSlugs.has(p.slug));
     return [...rest].sort((a, b) =>
-      String(b.date || '').localeCompare(String(a.date || '')),
+      String(b.created || '').localeCompare(String(a.created || '')),
     );
   }, [filteredPosts, pinnedSlugs]);
 
   const postsChronological = useMemo(
     () =>
       [...filteredPosts].sort((a, b) =>
-        String(b.date || '').localeCompare(String(a.date || '')),
+        String(b.created || '').localeCompare(String(a.created || '')),
       ),
     [filteredPosts],
   );
@@ -168,7 +168,7 @@ export default function BlogIndex({ posts }) {
                         title={post.title}
                         subtitle={post.subtitle}
                         excerpt={post.excerpt}
-                        date={post.date}
+                        created={post.created}
                         image={post.coverImage}
                       />
                     ))}
@@ -190,7 +190,7 @@ export default function BlogIndex({ posts }) {
                       title={post.title}
                       subtitle={post.subtitle}
                       excerpt={post.excerpt}
-                      date={post.date}
+                      created={post.created}
                       image={post.coverImage}
                     />
                   ))
@@ -202,7 +202,7 @@ export default function BlogIndex({ posts }) {
                       title={post.title}
                       subtitle={post.subtitle}
                       excerpt={post.excerpt}
-                      date={post.date}
+                      created={post.created}
                       image={post.coverImage}
                     />
                   ))

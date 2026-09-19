@@ -1,9 +1,11 @@
 title: Nordic Valley, UT and its alpine resort, USA
-date: 2023
+subtitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)
+created: 2023
+
 series: lidar
-suptitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)
 categories: [other]
 tags: [USA, Utah, Nordic Valley, ski resort, LiDAR, 3D elevation]
+
 type: carousel
 slides:
   - src: gallery/lidar-nordic-valley-ut/lidar-nordic-valley-ut.webp

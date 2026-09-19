@@ -1,12 +1,13 @@
 title: Downtown Cleveland, OH, USA
-date: 2023
+subtitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)
+created: 2023
+
 series: lidar
-suptitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)  
-src: gallery/lidar-downtown-cleveland-ohio/lidar-downtown-cleveland-ohio.webp
-categories:
-- other
+categories: [other]
 tags: [USA, downtowns, LiDAR, 3D elevation]
+
 type: carousel
+src: gallery/lidar-downtown-cleveland-ohio/lidar-downtown-cleveland-ohio.webp
 slides:
   - src: gallery/lidar-downtown-cleveland-ohio/lidar-downtown-cleveland-ohio.webp
   - src: gallery/lidar-downtown-cleveland-ohio/lidar-downtown-cleveland-ohio.mp4

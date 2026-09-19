@@ -1,9 +1,11 @@
 title: 🇰🇷 🇰🇵 Road network of the Korean Peninsula 🛣️
-suptitle: OSM-based road network of South Korea (ROK) and North Korea (DPRK)
-date: 2023-08
+subtitle: OSM-based road network of South Korea (ROK) and North Korea (DPRK)
+created: 2023-08
+
 series: road-network-chart
 categories: [cartography]
 tags: [Southeast Asia, Korea, road network]
+
 type: carousel
 slides:
   - src: gallery/road-network-chart-south-koreas/road-network-chart-south-koreas--1.webp

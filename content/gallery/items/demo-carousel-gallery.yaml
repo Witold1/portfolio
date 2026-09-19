@@ -1,9 +1,11 @@
 title: Demo carousel cards
-hidden: true
 subtitle: Demo carousel with images and videosm
-date: 2026-10-11
+created: 2026-10-11
+
 series: demo
 categories: [other]
+
+hidden: true
 type: carousel
 slides:
   - src: https://picsum.photos/500/500?random=41
@@ -22,9 +24,11 @@ slides:
   - src: https://picsum.photos/753/551?random=108
   - src: https://picsum.photos/678/761?random=109
   - src: https://picsum.photos/304/761?random=110
+
 link:
   - /blog/_mdx-showcase
   - https://example.com/external-reference
+
 notes: 
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et mattis eros. Sed et volutpat nunc. Nulla justo neque, condimentum quis accumsan nec, faucibus vitae ipsum. In pellentesque vestibulum interdum. Sed rutrum bibendum magna ut tempor. Nullam feugiat nibh eu sapien tristique, sed imperdiet magna iaculis. Ut interdum porttitor orci, eu consequat ante feugiat ac. Suspendisse condimentum libero sit amet tempor varius. Etiam finibus dignissim fermentum. Nam pharetra, justo quis posuere interdum, nisl velit pulvinar nunc, at congue nisi diam et metus. Pellentesque risus purus, cursus eget pellentesque nec, vehicula quis neque. Morbi sed justo pellentesque, tincidunt ante id, vehicula odio. Cras euismod pharetra iaculis. Nunc non nulla ex. Nam commodo, libero quis euismod gravida, dolor est varius orci, a posuere eros diam ut massa. In pellentesque felis ut magna rutrum feugiat.
 

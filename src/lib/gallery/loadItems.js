@@ -60,16 +60,16 @@ function normalizeCategories(raw, allowed, fileLabel) {
   return out;
 }
 
-function normalizeDate(raw, fileLabel) {
+function normalizeCreated(raw, fileLabel) {
   if (raw == null || raw === '') return null;
-  const date = String(raw).trim();
-  if (!date) return null;
-  if (!/^\d{4}(-\d{2})?(-\d{2})?$/.test(date)) {
+  const created = String(raw).trim();
+  if (!created) return null;
+  if (!/^\d{4}(-\d{2})?(-\d{2})?$/.test(created)) {
     throw new Error(
-      `${fileLabel}: "date" must be ISO-like (YYYY, YYYY-MM, or YYYY-MM-DD), got "${date}"`
+      `${fileLabel}: "created" must be ISO-like (YYYY, YYYY-MM, or YYYY-MM-DD), got "${created}"`
     );
   }
-  return date;
+  return created;
 }
 
 /** Optional series slug: lowercase kebab-case (`lidar`, `population-charts`). */
@@ -90,7 +90,7 @@ function normalizeSeries(raw, fileLabel) {
 
 function sortGalleryItems(items) {
   return [...items].sort((a, b) => {
-    const byDate = String(b.date || '').localeCompare(String(a.date || ''));
+    const byDate = String(b.created || '').localeCompare(String(a.created || ''));
     if (byDate !== 0) return byDate;
     return String(a.slug || '').localeCompare(String(b.slug || ''));
   });
@@ -151,7 +151,7 @@ function parseItemFile(filePath) {
         ? doc.suptitle
         : undefined;
   const subtitle = subtitleRaw?.trim() || undefined;
-  const date = normalizeDate(doc.date, fileLabel);
+  const created = normalizeCreated(doc.created ?? doc.date, fileLabel);
   const series = normalizeSeries(doc.series, fileLabel);
   const notesParas = normalizeGalleryNotesParagraphs(doc.notes);
 
@@ -172,7 +172,7 @@ function parseItemFile(filePath) {
   };
   if (type === 'carousel') item.slides = slides;
   if (subtitle) item.subtitle = subtitle;
-  if (date) item.date = date;
+  if (created) item.created = created;
   if (series) item.series = series;
   if (link) item.link = link;
   if (notesParas.length) item.notes = notesParas;

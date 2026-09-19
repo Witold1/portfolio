@@ -1,7 +1,9 @@
 title: Demo broken link card
-hidden: true
-date: 2026-10-11
+created: 2026-10-11
+
 series: demo
 categories: [other]
+
+hidden: true
 type: image
 src: https://broken-link.123456.link

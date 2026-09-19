@@ -1,9 +1,12 @@
 title: Simplified building taxonomy of selected cities
-suptitle: OSM-based building taxonomy of selected cities (animation, .mp4 | created with ezgif.com)
-date: 2024
+subtitle: OSM-based building taxonomy of selected cities (animation, .mp4 | created with ezgif.com)
+created: 2024
+
 series: experiment
 categories: [visualizations, other]
 tags: [General]
+
 type: video
 src: gallery/experiment-osm-building-taxonomy/experiment-osm-building-taxonomy.mp4
+
 link: /blog/viz-building-taxonomy

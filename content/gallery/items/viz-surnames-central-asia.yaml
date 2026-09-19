@@ -1,9 +1,12 @@
 title: Surnames of Central Asia
-suptitle: Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan
-date: 2024-06-15
+subtitle: Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan
+created: 2024-06-15
+
 series: surnames
 categories: [cartography]
 tags: [surnames, wordcloud, Central Asia]
+
 type: image
 src: blogposts/project-surnames/viz-surnames-central-asia/viz-surnames-central-asia--merged.webp
+
 link: /projects/project-surnames-navigator-meta

@@ -1,9 +1,12 @@
 title: Experiment "Transcultural Empire"
 subtitle: 1897 and 1926 census peoplespace explorer
-date: 2026-08
+created: 2026-08
+
 series: experiment
 categories: [visualizations, cartography]
 tags: [census, Russian Empire, Soviet Union, MapLibre, history]
+
 type: image
 src: gallery/experiment-transcultural-empire-dataset/experiment-transcultural-empire-dataset.webp
-link: /blog/viz-transcultural-empire-dataset/
+
+link: /blog/viz-transcultural-empire-dataset

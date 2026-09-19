@@ -1,9 +1,11 @@
 title: 🇮🇳 🇵🇰 🇧🇩 🇳🇵 🇱🇰 🇲🇻 🇧🇹 Road network of Indian subcontinent 🛣️
-suptitle: OSM-based road network of the Indian subcontinent
-date: 2023-09
+subtitle: OSM-based road network of the Indian subcontinent
+created: 2023-09
+
 series: road-network-chart
 categories: [cartography]
 tags: [Asia, Southeast Asia, Indian Peninsula, road network]
+
 type: carousel
 slides:
   - src: gallery/road-network-chart-indian-subcontinent/road-network-chart-indian-subcontinent--1.webp

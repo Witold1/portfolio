@@ -38,7 +38,7 @@ export function pickGalleryLightboxItem(item) {
   if (item.notes) out.notes = item.notes;
   if (item.link) out.link = item.link;
   if (item.slides) out.slides = item.slides;
-  if (item.date) out.date = item.date;
+  if (item.created) out.created = item.created;
   if (item.shareUrl) out.shareUrl = item.shareUrl;
   return out;
 }

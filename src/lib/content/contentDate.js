@@ -63,12 +63,13 @@ function formatWithIntlCalendar(parts, calendarId) {
 /**
  * Shared Blog / Projects date period - "July 2026" when month is known, otherwise "2026".
  * Pass `calendar` from admin prefs for the Easter egg (defaults to Gregorian).
+ * Reads `fields.created` (alias: `fields.date`).
  */
 export function formatContentPeriodLabel(
   fields = {},
   { calendar = DEFAULT_DATE_CALENDAR } = {},
 ) {
-  const parts = parseContentDateParts(fields.date);
+  const parts = parseContentDateParts(fields.created ?? fields.date);
   if (!parts) return '';
 
   let label = '';
@@ -112,7 +113,7 @@ export function formatContentEditedLabel(fields = {}, options = {}) {
   const raw = polished || edited;
   if (raw == null || raw === '') return '';
 
-  const period = formatContentPeriodLabel({ date: raw }, options);
+  const period = formatContentPeriodLabel({ created: raw }, options);
   if (!period) return '';
   return polished ? `Polished during ${period}` : `Edited during ${period}`;
 }

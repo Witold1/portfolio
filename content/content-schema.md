@@ -5,11 +5,40 @@ Canonical field shapes also live as JSDoc in code:
 - MDX: `lib/content/types.js` (`BlogFrontmatter`, `ProjectFrontmatter`, `ContentEntry`)
 - Gallery: `lib/gallery/types.js` (`GalleryItem`, `GallerySlide`, `GalleryLoadResult`)
 
+## Preferred frontmatter order
+
+Keep fields in this order (omit keys you do not need). Indent all frontmatter keys by **2 spaces**. Use a blank line between groups:
+
+```yaml
+  kind: post   # or project / visualization
+
+  title: …
+  subtitle: …
+  excerpt: …
+
+  created: …
+  edited: …    # or polished
+  version: …
+
+  tags:
+    - …
+  major: true
+
+  coverImage: …
+
+  repoUrl: …
+  demoUrl: …
+
+  citationAuthor: …
+
+  hidden: true
+```
+
 ## Common fields
 
 - `title`: string
 - `slug`: string (derived from file path for MDX; filename stem for gallery YAML)
-- `date`: YYYY-MM-DD (gallery also accepts YYYY / YYYY-MM) - shown as “Created during …”
+- `created`: YYYY-MM-DD (gallery also accepts YYYY / YYYY-MM) - shown as “Created during …”. Legacy alias: `date`.
 - `edited`: optional revisit date (YYYY / YYYY-MM / YYYY-MM-DD) - “Edited during …”
 - `polished`: softer alias of `edited` - “Polished during …” (used instead of `edited` when both are set)
 - `excerpt`: short summary

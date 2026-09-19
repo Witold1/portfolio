@@ -52,7 +52,7 @@ export function getSlugs(type) {
 }
 
 /**
- * Frontmatter listings (no MDX body), newest `date` first.
+ * Frontmatter listings (no MDX body), newest `created` first.
  * @param {string} type
  * @returns {ContentListEntry[]}
  */
@@ -64,9 +64,12 @@ export function getAllContent(type) {
       const fullPath = path.join(dir, filePath);
       const raw = fs.readFileSync(fullPath, 'utf8');
       const { data } = matter(raw);
-      return /** @type {ContentListEntry} */ ({ slug, ...withResolvedCoverImage(data) });
+      return /** @type {ContentListEntry} */ ({
+        slug,
+        ...normalizeContentDates(withResolvedCoverImage(data)),
+      });
     })
-    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+    .sort((a, b) => String(b.created || '').localeCompare(String(a.created || '')));
 }
 
 
@@ -83,8 +86,17 @@ export function getContentBySlug(type, slug) {
   const { data, content } = matter(raw);
   return /** @type {ContentEntry} */ ({
     slug: normalizedSlug,
-    ...withResolvedCoverImage(data),
+    ...normalizeContentDates(withResolvedCoverImage(data)),
     content,
   });
+}
+
+/** Prefer `created`; accept legacy `date` alias; drop `date` from the loaded object. */
+function normalizeContentDates(data) {
+  if (!data || typeof data !== 'object') return data;
+  const created = data.created ?? data.date;
+  const { date: _legacyDate, ...rest } = data;
+  if (created == null || created === '') return rest;
+  return { ...rest, created };
 }
 

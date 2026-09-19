@@ -1,8 +1,10 @@
 title: 🇫🇷 Road network of the European France 🛣️
-suptitle: OSM-based road network of the European France
-date: 2023-07
+subtitle: OSM-based road network of the European France
+created: 2023-07
+
 series: road-network-chart
 categories: [cartography]
 tags: [Europe, France, road network]
+
 type: video
 src: gallery/road-network-chart-european-france/road-network-chart-european-france.mp4

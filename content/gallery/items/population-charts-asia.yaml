@@ -1,12 +1,14 @@
 title: 🌐 Population of Asia
-suptitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 1000m2 Kontur Population dataset - 2022/June
-date: 2023-03
+subtitle: WGS 84 (EPSG:3857) | UN M49 | ⬡ 1000m2 Kontur Population dataset - 2022/June
+created: 2023-03
+
 series: population-charts
 categories:
   - cartography
 tags:
   - Asia  
   - population
+
 type: carousel
 slides:
   - src: gallery/population-charts-asia/population-charts-asia--hot.webp

@@ -1,9 +1,11 @@
 title: Forenames of the World
 subtitle: Regional forename wordcloud maps
-date: 2024-06-01
+created: 2024-06-01
+
 series: surnames
 categories: [cartography]
 tags: [forenames, wordcloud, demography]
+
 type: carousel
 src: blogposts/project-surnames/forenames/forenames--central-asia-merged.webp
 slides:
@@ -17,4 +19,5 @@ slides:
     alt: Forenames of the Indian Subcontinent
   - src: blogposts/project-surnames/forenames/forenames--balkan-peninsula-merged.webp
     alt: Forenames of the Balkan Peninsula
+
 link: /projects/project-surnames-navigator-meta

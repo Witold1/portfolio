@@ -113,7 +113,7 @@
   gap: 0.15rem;
 }
 
-.content-meta-line__date,
+.content-meta-line__created,
 .content-meta-line__edited,
 .content-meta-line__version {
   display: block;

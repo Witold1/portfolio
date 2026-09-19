@@ -6,7 +6,7 @@
  * @property {string} slug Derived from file path (no `.mdx`)
  * @property {string} [title]
  * @property {string} [subtitle]
- * @property {string} [date] Prefer `YYYY-MM-DD`
+ * @property {string} [created] Prefer `YYYY-MM-DD` (frontmatter alias: `date`)
  * @property {string} [edited] Optional revisit date (`YYYY` / `YYYY-MM` / `YYYY-MM-DD`) → “Edited during …”
  * @property {string} [polished] Softer alias of `edited` → “Polished during …” (wins if both set)
  * @property {string} [excerpt]

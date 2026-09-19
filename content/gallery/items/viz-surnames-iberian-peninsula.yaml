@@ -1,9 +1,12 @@
 title: Surnames of the Iberian Peninsula
-suptitle: Spain, Portugal, Andorra
-date: 2024-06-15
+subtitle: Spain, Portugal, Andorra
+created: 2024-06-15
+
 series: surnames
 categories: [cartography]
 tags: [surnames, wordcloud, Iberian Peninsula]
+
 type: image
 src: blogposts/project-surnames/viz-surnames-iberian-peninsula/viz-surnames-iberian-peninsula--merged.webp
+
 link: /projects/project-surnames-navigator-meta

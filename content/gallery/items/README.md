@@ -10,12 +10,35 @@ Normalized field shapes (for editors / loaders): `lib/gallery/types.js`.
 - `src` - image URL or CDN-relative key (see below); optional for `type: carousel` when `slides` has a first `src`
 - `categories` - one or more values from `content/config/gallery-settings.json`
 
+## Preferred metadata order
+
+Keep the top of each file in this order (omit keys you do not need). Use a blank line between groups:
+
+```yaml
+title: …
+subtitle: …
+created: …
+
+series: …
+categories: […]
+tags: […]
+
+type: …
+src: …
+
+link: …
+notes: …
+```
+
+Omit any group you do not need. `hidden` and `slides` sit with the media block (`type` / `src`).
+
 ## Optional fields
 
-- `date` - publication date (`YYYY`, `YYYY-MM`, or `YYYY-MM-DD`); items sort **newest first**, then a series-diversity pass spreads items that share the same series so they do not clump. Undated items appear last. Not shown in the lightbox chrome yet.
+- `created` - when the work was made (`YYYY`, `YYYY-MM`, or `YYYY-MM-DD`); items sort **newest first**, then a series-diversity pass spreads items that share the same series so they do not clump. Items without `created` appear last. Not shown in the lightbox chrome yet. Legacy alias: `date`.
 - `series` - optional kebab-case slug for related works (`lidar`, `population-charts`, `surnames`, …). Used for diversify + **Group → Series** on `/gallery`. Omit on one-offs.
 - `subtitle` - secondary line (lightbox caption / card hover); `suptitle` is accepted as an alias
-- `link` - site paths (`/blog/...`, `/projects/...`) and/or external source URLs; string or array. Relative forms like `blog/...` are normalized to `/blog/...`. Blog/project open from the toolbar; external URLs appear under **Show details** as sources
+- `tags` - free-form labels for search / filtering
+- `link` - site paths (`/blog/...`, `/projects/...`) and/or external source URLs; string or array. Prefer a leading `/` and no trailing slash for site paths (`blog/...` and `../blog/...` are still accepted and normalized). Blog/project open from the toolbar; external URLs appear under **Show details** as sources
 - `notes` - string or list of strings; opened via **Show details** in the lightbox toolbar (omit for image-only items)
 - `hidden` - when `true`, omitted from public lists, home featured picks, and the HTML sitemap; turn on **Show hidden items** in `/admin` to preview in lists. Detail pages still build (direct URL + `noindex`). Same field works on blog/project MDX frontmatter.
 
@@ -42,11 +65,14 @@ When root `type` is omitted on a single-item entry, it is inferred from `src` (e
 ```yaml
 title: Korean Peninsula road network
 subtitle: OSM extract
-date: 2024-06-15
+created: 2024-06-15
+
 series: road-network-chart
+categories: [cartography, visualizations]
+
 type: image
 src: https://witold1.github.io/gallery/assets/content/Road-Networks/RoadNetwork-Korean-Peninsula-1.jpeg
-categories: [cartography, visualizations]
+
 link: /projects/road-networks
 ```
 

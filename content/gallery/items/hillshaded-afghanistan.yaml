@@ -1,9 +1,11 @@
 title: 🇦🇫 Afghanistan elevation, shaded terrain ⛰️
-suptitle: COP-DEM/Copernicus DEM-based hillshaded terrain
-date: 2023-06
+subtitle: COP-DEM/Copernicus DEM-based hillshaded terrain
+created: 2023-06
+
 series: hillshaded
 categories: [cartography]
 tags: [Southern Asia, Afghanistan, elevation, hillshaded terrain]
+
 type: carousel
 slides:
   - src: gallery/hillshaded-afghanistan/hillshaded-afghanistan.mp4

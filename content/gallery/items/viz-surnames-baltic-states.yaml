@@ -1,9 +1,12 @@
 title: Surnames of the Baltic States
-suptitle: Estonia, Latvia, Lithuania
-date: 2024-06-15
+subtitle: Estonia, Latvia, Lithuania
+created: 2024-06-15
+
 series: surnames
 categories: [cartography]
 tags: [surnames, wordcloud, Baltic States]
+
 type: image
 src: blogposts/project-surnames/viz-surnames-baltic-states/viz-surnames-baltic-states--merged.webp
+
 link: /projects/project-surnames-navigator-meta

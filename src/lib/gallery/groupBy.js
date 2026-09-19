@@ -18,13 +18,13 @@ const SERIES_LABELS = {
 };
 
 /**
- * @param {{ date?: string } | null | undefined} item
+ * @param {{ created?: string } | null | undefined} item
  * @returns {string | null} Four-digit year, or null if missing/invalid.
  */
 export function galleryItemYear(item) {
-  const date = item?.date;
-  if (date == null || date === '') return null;
-  const year = String(date).trim().slice(0, 4);
+  const created = item?.created;
+  if (created == null || created === '') return null;
+  const year = String(created).trim().slice(0, 4);
   return /^\d{4}$/.test(year) ? year : null;
 }
 
@@ -59,7 +59,7 @@ export function formatGallerySeriesLabel(series) {
  * Partition gallery items into year sections (newest first; undated last).
  * Within each section, relative order from `items` is preserved.
  *
- * @param {Array<{ date?: string }>} items
+ * @param {Array<{ created?: string }>} items
  * @returns {{ key: string, label: string, items: typeof items }[]}
  */
 export function groupGalleryItemsByYear(items) {
@@ -87,13 +87,13 @@ export function groupGalleryItemsByYear(items) {
 }
 
 /**
- * Newest date string in a section (empty string if none).
- * @param {Array<{ date?: string }>} items
+ * Newest created string in a section (empty string if none).
+ * @param {Array<{ created?: string }>} items
  */
-function newestDateIn(items) {
+function newestCreatedIn(items) {
   let best = '';
   for (const item of items) {
-    const d = String(item?.date || '');
+    const d = String(item?.created || '');
     if (d && d.localeCompare(best) > 0) best = d;
   }
   return best;
@@ -103,7 +103,7 @@ function newestDateIn(items) {
  * Partition gallery items into series sections (explicit YAML `series` only).
  * Items without `series` land in Other (last). Sections ordered by newest item.
  *
- * @param {Array<{ series?: string, date?: string }>} items
+ * @param {Array<{ series?: string, created?: string }>} items
  * @returns {{ key: string, label: string, items: typeof items }[]}
  */
 export function groupGalleryItemsBySeries(items) {
@@ -120,7 +120,7 @@ export function groupGalleryItemsBySeries(items) {
   const keys = [...buckets.keys()].sort((a, b) => {
     if (a === GALLERY_OTHER_SERIES_LABEL) return 1;
     if (b === GALLERY_OTHER_SERIES_LABEL) return -1;
-    const byDate = newestDateIn(buckets.get(b)).localeCompare(newestDateIn(buckets.get(a)));
+    const byDate = newestCreatedIn(buckets.get(b)).localeCompare(newestCreatedIn(buckets.get(a)));
     if (byDate !== 0) return byDate;
     return a.localeCompare(b);
   });
@@ -134,7 +134,7 @@ export function groupGalleryItemsBySeries(items) {
 
 /**
  * Flat list used for pagination when a group mode is active.
- * @param {Array<{ date?: string, series?: string }>} items
+ * @param {Array<{ created?: string, series?: string }>} items
  * @param {'none' | 'year' | 'series'} groupBy
  */
 export function orderGalleryItemsForGrouping(items, groupBy) {
@@ -148,7 +148,7 @@ export function orderGalleryItemsForGrouping(items, groupBy) {
 }
 
 /**
- * @param {Array<{ date?: string, series?: string }>} items
+ * @param {Array<{ created?: string, series?: string }>} items
  * @param {'none' | 'year' | 'series'} groupBy
  * @returns {{ key: string, label: string, items: typeof items }[] | null}
  */

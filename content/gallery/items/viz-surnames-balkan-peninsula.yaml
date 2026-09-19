@@ -1,9 +1,12 @@
 title: Surnames of the Balkan Peninsula
-suptitle: Albania, Bosnia and Herzegovina, Bulgaria, Croatia, Kosovo, Montenegro, North Macedonia, Romania, Serbia, Slovenia, Greece, Moldova
-date: 2024-06-15
+subtitle: Albania, Bosnia and Herzegovina, Bulgaria, Croatia, Kosovo, Montenegro, North Macedonia, Romania, Serbia, Slovenia, Greece, Moldova
+created: 2024-06-15
+
 series: surnames
 categories: [cartography]
 tags: [surnames, wordcloud, Balkan Peninsula]
+
 type: image
 src: blogposts/project-surnames/viz-surnames-balkan-peninsula/viz-surnames-balkan-peninsula--merged.webp
+
 link: /projects/project-surnames-navigator-meta

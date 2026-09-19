@@ -21,9 +21,9 @@ export async function getStaticProps({ params }) {
 
 export default function ProjectPost({ entry, tocItems, citePageMeta }) {
   const metaLine =
-    entry.date || entry.edited || entry.polished || entry.version ? (
+    entry.created || entry.edited || entry.polished || entry.version ? (
       <ContentMetaLine
-        date={entry.date}
+        created={entry.created}
         edited={entry.edited}
         polished={entry.polished}
         version={entry.version}

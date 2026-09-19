@@ -13,7 +13,7 @@ export default function ContentCard({
   title,
   subtitle,
   excerpt,
-  date,
+  created,
   image,
   featured = false,
   compact = false,
@@ -74,7 +74,7 @@ export default function ContentCard({
         {!compact ? (
           <div className="content-card-meta">
             <span>
-              <ContentMetaLine date={date} />
+              <ContentMetaLine created={created} />
             </span>
             <Link href={href} className="content-card-cta">
               {ctaText}

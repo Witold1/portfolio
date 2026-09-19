@@ -1,9 +1,12 @@
 title: Surnames of the Middle East
-suptitle: Arabian peninsula, Levant, Egypt, Iraq, Iran, Türkiye, Afghanistan, Pakistan
-date: 2024-06-15
+subtitle: Arabian peninsula, Levant, Egypt, Iraq, Iran, Türkiye, Afghanistan, Pakistan
+created: 2024-06-15
+
 series: surnames
 categories: [cartography]
 tags: [surnames, wordcloud, Middle East]
+
 type: image
 src: blogposts/project-surnames/viz-surnames-middle-east/viz-surnames-middle-east--merged.webp
+
 link: /projects/project-surnames-navigator-meta

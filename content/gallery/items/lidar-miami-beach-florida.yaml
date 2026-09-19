@@ -1,8 +1,10 @@
 title: 🏙️ Miami Beach, FL, USA 🇺🇸
-suptitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)
-date: 2023-01
+subtitle: 1m LiDAR, data from USGS 3DEP (3D Elevation Program)
+created: 2023-01
+
 series: lidar
 categories: [other]
 tags: [USA, Florida, Miami Beach, LiDAR, 3D elevation]
+
 type: video
 src: gallery/lidar-miami-beach-florida/lidar-miami-beach-florida.mp4

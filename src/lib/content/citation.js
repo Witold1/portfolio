@@ -1,8 +1,8 @@
 import { defaultCitationAuthor, pageCitationHref, SITE_ORGANIZATION } from '../site';
 
 function yearFromDate(data) {
-  if (!data.date) return undefined;
-  const m = String(data.date).match(/^(\d{4})/);
+  if (!data.created && !data.date) return undefined;
+  const m = String(data.created ?? data.date).match(/^(\d{4})/);
   return m ? parseInt(m[1], 10) : undefined;
 }
 

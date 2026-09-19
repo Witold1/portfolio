@@ -5,7 +5,7 @@ import { formatContentDateLabel } from '../../lib/content/contentDate';
 import { useAdminPrefs } from './AdminPrefsProvider';
 
 /** Fixed sample used only on Admin so calendar changes are visible without leaving the page. */
-const DATE_CALENDAR_EXAMPLE = { date: '2026-07-15' };
+const DATE_CALENDAR_EXAMPLE = { created: '2026-07-15' };
 
 function AdminRow({ label, hint, children, below }) {
   return (

@@ -1,9 +1,11 @@
 title: Scientific publication activity in Russian regions
 subtitle: Map of scientific publication activity by administrative regions, data from World of Science (WoS) database, 2015–2017
-date: 2019-06
+created: 2019-06
+
 series: experiment
 categories: [cartography, visualizations]
 tags: [scientific publications, Russia, tilemap, regions]
+
 type: image
 src: gallery/experiment-scientific-publications-tilemap/experiment-scientific-publications-tilemap.webp
 alt: Map of scientific publication activity in Russia by administrative regions, data from World of Science (WoS) database, 2015–2017

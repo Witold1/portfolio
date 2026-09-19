@@ -1,9 +1,12 @@
 title: Experiment "American Presidents - Lifetimes & Service"
 subtitle: Circular lifetime and office glyphs for U.S. presidents
-date: 2026-07
+created: 2026-07
+
 series: experiment
 categories: [visualizations]
 tags: [presidents, timeline, history, United States]
+
 type: image
 src: gallery/experiment-american-presidents-lifetimes/experiment-american-presidents-lifetimes.webp
-link: /blog/viz-american-presidents-lifetimes/
+
+link: /blog/viz-american-presidents-lifetimes

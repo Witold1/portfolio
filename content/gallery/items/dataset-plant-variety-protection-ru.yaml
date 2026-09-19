@@ -1,9 +1,11 @@
 title: Plant variety protection in Russia
 subtitle: Supporting visualizations for research on patented seed and plant varieties
-date: 2019-08
+created: 2019-08
+
 series: dataset
 categories: [visualizations, analytics]
 tags: [plant varieties, patents, Russia, bar chart race, agriculture]
+
 type: carousel
 src: gallery/dataset-plant-variety-protection-ru/dataset-plant-variety-protection-ru--banner.webp
 slides:

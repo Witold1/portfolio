@@ -1,9 +1,12 @@
 title: Surnames of Central America
-suptitle: Guatemala, Belize, El Salvador, Honduras, Nicaragua, Costa Rica, Panama
-date: 2024-06-15
+subtitle: Guatemala, Belize, El Salvador, Honduras, Nicaragua, Costa Rica, Panama
+created: 2024-06-15
+
 series: surnames
 categories: [cartography]
 tags: [surnames, wordcloud, Central America]
+
 type: image
 src: blogposts/project-surnames/viz-surnames-central-america/viz-surnames-central-america--merged.webp
+
 link: /projects/project-surnames-navigator-meta

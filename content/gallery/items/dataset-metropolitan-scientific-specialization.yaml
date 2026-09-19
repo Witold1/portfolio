@@ -1,9 +1,11 @@
 title: Global metropolitan innovative and scientific specializations
 subtitle: Experimental visual ideas for technological specializations (patents) and regional scientific publication specializations
-date: 2019-08
+created: 2019-08
+
 series: metropolitan-scientific-specialization
 categories: [visualizations, analytics]
 tags: [scientific specialization, patents, cities, ITS]
+
 type: carousel
 src: gallery/dataset-metropolitan-scientific-specialization/dataset-metropolitan-scientific-specialization--matrix.webp
 slides:
