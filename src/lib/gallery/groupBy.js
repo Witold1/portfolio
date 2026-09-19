@@ -11,9 +11,10 @@ const SERIES_LABELS = {
   experiment: 'Experiments',
   hillshaded: 'Hillshaded',
   lidar: 'LiDAR',
+  'metropolitan-scientific-specialization': 'Metropolitan scientific specialization',
   'population-charts': 'Population charts',
   'road-network-chart': 'Road network charts',
-  surnames: 'Surnames',
+  surnames: 'Project Surnames',
 };
 
 /**
