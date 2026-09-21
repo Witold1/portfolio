@@ -17,7 +17,7 @@ export async function getStaticProps({ params }) {
   });
 }
 
-export default function BlogPost({ entry, tocItems, citePageMeta }) {
+export default function BlogPost({ entry, tocItems, citePageMeta, parentLink }) {
   const metaLine =
     entry.created || entry.edited || entry.polished || entry.version ? (
       <ContentMetaLine
@@ -33,6 +33,7 @@ export default function BlogPost({ entry, tocItems, citePageMeta }) {
       entry={entry}
       tocItems={tocItems}
       citePageMeta={citePageMeta}
+      parentLink={parentLink}
       pathPrefix="/blog"
       sectionHref="/blog/"
       sectionLabel="Blog"

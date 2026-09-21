@@ -19,7 +19,7 @@ export async function getStaticProps({ params }) {
   });
 }
 
-export default function ProjectPost({ entry, tocItems, citePageMeta }) {
+export default function ProjectPost({ entry, tocItems, citePageMeta, parentLink }) {
   const metaLine =
     entry.created || entry.edited || entry.polished || entry.version ? (
       <ContentMetaLine
@@ -53,6 +53,7 @@ export default function ProjectPost({ entry, tocItems, citePageMeta }) {
       entry={entry}
       tocItems={tocItems}
       citePageMeta={citePageMeta}
+      parentLink={parentLink}
       pathPrefix="/projects"
       sectionHref="/projects/"
       sectionLabel="Projects"

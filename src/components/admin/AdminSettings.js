@@ -71,7 +71,7 @@ export default function AdminSettings() {
 
           <AdminRow
             label="Show hidden items"
-            hint="Show blog posts, projects, and gallery cards marked hidden: true in frontmatter or YAML."
+            hint="Show blog posts, projects, and gallery cards marked hidden: true (drafts). Does not reveal listed: false hub children."
           >
             <AdminSwitch
               checked={showHiddenGallery}

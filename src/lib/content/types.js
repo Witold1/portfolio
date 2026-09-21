@@ -12,11 +12,14 @@
  * @property {string} [excerpt]
  * @property {string | string[]} [tags]
  * @property {string} [coverImage] Absolute or site-relative URL
- * @property {boolean} [hidden] Soft-hide from public lists; detail HTML still builds + noindex
+ * @property {boolean} [hidden] Draft/preview: omit from public lists + sitemap; detail HTML still builds + noindex
+ * @property {boolean} [listed] When `false`, omit from chronological lists/home but keep indexable + sitemap
+ * @property {string} [parent] Hub slug (`project-…` or `projects/…` / `blog/…`); nests in sitemap + “Part of” chip
  * @property {boolean} [wip] Force under-construction reveal cover on the detail page
- * @property {string} [citationAuthor]
+ * @property {{ name: string, affiliation?: string }[]} [creators] Preferred citation creators (per-person affiliation)
+ * @property {string} [citationAuthor] Single-author shorthand when `creators` omitted
  * @property {string} [author] Fallback citation author
- * @property {string} [citationOrganization]
+ * @property {string} [citationOrganization] Default affiliation for creators / citationAuthor
  * @property {string} [citationUrl]
  * @property {string} [citeKey]
  * @property {'misc' | 'online'} [citationEntryType]

@@ -1,5 +1,9 @@
 import { defaultCitationAuthor, pageCitationHref, SITE_ORGANIZATION } from '../site';
 
+/**
+ * @typedef {{ name: string, affiliation?: string }} CitationCreator
+ */
+
 function yearFromDate(data) {
   if (!data.created && !data.date) return undefined;
   const m = String(data.created ?? data.date).match(/^(\d{4})/);
@@ -14,13 +18,86 @@ function citeKeyFrom(data, prefix) {
 }
 
 /**
+ * Normalize frontmatter `creators` entries.
+ * @param {unknown} raw
+ * @param {string | null | undefined} defaultAffiliation
+ * @returns {CitationCreator[]}
+ */
+export function normalizeCreators(raw, defaultAffiliation) {
+  if (!Array.isArray(raw)) return [];
+  const out = [];
+  for (const entry of raw) {
+    if (typeof entry === 'string') {
+      const name = entry.trim();
+      if (!name) continue;
+      out.push({
+        name,
+        ...(defaultAffiliation ? { affiliation: defaultAffiliation } : {}),
+      });
+      continue;
+    }
+    if (!entry || typeof entry !== 'object') continue;
+    const name =
+      typeof entry.name === 'string'
+        ? entry.name.trim()
+        : typeof entry.author === 'string'
+          ? entry.author.trim()
+          : '';
+    if (!name) continue;
+    const affiliationRaw =
+      typeof entry.affiliation === 'string'
+        ? entry.affiliation.trim()
+        : typeof entry.organization === 'string'
+          ? entry.organization.trim()
+          : '';
+    const affiliation = affiliationRaw || defaultAffiliation || undefined;
+    out.push(affiliation ? { name, affiliation } : { name });
+  }
+  return out;
+}
+
+/**
+ * Prefer `creators`; else one creator from `citationAuthor` / `author` / default.
+ * @param {object} data
+ * @returns {CitationCreator[]}
+ */
+export function resolveCreators(data) {
+  const defaultAffiliation = data.citationOrganization ?? SITE_ORGANIZATION;
+  const fromList = normalizeCreators(data.creators, defaultAffiliation);
+  if (fromList.length) return fromList;
+
+  const name = data.citationAuthor || data.author || defaultCitationAuthor();
+  return defaultAffiliation
+    ? [{ name, affiliation: defaultAffiliation }]
+    : [{ name }];
+}
+
+/** Plain: `Name (Affil); Name2 (Affil2)` */
+export function formatCreatorsPlain(creators) {
+  if (!Array.isArray(creators) || !creators.length) return 'Author';
+  return creators
+    .map((c) => {
+      const name = c?.name || 'Author';
+      return c?.affiliation ? `${name} (${c.affiliation})` : name;
+    })
+    .join('; ');
+}
+
+/** BibTeX `author` field: `Name1 and Name2` */
+export function formatCreatorsBibTeX(creators) {
+  if (!Array.isArray(creators) || !creators.length) return 'Unknown';
+  return creators.map((c) => c?.name || 'Unknown').join(' and ');
+}
+
+/**
  * @param {object} data gray-matter fields + slug
  * @param {{ pathnamePrefix: string }} opts `/blog` or `/projects` (no trailing slash)
  */
 export function citeMetaFromContent(data, { pathnamePrefix }) {
   const pathname = `${pathnamePrefix}/${data.slug}/`;
   const workTitle = data.title || 'Untitled';
-  const author = data.citationAuthor || data.author || defaultCitationAuthor();
+  const creators = resolveCreators(data);
+  const author = formatCreatorsBibTeX(creators);
   const year = yearFromDate(data);
   const organization = data.citationOrganization ?? SITE_ORGANIZATION;
   const url = data.citationUrl || pageCitationHref(pathname);
@@ -29,6 +106,7 @@ export function citeMetaFromContent(data, { pathnamePrefix }) {
 
   return {
     workTitle,
+    creators,
     author,
     year,
     url,
@@ -58,15 +136,30 @@ export function mergeCitationPageMeta(base, patch) {
       ? Object.fromEntries(Object.entries(patch).filter(([, v]) => v !== undefined))
       : null;
   if (!b && !p) return null;
-  return { ...(b || {}), ...(p || {}) };
+  const merged = { ...(b || {}), ...(p || {}) };
+
+  // If patch supplies creators, re-derive author string; if only author/organization, rebuild creators.
+  if (Array.isArray(merged.creators) && merged.creators.length) {
+    const creators = normalizeCreators(merged.creators, merged.organization);
+    merged.creators = creators;
+    merged.author = formatCreatorsBibTeX(creators);
+  } else if (merged.author || merged.organization) {
+    merged.creators = resolveCreators({
+      citationAuthor: merged.author,
+      citationOrganization: merged.organization,
+    });
+  }
+
+  return merged;
 }
 
 export function warnIfCitationAuthorMissing(doc, label) {
   if (process.env.NODE_ENV !== 'development') return;
-  const has = doc.citationAuthor || doc.author;
+  const hasCreators = Array.isArray(doc.creators) && doc.creators.length > 0;
+  const has = hasCreators || doc.citationAuthor || doc.author;
   if (!has) {
     console.warn(
-      `[citation] ${label}/${doc.slug}: add frontmatter citationAuthor (or author) for accurate attribution; using NEXT_PUBLIC_DEFAULT_CITATION_AUTHOR / built-in default.`
+      `[citation] ${label}/${doc.slug}: add frontmatter creators (or citationAuthor) for accurate attribution; using NEXT_PUBLIC_DEFAULT_CITATION_AUTHOR / built-in default.`
     );
   }
 }

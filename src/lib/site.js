@@ -33,18 +33,14 @@ export function sharePageUrl(pathname) {
 
 /** BibTeX / plain-text author when frontmatter omits `citationAuthor` and `author`. */
 export function defaultCitationAuthor() {
-  return process.env.NEXT_PUBLIC_DEFAULT_CITATION_AUTHOR || 'Yevtushenko, Vitaliy';
+  return process.env.NEXT_PUBLIC_DEFAULT_CITATION_AUTHOR || 'Vitaliy Yevtushenko';
 }
 
 /**
- * Absolute page URL when `NEXT_PUBLIC_SITE_URL` is set (e.g. https://witold1.github.io).
- * Otherwise returns a root-relative path including `basePath` (works with next/link).
+ * Canonical page URL for citations / BibTeX `url`.
+ * Always absolute (citations must work outside the site).
+ * Override origin with `NEXT_PUBLIC_SITE_URL` (e.g. https://witold1.github.io).
  */
 export function pageCitationHref(pathname) {
-  const site = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '');
-  const bp = (process.env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/$/, '');
-  const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
-  const withBase = `${bp}${path}`.replace(/\/{2,}/g, '/') || '/';
-  if (!site) return withBase.startsWith('/') ? withBase : `/${withBase}`;
-  return `${site}${withBase}`.replace(/([^/])\/?$/, '$1/');
+  return absolutePageUrl(pathname);
 }

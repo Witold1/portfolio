@@ -40,7 +40,7 @@ Omit any group you do not need. `hidden` and `slides` sit with the media block (
 - `tags` - free-form labels for search / filtering
 - `link` - site paths (`/blog/...`, `/projects/...`) and/or external source URLs; string or array. Prefer a leading `/` and no trailing slash for site paths (`blog/...` and `../blog/...` are still accepted and normalized). Blog/project open from the toolbar; external URLs appear under **Show details** as sources
 - `notes` - string or list of strings; opened via **Show details** in the lightbox toolbar (omit for image-only items)
-- `hidden` - when `true`, omitted from public lists, home featured picks, and the HTML sitemap; turn on **Show hidden items** in `/admin` to preview in lists. Detail pages still build (direct URL + `noindex`). Same field works on blog/project MDX frontmatter.
+- `hidden` - when `true`, omitted from public lists, home featured picks, and the HTML sitemap; turn on **Show hidden items** in `/admin` to preview in lists. Detail pages still build (direct URL + `noindex`). Same field works on blog/project MDX frontmatter. For public hub children on MDX, prefer `listed: false` + `parent` instead (indexable, sitemap-nested, not in chronological lists).
 
 ## `type` - two levels
 

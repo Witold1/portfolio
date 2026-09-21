@@ -10,8 +10,8 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_APP_VERSION: pkg.version,
     NEXT_PUBLIC_BASE_PATH: '/portfolio',
-    /** Full site origin for BibTeX `url` + citation links, e.g. https://witold1.github.io */
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || '',
+    /** Full site origin for citations, OG, canonical (default: GitHub Pages host). */
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://witold1.github.io',
     /** Fallback when frontmatter has no citationAuthor / author */
     NEXT_PUBLIC_DEFAULT_CITATION_AUTHOR: process.env.NEXT_PUBLIC_DEFAULT_CITATION_AUTHOR || '',
     /** Optional CDN/origin prefix for relative media keys (gallery, future MDX assets). */

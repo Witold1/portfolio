@@ -2,11 +2,27 @@ import Link from 'next/link';
 import { blogIndexHref } from '../../lib/content/blogQuery';
 import { normalizeTags, tagToParam } from '../../lib/content/tags';
 
-export default function ContentLayout({ title, subtitle, metaLine, tags, children, className = '' }) {
+export default function ContentLayout({
+  title,
+  subtitle,
+  metaLine,
+  tags,
+  parentLink = null,
+  children,
+  className = '',
+}) {
   const tagList = normalizeTags(tags);
   return (
     <div className={`flex-grow py-8 ${className}`}>
       <article className="max-w-5xl mx-auto px-4">
+        {parentLink?.href && parentLink?.title ? (
+          <p className="content-part-of">
+            Part of{' '}
+            <Link href={parentLink.href} className="content-part-of-link">
+              {parentLink.title}
+            </Link>
+          </p>
+        ) : null}
         <h1 className="content-title">{title}</h1>
         {subtitle ? <p className="content-subtitle">{subtitle}</p> : null}
         {metaLine ? (

@@ -20,6 +20,7 @@ export default function MdxDetailPage({
   entry,
   tocItems,
   citePageMeta,
+  parentLink = null,
   pathPrefix,
   sectionHref,
   sectionLabel,
@@ -65,6 +66,7 @@ export default function MdxDetailPage({
             subtitle={entry.subtitle}
             metaLine={metaLine}
             tags={showTags ? entry.tags : undefined}
+            parentLink={parentLink}
             className="content-article"
           >
             <WipReveal active={showWip} title={wipTitle}>

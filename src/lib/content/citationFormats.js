@@ -54,31 +54,47 @@ export function formatAccessedDate(date = new Date()) {
 /**
  * @param {object} m
  * @param {string} m.workTitle
- * @param {string} [m.author]
+ * @param {Array<{ name: string, affiliation?: string }>} [m.creators]
+ * @param {string} [m.author] BibTeX-style author string (fallback when creators absent)
  * @param {string|number} [m.year]
  * @param {string} [m.url]
- * @param {string} [m.organization] Used for plain-text citation only (not written to BibTeX).
+ * @param {string} [m.organization] Fallback single affiliation when using `author` only
  * @param {string} [m.citeKey] Base key (e.g. blog_slug); normalized to witold_blog_slug.
  * @param {'misc'|'online'} [m.entryType]
  * @param {string} [m.accessed] Human access date (e.g. September 10, 2026)
  * @param {string} [m.urldate] ISO access date for BibTeX (e.g. 2026-09-10)
  */
 export function buildPlainCitation(m) {
-  const author = m.author || 'Author';
   const year = m.year != null ? String(m.year) : 'n.d.';
   const title = m.workTitle || 'Untitled';
-  const org = m.organization ? ` ${m.organization}.` : '';
+  let people;
+  if (Array.isArray(m.creators) && m.creators.length) {
+    people = m.creators
+      .map((c) => {
+        const name = c?.name || 'Author';
+        return c?.affiliation ? `${name} (${c.affiliation})` : name;
+      })
+      .join('; ');
+  } else {
+    const author = m.author || 'Author';
+    const org = m.organization ? ` (${m.organization})` : '';
+    people = `${author}${org}`;
+  }
   const url = m.url ? ` ${m.url}` : '';
   const accessed = m.accessed ? ` Accessed ${m.accessed}.` : '';
-  return `${title} (${year}), ${author}.${org}${url}${accessed}`.trim();
+  return `${title} (${year}), ${people}.${url}${accessed}`.trim();
 }
 
 export function buildBibTeX(m) {
   const key = bibtexCitationKey(m);
   const type = m.entryType === 'online' ? 'online' : 'misc';
+  const authorField =
+    Array.isArray(m.creators) && m.creators.length
+      ? m.creators.map((c) => c?.name || 'Unknown').join(' and ')
+      : m.author || 'Unknown';
   const lines = [
     `@${type}{${key},`,
-    `  author = ${bibtexBrace(m.author || 'Unknown')},`,
+    `  author = ${bibtexBrace(authorField)},`,
     `  title = ${bibtexTitle(m.workTitle || 'Untitled')},`,
   ];
   if (m.year != null) lines.push(`  year = ${bibtexBrace(String(m.year))},`);

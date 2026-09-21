@@ -135,6 +135,25 @@
   line-height: 1.25;
 }
 
+.content-part-of {
+  margin: 0 0 0.375rem;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.content-part-of-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.content-part-of-link:hover {
+  color: var(--page-fg);
+}
+
 .content-subtitle {
   margin: 0 0 0.5rem;
   color: var(--page-fg);

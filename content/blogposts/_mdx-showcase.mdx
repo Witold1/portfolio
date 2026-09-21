@@ -2,8 +2,8 @@
   kind: post
 
   title: "MDX Showcase: Custom Components + Design Language"
-  subtitle: "Prose and lists, footnotes, carousels, collapsible sections, WIP reveal, ToC, and media presence"
-  excerpt: "A working reference post demonstrating our MDX components, styles, and authoring patterns."
+  subtitle: Prose and lists, footnotes, carousels, collapsible sections, WIP reveal, ToC, and media presence
+  excerpt: A working reference post demonstrating our MDX components, styles, and authoring patterns.
 
   created: "1900"
 
@@ -14,7 +14,8 @@
 
   coverImage: "https://picsum.photos/1200/600?random=99"
 
-  citationAuthor: "Yevtushenko, Vitaliy"
+  creators:
+    - name: Vitaliy Yevtushenko
 
   hidden: true
 ---
@@ -303,13 +304,20 @@ On blog and project pages, a **collapsible table of contents** is rendered autom
   ]}
 />
 
-Manual attribution while BibTeX still comes from **page frontmatter** (`title`, `created`, `citationAuthor`, optional `citationUrl`):
+Plain attribution and BibTeX come from frontmatter `creators` (or `citationAuthor` shorthand), `title`, `created`, optional `citationUrl`.
 
-<CitationBox
-  title="How to cite this page"
-  citation="Yevtushenko, V. (2026). MDX Showcase: Custom Components + Design Language. Witold's Data Consulting."
-/>
+Multi-author example shape:
 
-Fully automatic (same frontmatter - no `citation` / `url` props):
+```yaml
+  creators:
+    - name: Vitaliy Yevtushenko
+    - name: Ada Smith
+      affiliation: Example University
+```
+
+Renders as: `…, Vitaliy Yevtushenko (Witold's Data Consulting); Ada Smith (Example University).`  
+BibTeX: `author = {Vitaliy Yevtushenko and Ada Smith}`
+
+<CitationBox title="How to cite this page" />
 
 <CitationBox title="Auto-generated from frontmatter" />

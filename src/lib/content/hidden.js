@@ -1,15 +1,32 @@
 /**
- * Frontmatter / YAML `hidden: true` - the single visibility flag.
+ * Visibility flags for MDX / gallery items.
  *
- * Public surfaces (lists, home featured, HTML sitemap) omit hidden items unless
- * the admin “Show hidden items” toggle is on. Detail pages still build so you
- * can preview via direct URL; MDX pages emit noindex when hidden.
+ * - `hidden: true` — drafts/previews: omit from public lists + HTML sitemap;
+ *   detail pages still build but emit `noindex`. Admin “Show hidden items”
+ *   reveals them in lists.
+ * - `listed: false` — public hub children: omit from chronological blog/project
+ *   grids and home featured picks, but remain indexable and appear in the
+ *   sitemap (nested under `parent` when set). Not revealed by the admin toggle.
  */
+
 export function isHiddenContent(item) {
   return item?.hidden === true;
 }
 
+/** Soft-omit from public lists while staying crawlable (`listed: false`). */
+export function isUnlistedContent(item) {
+  return item?.listed === false;
+}
+
+/**
+ * Public list surfaces (blog, projects, gallery, home picks).
+ * Always drops `listed: false`. Drops `hidden` unless `showHidden`.
+ */
 export function filterVisibleContent(items, { showHidden = false } = {}) {
-  if (showHidden || !Array.isArray(items)) return items || [];
-  return items.filter((item) => !isHiddenContent(item));
+  if (!Array.isArray(items)) return items || [];
+  return items.filter((item) => {
+    if (isUnlistedContent(item)) return false;
+    if (isHiddenContent(item) && !showHidden) return false;
+    return true;
+  });
 }

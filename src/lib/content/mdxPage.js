@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm';
 import { getSlugs, getContentBySlug } from './index';
 import { extractTocFromMdx } from './toc';
 import { warnIfCitationAuthorMissing } from './citation';
+import { resolveParentLink } from './parent';
 
 /** Shared catch-all paths for MDX collections under `content/<collection>/`. */
 export function getMdxStaticPaths(collection) {
@@ -24,6 +25,7 @@ export async function getMdxStaticProps({ collection, slug, citeMeta, citationLa
   const entry = getContentBySlug(collection, slug);
   warnIfCitationAuthorMissing(entry, citationLabel);
   const citePageMeta = citeMeta(entry);
+  const parentLink = resolveParentLink(entry.parent);
   const tocItems = extractTocFromMdx(entry.content);
   const mdxSource = await serialize(entry.content, {
     mdxOptions: { remarkPlugins: [remarkGfm] },
@@ -33,6 +35,7 @@ export async function getMdxStaticProps({ collection, slug, citeMeta, citationLa
       entry: { ...entry, mdxSource },
       tocItems,
       citePageMeta,
+      parentLink,
     },
   };
 }

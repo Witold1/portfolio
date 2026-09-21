@@ -774,7 +774,7 @@ h2.mdx-media-header {
 
 .mdx-carousel-caption {
   counter-increment: mdx-figure;
-  margin: 0 0 6px;
+  margin: 0;
   color: inherit;
   font-size: inherit;
 }
