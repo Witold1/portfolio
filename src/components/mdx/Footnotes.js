@@ -1,15 +1,56 @@
 'use client';
 
-import { createContext, useCallback, useContext, useEffect, useId, useMemo, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
-import { usePrimaryInputIsHoverNone } from '../../lib/usePrimaryInputIsHoverNone';
 import { useEscapeToClose } from '../../lib/useEscapeToClose';
 
 const FootnotesContext = createContext(null);
 
+/** Align the drawer with the live `.content-reading` column (not the full viewport). */
+function useContentReadingBox(active) {
+  const [box, setBox] = useState(null);
+
+  useLayoutEffect(() => {
+    if (!active) {
+      setBox(null);
+      return undefined;
+    }
+
+    const update = () => {
+      const el = document.querySelector('.content-reading');
+      if (!el) {
+        setBox(null);
+        return;
+      }
+      const r = el.getBoundingClientRect();
+      setBox({ left: r.left, width: r.width });
+    };
+
+    update();
+    window.addEventListener('resize', update);
+    window.addEventListener('scroll', update, true);
+    return () => {
+      window.removeEventListener('resize', update);
+      window.removeEventListener('scroll', update, true);
+    };
+  }, [active]);
+
+  return box;
+}
+
 function FootnoteDrawer() {
   const { drawerId, closeDrawer, get } = useFootnotes();
   const drawerBodyId = useId();
+  const readingBox = useContentReadingBox(Boolean(drawerId));
 
   useEscapeToClose(closeDrawer, { enabled: Boolean(drawerId) });
 
@@ -17,6 +58,10 @@ function FootnoteDrawer() {
 
   const entry = get(drawerId);
   if (!entry?.content) return null;
+
+  const drawerStyle = readingBox
+    ? { left: readingBox.left, width: readingBox.width, right: 'auto' }
+    : undefined;
 
   return createPortal(
     <>
@@ -31,6 +76,7 @@ function FootnoteDrawer() {
         role="dialog"
         aria-label={`Footnote ${drawerId}`}
         aria-modal="true"
+        style={drawerStyle}
       >
         <button
           type="button"
@@ -40,6 +86,7 @@ function FootnoteDrawer() {
           aria-controls={drawerBodyId}
           aria-label="Hide footnote"
         >
+          <span className="mdx-footnote-drawer-title">Footnote</span>
           <svg
             className="mdx-footnote-drawer-chevron is-open"
             viewBox="0 0 24 12"
@@ -129,8 +176,8 @@ export function FootnoteDefinition({ id, children }) {
 }
 
 export function Footnotes({ title = 'Footnotes', children }) {
-  // This component is mostly a semantic wrapper that lets you colocate
-  // <FootnoteDefinition /> blocks near the section they belong to.
+  // Semantic wrapper that lets you colocate <FootnoteDefinition /> blocks
+  // near the section they belong to; also renders the collected list.
   return (
     <section className="mdx-footnotes">
       <div className="mdx-footnotes-header">
@@ -165,13 +212,11 @@ function FootnotesSection() {
 
 export function FootnoteRef({ id }) {
   const { get, drawerId, toggleDrawer } = useFootnotes();
-  const touchUi = usePrimaryInputIsHoverNone();
-  const [open, setOpen] = useState(false);
   const entry = get(id);
 
   const label = String(id);
   const hasPreview = Boolean(entry?.content);
-  const isDrawerOpen = touchUi && drawerId === label;
+  const isDrawerOpen = drawerId === label;
 
   return (
     <span className="mdx-footnote-refwrap">
@@ -180,30 +225,17 @@ export function FootnoteRef({ id }) {
           id={`fnref-${label}`}
           href={`#fn-${label}`}
           className={`mdx-footnote-ref${isDrawerOpen ? ' mdx-footnote-ref--active' : ''}`}
-          onMouseEnter={() => !touchUi && hasPreview && setOpen(true)}
-          onMouseLeave={() => !touchUi && setOpen(false)}
-          onFocus={() => !touchUi && hasPreview && setOpen(true)}
-          onBlur={() => !touchUi && setOpen(false)}
           onClick={(event) => {
-            if (touchUi && hasPreview) {
-              event.preventDefault();
-              toggleDrawer(label);
-              return;
-            }
-            setOpen(false);
+            if (!hasPreview) return;
+            event.preventDefault();
+            toggleDrawer(label);
           }}
           aria-label={`Footnote ${label}`}
-          aria-expanded={touchUi && hasPreview ? isDrawerOpen : undefined}
+          aria-expanded={hasPreview ? isDrawerOpen : undefined}
         >
           {label}
         </a>
       </sup>
-
-      {hasPreview && open && !touchUi ? (
-        <span className="mdx-footnote-popover" role="note">
-          {entry.content}
-        </span>
-      ) : null}
     </span>
   );
 }

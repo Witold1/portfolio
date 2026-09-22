@@ -23,7 +23,11 @@ export default function ContentLayout({
             </Link>
           </p>
         ) : null}
-        <h1 className="content-title">{title}</h1>
+        {typeof title === 'string' || typeof title === 'number' ? (
+          <h1 className="content-title">{title}</h1>
+        ) : (
+          title
+        )}
         {subtitle ? <p className="content-subtitle">{subtitle}</p> : null}
         {metaLine ? (
           <div
@@ -46,7 +50,7 @@ export default function ContentLayout({
             ))}
           </div>
         ) : null}
-        <div className="mdx-article-body space-y-4 text-gray-800 dark:text-gray-200">{children}</div>
+        <div className="mdx-article-body text-gray-800 dark:text-gray-200">{children}</div>
       </article>
     </div>
   );

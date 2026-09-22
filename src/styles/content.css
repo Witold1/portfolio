@@ -135,6 +135,27 @@
   line-height: 1.25;
 }
 
+/* Sequential fade title (archive-style jQuery fadeOut/fadeIn) */
+.rotating-title {
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+}
+
+.rotating-title--out {
+  opacity: 0;
+}
+
+.rotating-title--in {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-title {
+    transition: none;
+    opacity: 1;
+  }
+}
+
 .content-part-of {
   margin: 0 0 0.375rem;
   color: var(--text-muted);

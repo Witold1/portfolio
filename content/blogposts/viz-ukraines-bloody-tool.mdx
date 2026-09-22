@@ -2,12 +2,12 @@
   kind: post
 
   title: Visualization "Ukraine's bloody tool"
-  subtitle: Visualizing official casualty cross-reports since Feb 2022
-  excerpt: A visualization of cross-reported casualties from daily briefings of contestant military commnds, with notes on definitions, limitations, and methodology.
+  subtitle: Daily casualty estimates reported by each belligerent party for the opposing side since February 2022
+  excerpt: This work illustrates cross-reported casualty estimates from the daily briefings of the respective military authorities, with each side reporting estimates of the other’s casualties. It also discusses the methodology and limitations of the reported data.
 
   created: "2025-04"
   version: private beta (code), AI-draft (this page text)
-
+  wip: true
   tags:
     - dataviz
     - open-source-intelligence
@@ -22,26 +22,50 @@
     - name: Vitaliy Yevtushenko
 ---
 
+<RotatingTitle
+  variants={[
+    "Visualization \"Ukraine's bloody tool\"",
+    "Visualization \"Кровавая цена Украины\"",
+    "Visualization \"Криваві ціна України\"",
+  ]}
+  intervalMs={4000}
+  fadeMs={1000}
+/>
+
 <Carousel
-  caption="Officially reported casualties in Russia–Ukraine war, since Feb 2022"
+  caption="Aggregated monthly casualty estimates officially reported by each belligerent party for the opposing side since February 2022"
   items={[
-    { src: "gallery/dataset-ukraine-bloody-toll/dataset-ukraine-bloody-toll.webp", alt: "Casualty chart preview" }
+    { src: "gallery/dataset-ukraine-bloody-toll/dataset-ukraine-bloody-toll.webp", alt: "Chart showing monthly casualty estimates reported by each belligerent party for the opposing side from February 2022 onward" }
   ]}
 />
 
-Visualize official casualty reports from the active stage of the Russia–Ukraine war using PyData, Selenium, BeautifulSoup4, and LLM-assisted extraction.
+## What's this about?
 
-## Notes on interpretation
+What casualty figures did each side officially report for the opposing side, day by day? The ground truth on casualty figures, including the death toll, remains unknown. A wide range of journalists and researchers have attempted to estimate military casualties using various methodologies, including open-source analysis, social media analysis, demographic analysis, event-based data collection, intelligence assessments, and statistical modelling. These approaches provide important estimates, but they necessarily rely on assumptions, data sources, and methodological choices that remain subject to debate and revision as new evidence becomes available.
+
+This work takes a slightly different approach. Rather than attempting to estimate the ground truth, we collected and visualized cross-reported casualty figures from the daily briefings of the respective military authorities, with each side reporting estimates of the other side's casualties. The data were collected using PyData, Selenium, and Beautiful Soup, with experiments in LLM-assisted information extraction.
+
+The methodology and terminology used here are intentionally descriptive and do not adopt either party's official characterization of the conflict. The resulting dataset provides a consistent visual record of the casualty figures reported by the belligerent parties over time.
+
+
+## Notes on method and interpretation
+
+* **These are casualties, not fatalities. Do not treat casualty figures as fatalities**. The term casualty can include killed, wounded, captured, missing, and other categories of personnel lost or affected, depending on the reporting system. The same individual may potentially be counted more than once over time, depending on how casualties are recorded and reported. In practice, officers are often responsible for recording casualties that occurred within their commands<FootnoteRef id="ref 1" />. Definitions and counting practices may differ between the parties and may also change over the course of the conflict<FootnoteRef id="ref 2" />. Converting casualties into fatalities by applying a ["wounded-to-killed ratio"](https://en.wikipedia.org/wiki/Loss_exchange_ratio) requires assumptions about the composition of the reported figures, definitions, medical outcomes, reporting practices, and the underlying population. Different ratios can therefore produce substantially different results. Such calculations are outside the scope of this project.
+
+* **These are cross-reported figures**. Each side reports estimates of the other side's casualties. The figures therefore represent official wartime claims, not independently verified measurements of ground truth.
 
 <details>
-  <summary><b>What’s important to understand before reading the numbers?</b></summary>
+<summary><b>What’s important to understand before reading the numbers?</b></summary>
 
-  1. These are **casualties**, not fatalities. A “casualty” can include killed, wounded, captured, missing, etc., and can be counted multiple times across time depending on reporting practices.
-  2. These are **cross-reported** figures (Country A reporting Country B losses, and vice-versa). They are best thought of as official propaganda signals rather than ground truth.
-  3. Quantification is uncertain; a plausible “ground truth” could be far from cross-reports for any given day.
-  4. You can apply your own wounded-to-killed ratios if you want to reason about fatalities, but assumptions will dominate.
+These figures are best understood as officially reported claims rather than ground truth. Many journalists and researchers have attempted to estimate military casualties using alternative sources and methodologies, including open-source documentation, social media analysis, demographic analysis, event-based data collection, intelligence assessments, satellite imagery, and statistical modelling. These approaches may provide useful estimates, but they rely on different assumptions, sources, and methodological choices, and their results remain subject to debate and revision as new evidence becomes available.
+
+Comparable independent estimates for both sides remain difficult to establish. The parties to a conflict also have strategic incentives regarding what casualty information they disclose and how they characterize the opposing side's losses.
+
+This project does not attempt to resolve these uncertainties. The two sides' figures are collected using the same general procedure and presented alongside each other, but this does not imply that they are equally accurate, equally reliable, or equally close to the ground truth. The purpose is to provide a consistent visual record of what the respective military authorities officially reported over time.
 
 </details>
+
+* **Future evidence may change the picture**. Independent research, newly available records, archival material, demographic data, and other sources may eventually allow these wartime claims to be assessed more reliably. This dataset is intended to preserve the reported figures so that they can also be compared with future evidence.
 
 ## Sources and data access (legacy summary)
 
@@ -59,6 +83,15 @@ Dataset:
 Inspiration:
 
 - ["Iraq’s bloody toll" (Simon Scarr)](https://www.simonscarr.com/iraqs-bloody-toll)
+
+<Footnotes>
+  <FootnoteDefinition id="ref 1">
+    According to American Battlefield Trust's [Civil War Casualties The Cost of War: Killed, Wounded, Captured, and Missing](https://www.battlefields.org/learn/articles/civil-war-casualties").
+  </FootnoteDefinition>
+  <FootnoteDefinition id="ref 2">
+    For example, see [How Israel Classifies its Wounded](https://gist.github.com/idan/4124398).
+  </FootnoteDefinition>
+</Footnotes>
 
 <MediaPresence items={[]} />
 

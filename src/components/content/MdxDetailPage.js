@@ -11,6 +11,7 @@ import ShareSocialLinks from '../ShareSocialLinks';
 import DiscussWithAi from './DiscussWithAi';
 import { SITE_ORGANIZATION } from '../../lib/site';
 import { isWipContent } from '../../lib/content/wip';
+import { PageTitle, PageTitleProvider } from './PageTitle';
 
 /**
  * Shared chrome for MDX detail routes (blog / projects).
@@ -61,32 +62,34 @@ export default function MdxDetailPage({
           <div className="content-breadcrumb-rail">
             <ContentBreadcrumb items={breadcrumbItems} />
           </div>
-          <ContentLayout
-            title={entry.title}
-            subtitle={entry.subtitle}
-            metaLine={metaLine}
-            tags={showTags ? entry.tags : undefined}
-            parentLink={parentLink}
-            className="content-article"
-          >
-            <WipReveal active={showWip} title={wipTitle}>
-              <Toc items={tocItems} collapsible defaultOpen={false} />
-              <CitationProvider meta={citePageMeta}>
-                <FootnotesProvider>
-                  <MDXRemote {...entry.mdxSource} components={mdxComponents} />
-                </FootnotesProvider>
-              </CitationProvider>
-            </WipReveal>
-            <div className="mt-10 border-t border-gray-200 pt-6 dark:border-gray-700 space-y-4">
-              <DiscussWithAi
-                pagePath={sharePath}
-                title={entry.title}
-                pageKind={pathPrefix === '/projects' ? 'page' : 'article'}
-              />
-              <ShareSocialLinks sharePath={sharePath} shareText={shareText} />
-            </div>
-            {afterShare}
-          </ContentLayout>
+          <PageTitleProvider fallbackTitle={entry.title}>
+            <ContentLayout
+              title={<PageTitle />}
+              subtitle={entry.subtitle}
+              metaLine={metaLine}
+              tags={showTags ? entry.tags : undefined}
+              parentLink={parentLink}
+              className="content-article"
+            >
+              <WipReveal active={showWip} title={wipTitle}>
+                <Toc items={tocItems} collapsible defaultOpen={false} />
+                <CitationProvider meta={citePageMeta}>
+                  <FootnotesProvider>
+                    <MDXRemote {...entry.mdxSource} components={mdxComponents} />
+                  </FootnotesProvider>
+                </CitationProvider>
+              </WipReveal>
+              <div className="mt-10 border-t border-gray-200 pt-6 dark:border-gray-700 space-y-4">
+                <DiscussWithAi
+                  pagePath={sharePath}
+                  title={entry.title}
+                  pageKind={pathPrefix === '/projects' ? 'page' : 'article'}
+                />
+                <ShareSocialLinks sharePath={sharePath} shareText={shareText} />
+              </div>
+              {afterShare}
+            </ContentLayout>
+          </PageTitleProvider>
         </div>
       </div>
     </div>

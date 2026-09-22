@@ -46,6 +46,26 @@
 }
 
 /*
+ * Tailwind Preflight zeros <p> margins. Restore prose rhythm; exclude MDX widget
+ * copy that should stay flush (captions, media notes, citation labels).
+ */
+.mdx-article-body p:not(.mdx-carousel-caption):not(.mdx-media-note):not(.mdx-citation-code-label) {
+  margin: 0.9em 0;
+}
+
+.mdx-article-body li > p {
+  margin: 0.35em 0;
+}
+
+.mdx-article-body li > p:first-child {
+  margin-top: 0;
+}
+
+.mdx-article-body li > p:last-child {
+  margin-bottom: 0;
+}
+
+/*
  * Markdown lists: Tailwind Preflight sets list-style: none on ul/ol globally.
  * Restore markers only for prose lists (exclude MDX widgets that use their own ul/ol).
  */
@@ -309,7 +329,7 @@ html.dark .mdx-article-body blockquote hr {
   border-bottom: none;
   padding-bottom: 0;
   margin-bottom: 0;
-  /* No margin-top: spacing comes from .mdx-collapsible + space-y on .mdx-article-body, not from the inner h2 (avoids double gap). */
+  /* No margin-top: spacing comes from .mdx-collapsible, not from the inner h2 (avoids double gap). */
   margin-top: 0;
 }
 
@@ -375,7 +395,6 @@ html.dark .mdx-collapsible {
 .mdx-media,
 .mdx-citation,
 .mdx-footnotes,
-.mdx-footnote-popover,
 .mdx-footnote-drawer {
   --mdx-aside-bg: var(--surface-wash);
   --mdx-aside-border: var(--border);
@@ -394,7 +413,6 @@ html.dark .mdx-toc,
 html.dark .mdx-media,
 html.dark .mdx-citation,
 html.dark .mdx-footnotes,
-html.dark .mdx-footnote-popover,
 html.dark .mdx-footnote-drawer {
   --mdx-aside-bg: var(--surface);
   --mdx-aside-border: var(--border);
@@ -427,7 +445,6 @@ html.dark .mdx-footnote-drawer {
 
 .mdx-footnote-ref {
   text-decoration: none;
-  border-bottom: 1px dotted currentColor;
   padding: 0 0.125rem;
 }
 
@@ -436,22 +453,7 @@ html.dark .mdx-footnote-drawer {
   text-decoration: underline;
 }
 
-.mdx-footnote-popover {
-  position: absolute;
-  z-index: 50;
-  left: 0;
-  top: 1.2rem;
-  min-width: 20rem;
-  padding: 0.625rem;
-  border: 1px solid var(--mdx-aside-border);
-  /* Opaque surface: --mdx-aside-bg is a wash for in-flow asides, not overlays. */
-  background: var(--mdx-aside-btn-bg);
-  color: inherit;
-  box-shadow: var(--mdx-aside-popover-shadow);
-  border-radius: var(--radius-lg);
-}
-
-/* Touch / narrow: bottom drawer (panel-drawer-toggle pattern from transcultural-empire-dataset). */
+/* Bottom drawer for footnote previews (all viewports). */
 .mdx-footnote-drawer-backdrop {
   position: fixed;
   inset: 0;
@@ -472,6 +474,7 @@ html.dark .mdx-footnote-drawer {
   display: flex;
   flex-direction: column;
   max-height: min(70%, 24rem);
+  box-sizing: border-box;
   border: 1px solid var(--mdx-aside-border);
   border-bottom: none;
   background: var(--page-bg);
@@ -493,21 +496,30 @@ html.dark .mdx-footnote-drawer {
   border: 0;
   border-bottom: 1px solid var(--mdx-aside-border);
   background: var(--page-bg);
-  color: var(--mdx-aside-muted);
+  color: var(--page-fg);
   cursor: pointer;
   touch-action: manipulation;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .mdx-footnote-drawer-toggle:hover,
 .mdx-footnote-drawer-toggle:focus-visible {
-  color: var(--mdx-aside-heading);
+  color: var(--page-fg);
 }
 
 .mdx-footnote-drawer-toggle:focus-visible {
   outline: none;
   box-shadow: inset 0 0 0 2px var(--mdx-aside-border);
+}
+
+.mdx-footnote-drawer-title {
+  font-size: inherit;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1;
+  text-align: left;
 }
 
 .mdx-footnote-drawer-chevron {
@@ -705,9 +717,9 @@ h2.mdx-media-header {
   padding-left: 38px;
 }
 
-/* Default spacer before MediaPresence */
+/* MediaPresence spacing comes from sibling margins, not an extra wrap pad */
 .mdx-media-wrap {
-  padding-top: 1.25rem;
+  padding-top: 0;
 }
 
 .mdx-media-list {
@@ -769,12 +781,12 @@ h2.mdx-media-header {
 .mdx-carousel {
   border: none;
   background: transparent;
-  padding: 0.625rem 0;
+  padding: 0;
 }
 
 .mdx-carousel-caption {
   counter-increment: mdx-figure;
-  margin: 0 0 0.5rem;
+  margin: 0;
   color: inherit;
   font-size: inherit;
 }
