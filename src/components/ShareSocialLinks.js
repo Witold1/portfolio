@@ -9,10 +9,10 @@ const iconBtnClass =
   'inline-flex items-center justify-center w-8 h-8 rounded text-inherit opacity-90 hover:opacity-100 hover:bg-black/5 dark:hover:bg-white/10 transition-colors';
 
 const iconBtnLightboxClass =
-  'gallery-lightbox-share-btn inline-flex items-center justify-center w-7 h-7 rounded-full text-inherit transition-colors';
+  'gallery-lightbox-share-btn inline-flex items-center justify-center w-8 h-8 rounded-full text-inherit transition-colors';
 
 const iconSize = '1rem';
-const iconSizeLightbox = '0.875rem';
+const iconSizeLightbox = '1rem';
 
 function CopyLinkButton({ url, variant = 'default' }) {
   const { copied, copy } = useCopyToClipboard();

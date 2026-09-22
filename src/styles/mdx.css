@@ -774,7 +774,7 @@ h2.mdx-media-header {
 
 .mdx-carousel-caption {
   counter-increment: mdx-figure;
-  margin: 0;
+  margin: 0 0 0.5rem;
   color: inherit;
   font-size: inherit;
 }
@@ -787,9 +787,10 @@ h2.mdx-media-header {
 
 .mdx-carousel-frame {
   position: relative;
-  background: transparent;
+  background: color-mix(in srgb, var(--page-fg) 4%, transparent);
   overflow: hidden;
-  border: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 0.25rem);
 }
 
 .mdx-carousel-media {
@@ -811,36 +812,65 @@ h2.mdx-media-header {
 .mdx-carousel-btn {
   position: absolute;
   top: 50%;
+  z-index: 2;
   transform: translateY(-50%);
-  background: rgba(17, 24, 39, 0.65);
-  color: white;
-  border: none;
-  padding: 0.625rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.2rem;
+  background: rgba(9, 9, 11, 0.78);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
   cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.mdx-carousel-btn-icon {
+  width: 1.05rem;
+  height: 1.05rem;
 }
 
 .mdx-carousel-btn-left {
-  left: 6px;
+  left: 0.5rem;
 }
 
 .mdx-carousel-btn-right {
-  right: 6px;
+  right: 0.5rem;
 }
 
-.mdx-carousel-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
+.mdx-carousel-btn:hover,
+.mdx-carousel-btn:focus-visible {
+  background: rgba(9, 9, 11, 0.92);
+  border-color: rgba(255, 255, 255, 0.34);
+  outline: none;
+}
+
+.mdx-carousel-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .mdx-carousel-counter {
   position: absolute;
-  bottom: 6px;
+  bottom: 0.5rem;
   left: 50%;
+  z-index: 2;
   transform: translateX(-50%);
-  background: rgba(17, 24, 39, 0.55);
-  color: var(--page-fg);
-  padding: 0.25rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
+  background: rgba(9, 9, 11, 0.72);
+  color: #fff;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.2rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
 }
 
 html.dark .mdx-carousel {
@@ -849,8 +879,243 @@ html.dark .mdx-carousel {
 }
 
 html.dark .mdx-carousel-frame {
-  background: transparent;
+  background: color-mix(in srgb, var(--page-fg) 6%, transparent);
+  border-color: var(--border);
+}
+
+/* Full-viewport image lightbox (carousel / MDX zoom) */
+.mdx-image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.84);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.mdx-image-lightbox-stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100vw;
+  max-height: 100dvh;
+}
+
+/* Float above the media (same stacking idea as chrome over tall images). */
+.mdx-image-lightbox-nav {
+  position: absolute;
+  top: 0.65rem;
+  left: 50%;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: fit-content;
+  max-width: calc(100% - 1.25rem);
+  margin: 0;
+  padding: 0.35rem;
+  border-radius: 0.35rem;
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  transform: translateX(-50%);
+}
+
+.mdx-image-lightbox-nav--close-only {
+  left: auto;
+  right: 0.65rem;
+  transform: none;
+  padding: 0;
+  background: none;
   border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.mdx-image-lightbox-nav-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.mdx-image-lightbox-nav-spacer {
+  display: none;
+}
+
+.mdx-image-lightbox-nav-counter {
+  min-width: 3.25rem;
+  padding: 0 0.15rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+.mdx-image-lightbox-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.2rem;
+  background: rgba(9, 9, 11, 0.78);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.mdx-image-lightbox-btn:hover,
+.mdx-image-lightbox-btn:focus-visible {
+  background: rgba(9, 9, 11, 0.92);
+  border-color: rgba(255, 255, 255, 0.34);
+  outline: none;
+}
+
+.mdx-image-lightbox-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.mdx-image-lightbox-btn-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.mdx-image-lightbox-frame {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  max-height: 100dvh;
+}
+
+.mdx-image-lightbox-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100vw;
+  max-height: 100dvh;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+.mdx-image-lightbox-chrome {
+  position: absolute;
+  bottom: 0.65rem;
+  left: 50%;
+  z-index: 5;
+  width: min(36rem, calc(100vw - 1.5rem));
+  max-width: calc(100vw - 1.5rem);
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  text-align: left;
+  border-radius: var(--radius-lg);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32);
+  transform: translateX(-50%);
+}
+
+.mdx-image-lightbox-title {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.005em;
+}
+
+@media (max-width: 640px) {
+  .mdx-image-lightbox {
+    align-items: stretch;
+  }
+
+  .mdx-image-lightbox-stack {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100dvh;
+  }
+
+  .mdx-image-lightbox-nav {
+    top: max(0.55rem, env(safe-area-inset-top, 0px));
+    left: 0.65rem;
+    right: 0.65rem;
+    width: auto;
+    max-width: none;
+    transform: none;
+    justify-content: space-between;
+    display: flex;
+  }
+
+  .mdx-image-lightbox-nav--close-only {
+    left: auto;
+    right: 0.65rem;
+    width: fit-content;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .mdx-image-lightbox-nav-spacer {
+    display: block;
+    flex: 1 1 auto;
+  }
+
+  .mdx-image-lightbox-nav-counter {
+    font-size: 1rem;
+  }
+
+  .mdx-image-lightbox-frame {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow: auto;
+  }
+
+  .mdx-image-lightbox-img {
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .mdx-image-lightbox-chrome {
+    bottom: max(0.65rem, env(safe-area-inset-bottom, 0px));
+    left: 0.65rem;
+    right: 0.65rem;
+    width: auto;
+    max-width: none;
+    transform: none;
+  }
+
+  .mdx-image-lightbox-title {
+    font-size: 1rem;
+  }
 }
 
 .mdx-navgrid {
@@ -1107,7 +1372,7 @@ html.dark .mdx-code-details {
   margin: 0;
   padding: 0.5rem 0.5rem 0.65rem;
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.3;
   color: var(--page-fg);

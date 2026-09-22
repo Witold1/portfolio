@@ -45,7 +45,7 @@ export default function BlogIndex({ posts }) {
   const activeTagSlug = rawTag ? tagToParam(decodeURIComponent(rawTag)) : '';
 
   const sortMode =
-    router.isReady && router.query.sort === 'time' ? 'time' : 'featured';
+    router.isReady && router.query.sort === 'featured' ? 'featured' : 'time';
 
   const filteredPosts = useMemo(() => {
     if (!activeTagSlug) return visiblePosts;

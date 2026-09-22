@@ -9,7 +9,7 @@ function GalleryLightboxError({ children }) {
 }
 
 /** Renders the correct media for a gallery lightbox item. */
-export default function GalleryLightboxItemMedia({ item }) {
+export default function GalleryLightboxItemMedia({ item, slideIndex = 0 }) {
   const type = getGalleryItemType(item);
 
   if (item?.type && !isGalleryContentType(item.type)) {
@@ -17,7 +17,13 @@ export default function GalleryLightboxItemMedia({ item }) {
   }
 
   if (type === 'carousel') {
-    return <GalleryLightboxCarousel slides={item.slides} title={item.title} />;
+    return (
+      <GalleryLightboxCarousel
+        slides={item.slides}
+        title={item.title}
+        index={slideIndex}
+      />
+    );
   }
 
   if (!item?.src) {

@@ -96,7 +96,7 @@
   border-bottom: 1px solid var(--border);
   background: transparent;
   color: var(--text-secondary);
-  font-size: 0.8125rem;
+  font-size: 1rem;
   line-height: 1.4;
   letter-spacing: 0.01em;
 }
@@ -271,7 +271,7 @@
 }
 
 .wip-reveal-kicker {
-  font-size: 0.6875rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -288,7 +288,7 @@
 
 .wip-reveal-hint {
   margin-top: 0.35rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--text-faint);
 }
 
@@ -317,6 +317,11 @@
   justify-content: space-between;
   gap: 0.625rem 1rem;
   margin: 0 0 var(--content-stack-gap);
+  font-size: 1rem;
+}
+
+.content-primary-controls .gallery-grid-toggle {
+  font-size: inherit;
 }
 
 /* Grid/List is a no-op when only one card column fits */
@@ -332,7 +337,7 @@
   align-items: center;
   gap: 0.375rem 0.625rem;
   margin: 0;
-  font-size: 0.8125rem;
+  font-size: inherit;
   color: var(--text-muted);
 }
 
@@ -667,7 +672,7 @@ html.dark .content-card-badge {
   }
 }
 
-/* Share QR popover (blog, projects, gallery) */
+/* Share QR popover (blog, projects, gallery) — solid white for QR readability */
 .share-qr-popover {
   position: absolute;
   left: 50%;
@@ -676,9 +681,9 @@ html.dark .content-card-badge {
   max-width: min(16rem, calc(100vw - 2rem));
   padding: 0.75rem;
   border-radius: var(--radius-md, 0.375rem);
-  border: 1px solid var(--border);
-  background: var(--surface-elevated);
-  color: var(--page-fg);
+  border: 1px solid rgba(24, 24, 27, 0.12);
+  background: #fff;
+  color: #18181b;
   box-shadow: var(--shadow-sm, 0 1px 2px rgba(24, 24, 27, 0.06)), 0 10px 25px rgba(24, 24, 27, 0.12);
   transform: translateX(-50%);
 }
@@ -712,25 +717,22 @@ html.dark .content-card-badge {
   font-size: 0.6875rem;
   line-height: 1.35;
   text-align: center;
-  color: var(--text-muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-html.dark .share-qr-popover:not(.share-qr-popover--lightbox) {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  color: #18181b;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .share-qr-popover--lightbox {
-  border-color: var(--gallery-lightbox-surface-border);
-  background: var(--gallery-lightbox-surface-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border-color: rgba(24, 24, 27, 0.14);
+  background: #fff;
+  color: #18181b;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
 .share-qr-popover--lightbox .share-qr-popover__url {
-  color: rgba(255, 255, 255, 0.65);
+  color: #18181b;
 }
 

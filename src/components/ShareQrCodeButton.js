@@ -12,20 +12,24 @@ const iconBtnClass =
   'inline-flex items-center justify-center w-8 h-8 rounded text-inherit opacity-90 hover:opacity-100 hover:bg-black/5 dark:hover:bg-white/10 transition-colors';
 
 const iconBtnLightboxClass =
-  'gallery-lightbox-share-btn inline-flex items-center justify-center w-7 h-7 rounded-full text-inherit transition-colors';
+  'gallery-lightbox-share-btn inline-flex items-center justify-center w-8 h-8 rounded-full text-inherit transition-colors';
 
 /**
  * QR code share control — opens a small popover on click.
  */
-export default function ShareQrCodeButton({ url, variant = 'default' }) {
+export default function ShareQrCodeButton({ url, variant = 'default', labeled = false }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const rootRef = useRef(null);
   const popoverRef = useRef(null);
   const popoverId = useId();
   const isLightbox = variant === 'lightbox';
-  const btnClass = isLightbox ? iconBtnLightboxClass : iconBtnClass;
-  const iconSize = isLightbox ? '0.875rem' : '1rem';
+  const btnClass = labeled
+    ? 'gallery-lightbox-actions-item gallery-lightbox-share-stack-item'
+    : isLightbox
+      ? iconBtnLightboxClass
+      : iconBtnClass;
+  const iconSize = '1rem';
 
   const close = useCallback(() => setOpen(false), []);
   useEscapeToClose(close, { enabled: open });
@@ -67,7 +71,7 @@ export default function ShareQrCodeButton({ url, variant = 'default' }) {
   ) : null;
 
   return (
-    <div className="relative" ref={rootRef}>
+    <div className={labeled ? 'gallery-lightbox-share-stack-qr' : 'relative'} ref={rootRef}>
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
@@ -76,8 +80,10 @@ export default function ShareQrCodeButton({ url, variant = 'default' }) {
         aria-label="Show QR code"
         aria-expanded={open}
         aria-controls={open ? popoverId : undefined}
+        role={labeled ? 'menuitem' : undefined}
       >
         <ToolbarIcon name="share-qr" size={iconSize} />
+        {labeled ? <span>QR code</span> : null}
       </button>
       {open
         ? isLightbox && mounted
