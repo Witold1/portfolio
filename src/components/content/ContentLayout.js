@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { blogIndexHref } from '../../lib/content/blogQuery';
-import { normalizeTags, tagToParam } from '../../lib/content/tags';
+import ContentMetaPanel from './ContentMetaPanel';
 
 export default function ContentLayout({
   title,
@@ -11,7 +10,6 @@ export default function ContentLayout({
   children,
   className = '',
 }) {
-  const tagList = normalizeTags(tags);
   return (
     <div className={`flex-grow py-8 ${className}`}>
       <article className="max-w-5xl mx-auto px-4">
@@ -29,27 +27,7 @@ export default function ContentLayout({
           title
         )}
         {subtitle ? <p className="content-subtitle">{subtitle}</p> : null}
-        {metaLine ? (
-          <div
-            className={`content-meta-line${tagList.length ? ' content-meta-line--before-tags' : ' content-meta-line--before-body'}`}
-          >
-            {metaLine}
-          </div>
-        ) : null}
-        {tagList.length ? (
-          <div className="content-tag-index mb-3" role="list" aria-label="Tags">
-            {tagList.map((tag) => (
-              <Link
-                key={tag}
-                role="listitem"
-                href={blogIndexHref({ tag: tagToParam(tag) })}
-                className="blog-tag-chip"
-              >
-                {tag}
-              </Link>
-            ))}
-          </div>
-        ) : null}
+        <ContentMetaPanel metaLine={metaLine} tags={tags} />
         <div className="mdx-article-body text-gray-800 dark:text-gray-200">{children}</div>
       </article>
     </div>

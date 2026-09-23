@@ -2,13 +2,14 @@
   kind: visualization
 
   title: Visualization "Rulers of the World" - Kazakh Khanate
-  subtitle: Timeline visualization of Kazakh Khan rulers by year
+  subtitle: Timeline of Kazakh Khans by year
   excerpt: A stripe-based timeline chart showing years of rule, periods of stability, and transitions of power in the Kazakh Khanate. Jupyter Notebook poster plus an interactive browser tool.
 
   created: "2024-09"
   polished: "2026-09"
-  version: public beta (tool), alpha (preset datasets), and AI-draft (this page text)
-  wip: true
+  version: public beta (tool), alpha (preset datasets), and curated (this page text)
+  wip: false
+
   tags:
     - history
     - timeline
@@ -20,37 +21,56 @@
 
   coverImage: gallery/experiment-timeline-kazakh-rulers/experiment-timeline-kazakh-rulers--dark.webp
 
-  repoUrl: "https://github.com/Witold1/rulers-of-kazakh-khanate"
-
   creators:
     - name: Vitaliy Yevtushenko
 ---
 
 <Carousel
-  caption="Rulers of Kazakh Khanate (dark/light color schemes, PNG/SVG extensions)"
+  caption="Rulers of Kazakh Khanate visualization in dark and light color palette"
   items={[
-    { src: "gallery/experiment-timeline-kazakh-rulers/experiment-timeline-kazakh-rulers--dark.webp", alt: "Dark PNG" },
-    { src: "gallery/experiment-timeline-kazakh-rulers/experiment-timeline-kazakh-rulers--white.webp", alt: "Light PNG" },
-    { src: "gallery/experiment-timeline-kazakh-rulers/experiment-timeline-kazakh-rulers--dark.svg", alt: "Dark SVG" },
-    { src: "gallery/experiment-timeline-kazakh-rulers/experiment-timeline-kazakh-rulers--white.svg", alt: "Light SVG" }
+    { src: "gallery/experiment-timeline-kazakh-rulers/experiment-timeline-kazakh-rulers--dark.webp", alt: "Dark color scheme" },
+    { src: "gallery/experiment-timeline-kazakh-rulers/experiment-timeline-kazakh-rulers--white.webp", alt: "Light color scheme (experimental)" }
   ]}
 />
 
 ## What is this about?
 
-> Recently I saw an old infographic visualization about [Roman emperors](https://www.reddit.com/r/dataisbeautiful/comments/8tzfgz/roman_emperors_by_year_oc/) prepared by Peter Gorman, from [BarelyMaps](https://www.barelymaps.com/) for the #dataisbeautiful weekly contest on reddit. So, here is my version for rulers of the so-known Kazakh Khanate, a successor state of the Golden Horde in the region, in dark and white colors. Palette isn't web-safe or grayscale-safe. The reference chart by Peter is in comments.
-> 
-> As usual, I reproduced it with pure #python and #matplotlib to make it scalable to other countries and historical periods (which one would you like to see?). Chart type is... stripe chart?! Each stripe represents a year of the respective century. Solid stripes indicate there was only one ruler in that year, which presumes times of relative stability. Segmented stripe shows there were many rulers in that year, which usually signifies a vacuum of power, forms of split of power including co-rule, unrest, civil wars, or other forms of instability. Using the table below as a legend we can match each ruler with their respective colors and years of reign.
-> 
-> #dataviz #datavisualization #Казахстан #Kazakhstan #History #CentralAsia
+  I recently came across an old infographic about [Roman emperors](https://www.reddit.com/r/dataisbeautiful/comments/8tzfgz/roman_emperors_by_year_oc/), prepared by [Peter Gorman from BarelyMaps](https://www.barelymaps.com/) for the #dataisbeautiful contest on Reddit.
+  That work combines artistic and analytical approaches to visualize complex political dynamics over long periods of time.
 
-Learn more about this historical state (_khanate, nomadic polity_) in [History of Kazakh Khanate (animated map)](https://www.youtube.com/watch?v=OnVF3xWB2so), from [Anwoo Mapping History](https://www.youtube.com/@Anwwoo).
+  I wanted to see what the same visual language would look like when applied to other periods, and first picked the Kazakh Khanate - one of the historical successor states (_khanate, nomadic polity_) of the Golden Horde that existed in the region of [modern-day Central Asia](https://unstats.un.org/unsd/methodology/m49/). 
+  You can learn more about this polity in [History of Kazakh Khanate (animated map)](https://www.youtube.com/watch?v=OnVF3xWB2so) from [Anwoo Mapping History](https://www.youtube.com/@Anwwoo).
 
-This is a pretty unusuas visualization to show a timeline with nested elements, but for futher and interactive inspiration you can also check [Bartosz Ciołek's](https://pl.linkedin.com/in/bartosz-cio%C5%82ek-240201189) work in [English Kingdom](https://public.tableau.com/app/profile/bartoszciolek/viz/KingsandQueensofEnglandandGreatBritain/KingsandQueens).
+## How does it work?
+
+  I'm not entirely sure whether "stripe chart" is the established name for this visualization type, but the idea is fairly simple.
+
+  Each stripe represents one year within a given century. A solid stripe means that there was a single ruler during that year, suggesting a period of relative stability.
+  A segmented stripe means that multiple rulers reigned during the same year. This usually indicates some form of political instability or a power vacuum - for example, a succession dispute, divided major authority or co-rule, unrest, civil war, or other forms of conflict.
+
+  The table below acts as a legend: each ruler has their own color, allowing the stripes to be matched to their respective names and years of reign. One caveat: the color palette is not designed to be web-safe or grayscale-safe.
+
+## Why did I make it?
+
+  I wanted to reproduce the original chart using pure [Python](https://www.python.org/) and [Matplotlib](https://matplotlib.org/). 
+  Another goal was to make this visual approach more [reusable](https://en.wikipedia.org/wiki/Code_reuse) and test it with different historical periods, since original work was reportedly created with Illustrator.
 
 ## Try it yourself
 
-To reproduce or make with your own dataset, open the interactive web tool: [LINK - "Rulers of the Kazakh Khanate"](https://witold1.github.io/rulers-of-kazakh-khanate/). Source on [GitHub](https://github.com/Witold1/rulers-of-kazakh-khanate).
+  A couple of years later, I published a refactored version of the project's code _(refactored with an LLM)_ and built a web tool that can generate similar charts for other historical periods.
+  There are currently multiple historical dataset available as presets that I gathered with AI agents, including the original Roman Emperors, Middle Eastern Caliphs, and English Kings.
+  I also generated a synthetic example dataset designed to test more complex situations, including text encoding, multiple co-rulers, multiple power vacuums, epochs, and epoch splits. See the source code now on [GitHub](https://github.com/Witold1/rulers-of-kazakh-khanate).
+
+  <ActionLink
+    href="https://witold1.github.io/rulers-of-kazakh-khanate/"
+    action="Open interactive web tool"
+    title="Rulers of the Kazakh Khanate"
+  />
+
+## Related work
+
+  This is a pretty unusuas way to show a timeline, but for futher and interactive inspiration you can also check [Bartosz Ciołek's](https://pl.linkedin.com/in/bartosz-cio%C5%82ek-240201189) work in [English Kingdom](https://public.tableau.com/app/profile/bartoszciolek/viz/KingsandQueensofEnglandandGreatBritain/KingsandQueens).
+
 
 <MediaPresence
   items={[

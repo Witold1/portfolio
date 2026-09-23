@@ -80,7 +80,7 @@ export function buildPlainCitation(m) {
     const org = m.organization ? ` (${m.organization})` : '';
     people = `${author}${org}`;
   }
-  const url = m.url ? ` ${m.url}` : '';
+  const url = m.url ? ` ${m.url}.` : '';
   const accessed = m.accessed ? ` Accessed ${m.accessed}.` : '';
   return `${title} (${year}), ${people}.${url}${accessed}`.trim();
 }

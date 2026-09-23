@@ -136,12 +136,17 @@
   font-size: clamp(1.125rem, 1.65vw, 1.3125rem);
   font-weight: 500;
   line-height: 1.38;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid rgba(24, 24, 27, 0.08);
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--border-strong);
   scroll-margin-top: 5rem;
+}
+
+html:not(.dark) .mdx-article-body .mdx-heading-h2 {
+  border-bottom-color: rgb(161 161 170); /* zinc-400 */
 }
 
 .mdx-article-body .mdx-heading-h2:first-child {
@@ -198,17 +203,32 @@
   scroll-margin-top: 5rem;
 }
 
-html.dark .mdx-article-body .mdx-heading-h2 {
-  border-bottom-color: rgba(244, 244, 245, 0.1);
-}
-
-/* Blockquotes (MDX / GFM `>`): left accent bar */
+/* Blockquotes (MDX / GFM `>`): zigzag left edge in zinc chrome */
 .mdx-article-body blockquote {
+  position: relative;
   margin: 0.625rem 0;
   margin-left: 0;
-  padding-left: 0.9375rem;
-  border-left: 5px solid #66e4b4;
+  padding-left: 1.05rem;
+  border-left: none;
   color: inherit;
+}
+
+.mdx-article-body blockquote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  bottom: 0.1em;
+  width: 0.55rem;
+  background-color: var(--text-faint);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12' width='8' height='12'%3E%3Cpath fill='none' stroke='%23000' stroke-width='1.75' stroke-linejoin='miter' stroke-linecap='square' d='M1.5 0 L6.5 6 L1.5 12'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12' width='8' height='12'%3E%3Cpath fill='none' stroke='%23000' stroke-width='1.75' stroke-linejoin='miter' stroke-linecap='square' d='M1.5 0 L6.5 6 L1.5 12'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 0.7rem;
+  mask-size: 100% 0.7rem;
+  -webkit-mask-repeat: repeat-y;
+  mask-repeat: repeat-y;
+  -webkit-mask-position: left top;
+  mask-position: left top;
 }
 
 .mdx-article-body blockquote p {
@@ -232,15 +252,104 @@ html.dark .mdx-article-body .mdx-heading-h2 {
 .mdx-article-body blockquote hr {
   margin: 0.75em 0;
   border: none;
-  border-top: 1px solid rgba(148, 163, 175, 0.45);
+  border-top: 1px solid var(--border-strong);
 }
 
-html.dark .mdx-article-body blockquote {
-  border-left-color: #5eead4;
+/* Action CTA: zigzag (like blockquote) + surface fill so it reads as a button */
+.mdx-action-link {
+  position: relative;
+  display: block;
+  margin: 1rem 0 1.1rem;
+  padding: 0.78rem 1rem 0.78rem 1.2rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(
+      135deg,
+      var(--surface-elevated) 0%,
+      color-mix(in srgb, var(--page-fg) 7%, var(--surface)) 45%,
+      color-mix(in srgb, var(--page-fg) 14%, var(--surface)) 100%
+    );
+  color: inherit;
+  text-decoration: none;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--page-fg) 6%, transparent),
+    0 0 18px color-mix(in srgb, var(--page-fg) 10%, transparent),
+    0 1px 2px color-mix(in srgb, var(--page-fg) 8%, transparent);
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-html.dark .mdx-article-body blockquote hr {
-  border-top-color: rgba(148, 163, 175, 0.35);
+.mdx-action-link::before {
+  content: '';
+  position: absolute;
+  left: 0.38rem;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  width: 0.55rem;
+  background-color: var(--text-secondary);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12' width='8' height='12'%3E%3Cpath fill='none' stroke='%23000' stroke-width='1.75' stroke-linejoin='miter' stroke-linecap='square' d='M1.5 0 L6.5 6 L1.5 12'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12' width='8' height='12'%3E%3Cpath fill='none' stroke='%23000' stroke-width='1.75' stroke-linejoin='miter' stroke-linecap='square' d='M1.5 0 L6.5 6 L1.5 12'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 0.7rem;
+  mask-size: 100% 0.7rem;
+  -webkit-mask-repeat: repeat-y;
+  mask-repeat: repeat-y;
+  -webkit-mask-position: left top;
+  mask-position: left top;
+}
+
+html:not(.dark) .mdx-action-link {
+  border-color: rgb(113 113 122); /* zinc-500 */
+}
+
+.mdx-action-link:hover {
+  border-color: var(--page-fg);
+  background:
+    linear-gradient(
+      135deg,
+      var(--surface-elevated) 0%,
+      color-mix(in srgb, var(--page-fg) 10%, var(--surface)) 50%,
+      color-mix(in srgb, var(--page-fg) 18%, var(--surface)) 100%
+    );
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--page-fg) 12%, transparent),
+    0 0 28px color-mix(in srgb, var(--page-fg) 16%, transparent),
+    0 2px 6px color-mix(in srgb, var(--page-fg) 10%, transparent);
+}
+
+.mdx-action-link:hover::before {
+  background-color: var(--page-fg);
+}
+
+.mdx-action-link:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.mdx-action-link-action,
+.mdx-action-link-title {
+  margin: 0;
+  padding-left: 0.15rem;
+  font-family: var(--font-display);
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  color: var(--page-fg);
+}
+
+.mdx-action-link-action {
+  display: block;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mdx-action-link-title {
+  display: block;
+  letter-spacing: 0.01em;
+}
+
+/* If MDX still wraps legacy children in <p>, kill prose margins inside the CTA */
+.mdx-article-body .mdx-action-link p {
+  margin: 0;
 }
 
 /* MDX <CollapsibleSection> (details + editorial heading in summary) */
@@ -280,7 +389,8 @@ html.dark .mdx-article-body blockquote hr {
   font-size: clamp(1.125rem, 1.65vw, 1.3125rem);
   font-weight: 500;
   line-height: 1.38;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .mdx-collapsible-summary-heading-row .mdx-heading[data-mdx-heading-level='3'] {
@@ -321,8 +431,12 @@ html.dark .mdx-article-body blockquote hr {
 
 .mdx-collapsible[data-mdx-level='2'] .mdx-collapsible-summary-heading-row {
   align-items: flex-end;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid rgba(24, 24, 27, 0.08);
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+html:not(.dark) .mdx-collapsible[data-mdx-level='2'] .mdx-collapsible-summary-heading-row {
+  border-bottom-color: rgb(161 161 170); /* zinc-400 */
 }
 
 .mdx-collapsible[data-mdx-level='2'] .mdx-collapsible-summary-heading-row .mdx-heading[data-mdx-heading-level='2'] {
@@ -377,10 +491,6 @@ html.dark .mdx-article-body blockquote hr {
   padding-left: 1rem;
   padding-right: 0.5rem;
   padding-top: 0.125rem;
-}
-
-html.dark .mdx-collapsible[data-mdx-level='2'] .mdx-collapsible-summary-heading-row {
-  border-bottom-color: rgba(244, 244, 245, 0.1);
 }
 
 html.dark .mdx-collapsible {
@@ -670,6 +780,9 @@ h2.mdx-media-header {
 }
 
 .mdx-toc-summary {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
   cursor: pointer;
   list-style: none;
 }
@@ -678,14 +791,19 @@ h2.mdx-media-header {
   display: none;
 }
 
-.mdx-toc-summary strong::after {
-  content: " ▾";
-  font-weight: 400;
-  color: var(--mdx-aside-muted);
+.mdx-toc-summary strong::before {
+  content: '+';
+  display: inline-block;
+  min-width: 0.85em;
+  margin-right: 0.4rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  line-height: 1;
+  color: inherit;
 }
 
-.mdx-toc-details[open] .mdx-toc-summary strong::after {
-  content: " ▴";
+.mdx-toc-details[open] .mdx-toc-summary strong::before {
+  content: '−';
 }
 
 .mdx-toc-row {

@@ -27,7 +27,6 @@ Keep fields in this order (omit keys you do not need). Indent all frontmatter ke
 
   coverImage: …
 
-  repoUrl: …
   demoUrl: …
 
   creators:
@@ -73,5 +72,4 @@ Keep fields in this order (omit keys you do not need). Indent all frontmatter ke
 - `kind`: `project`
 - `subtitle`: string
 - `version`: string (display label only, e.g. `"draft"` / `draft-alpha` - not a visibility flag)
-- `repoUrl`: URL (optional)
 - `demoUrl`: URL (optional)

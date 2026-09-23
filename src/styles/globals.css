@@ -11,7 +11,7 @@
 
 /*
  * Site design tokens (zinc). Prefer these over raw gray/slate hex.
- * Domain accents (blockquote teal, pipeline red, code syntax) stay local.
+ * Domain accents (pipeline red, code syntax) stay local.
  */
 :root {
   --page-bg: rgb(255 255 255);

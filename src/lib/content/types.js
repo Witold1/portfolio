@@ -32,7 +32,6 @@
  * @typedef {ContentFrontmatterBase & {
  *   kind?: 'project' | string,
  *   version?: string,
- *   repoUrl?: string,
  *   demoUrl?: string,
  * }} ProjectFrontmatter
  *

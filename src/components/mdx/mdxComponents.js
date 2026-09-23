@@ -1,5 +1,6 @@
 import WipReveal from '../content/WipReveal';
 import { RotatingTitle } from '../content/PageTitle';
+import ActionLink from './ActionLink';
 import Carousel from './Carousel';
 import CitationBox from './CitationBox';
 import MediaPresence from './MediaPresence';
@@ -14,6 +15,7 @@ import MdxLink from './MdxLink';
 import MdxImg from './MdxImg';
 
 export const mdxComponents = {
+  ActionLink,
   Carousel,
   CollapsibleSection,
   CitationBox,
