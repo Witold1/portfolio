@@ -29,7 +29,7 @@ export default function ContentBreadcrumb({ items }) {
           const titleAttr =
             typeof item.title === 'string' && item.title.trim()
               ? item.title.trim()
-              : isLast && typeof item.label === 'string' && item.label !== display
+              : typeof item.label === 'string' && (isLast || item.label !== display)
                 ? item.label
                 : undefined;
           return (

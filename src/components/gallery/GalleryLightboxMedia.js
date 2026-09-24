@@ -14,13 +14,16 @@ export default function GalleryLightboxMedia({
   src,
   alt,
   type,
+  poster: posterProp,
   priority = false,
   autoPlay = false,
   imageClassName = 'gallery-lightbox-media-img',
   videoClassName = 'gallery-lightbox-media-el',
 }) {
   const isVideo = inferMediaTypeFromSrc(src, type) === 'video';
-  const poster = isVideo ? cdnPosterUrl(src) : '';
+  const poster = isVideo
+    ? (typeof posterProp === 'string' && posterProp.trim()) || cdnPosterUrl(src) || ''
+    : '';
   const { status, markReady, markError, mediaRef } = useGalleryMediaStatus(src);
   const errorMessage = isVideo ? 'Could not load video' : 'Could not load image';
 
@@ -34,9 +37,11 @@ export default function GalleryLightboxMedia({
           poster={poster || undefined}
           controls
           autoPlay={autoPlay}
+          playsInline
           preload="metadata"
           className={galleryLightboxMediaClassName(videoClassName, status)}
           aria-label={alt}
+          onLoadedMetadata={markReady}
           onLoadedData={markReady}
           onError={markError}
         />

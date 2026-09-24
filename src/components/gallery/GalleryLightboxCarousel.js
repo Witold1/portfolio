@@ -28,6 +28,7 @@ export default function GalleryLightboxCarousel({
           src={current.src}
           alt={alt}
           type={current.type}
+          poster={current.poster}
           priority={clamped === 0}
         />
       </div>

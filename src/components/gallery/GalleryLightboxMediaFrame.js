@@ -34,7 +34,9 @@ export function useGalleryMediaStatus(src) {
     (el) => {
       if (!el) return;
       if (el.tagName === 'VIDEO') {
-        if (el.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) markReady();
+        // Mobile browsers often stop at HAVE_METADATA with preload="metadata"
+        // and never fire loadeddata until play — treat metadata as ready.
+        if (el.readyState >= HTMLMediaElement.HAVE_METADATA) markReady();
         return;
       }
       if (el.tagName === 'IMG' && el.complete && el.naturalWidth > 0) {

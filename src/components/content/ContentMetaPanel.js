@@ -16,8 +16,6 @@ export default function ContentMetaPanel({ metaLine, tags }) {
   const tagList = normalizeTags(tags);
   const hasMeta = Boolean(metaLine);
   const hasTags = tagList.length > 0;
-  if (!hasMeta && !hasTags) return null;
-
   const [isDesktop, setIsDesktop] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -32,6 +30,8 @@ export default function ContentMetaPanel({ metaLine, tags }) {
     mq.addEventListener('change', sync);
     return () => mq.removeEventListener('change', sync);
   }, []);
+
+  if (!hasMeta && !hasTags) return null;
 
   const body = (
     <div className="content-meta-panel__body">
