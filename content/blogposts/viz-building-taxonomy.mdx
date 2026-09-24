@@ -1,12 +1,12 @@
 ---
-  kind: post
+  kind: visualization
 
   title: Visualization "Building taxonomy"
   subtitle: Simplified building taxonomy of selected cities
-  excerpt: A minimalist small-multiple grid visualizing the 100 most geometrically complex buildings in each city, computed from OpenStreetMap building geometries.
+  excerpt: A minimalist small-multiple grid of the 100 most geometrically complex buildings in each city, computed from OpenStreetMap building geometries.
 
   created: "2024-11"
-  version: AI-draft (this page textdraft)
+  version: AI-draft (this page text)
   wip: true
 
   tags:
@@ -29,44 +29,43 @@
   ]}
 />
 
-## Introduction
+## What is this about?
 
-Plot simplified taxonomies of buildings across selected cities using PyData, QuackOSM and Metaflow.
+  A small-multiple grid of simplified building outlines for selected cities, built with PyData, QuackOSM, and Metaflow from OpenStreetMap geometries.
 
-> **[#30DayMapChallenge | Day 3: Polygons | 2024](https://30daymapchallenge.com/)** (see: ["30DayMapChallenge" official Github repo ](https://github.com/tjukanovt/30DayMapChallenge))
->
-> Recently I saw a post by Daniel Gorokhov who illustrated building taxonomy of "interesting buildings" in Milano, Italy, Stockholm, Sweden and Amsterdam, Nethedlands. Here is my extension for that post, with some more cities, mostly in USA, but also in Europe.
->
-> <p>Chart type is <a href="https://en.wikipedia.org/wiki/Small_multiple">"small multiple" (a.k.a. "grid chart")</a>. How was it made? I run a script that loaded all mapped buildings within city area and counted exterior vertices (nodes) for all of them. Still, I did not explicitly count inner polygons, like courtyards or patios. Then, I took one hundred of buildings with the most nodes to plot them.</p>
-> 
-> <ol class="mdx-list-circled">
->  <li>Yet, it happened that under current methodology, quite often, "interesting" buildings are repetitive because of construction nature (for example - neighborhoods of apartment buildings or high-rise housing projects; industrial structures, like water treatment ponds, fuel storages, dockside cranes)</li>
->  <li>Yet, it happened that under current methodology, quite often, "interesting" buildings are repetitive because of construction nature (for example - neighborhoods of apartment buildings or high-rise housing projects; industrial structures, like water treatment ponds, fuel storages, dockside cranes)</li>
-> </ol>
->
-> ---
-> Made with #Python  
-> Data: #OSM, #OpenStreetMap retrieved with [QuackOSM ](https://kraina-ai.github.io/quackosm/0.12.0/examples/advanced_examples/osm_extracts/#query-osm-extract-by-name)  
-> #dataviz #datavisualization
+  > **[#30DayMapChallenge | Day 3: Polygons | 2024](https://30daymapchallenge.com/)** (see: ["30DayMapChallenge" official Github repo](https://github.com/tjukanovt/30DayMapChallenge))
+  >
+  > Recently I saw a post by Daniel Gorokhov who illustrated building taxonomy of "interesting buildings" in Milano, Italy, Stockholm, Sweden and Amsterdam, Netherlands. Here is my extension for that post, with some more cities, mostly in USA, but also in Europe.
+  >
+  > <p>Chart type is <a href="https://en.wikipedia.org/wiki/Small_multiple">"small multiple" (a.k.a. "grid chart")</a>. How was it made? I run a script that loaded all mapped buildings within city area and counted exterior vertices (nodes) for all of them. Still, I did not explicitly count inner polygons, like courtyards or patios. Then, I took one hundred of buildings with the most nodes to plot them.</p>
+  >
+  > <ol class="mdx-list-circled">
+  >  <li>Yet, it happened that under current methodology, quite often, "interesting" buildings are repetitive because of construction nature (for example - neighborhoods of apartment buildings or high-rise housing projects; industrial structures, like water treatment ponds, fuel storages, dockside cranes)</li>
+  >  <li>Yet, it happened that under current methodology, quite often, "interesting" buildings are repetitive because of construction nature (for example - neighborhoods of apartment buildings or high-rise housing projects; industrial structures, like water treatment ponds, fuel storages, dockside cranes)</li>
+  > </ol>
+  >
+  > ---
+  > Made with #Python  
+  > Data: #OSM, #OpenStreetMap retrieved with [QuackOSM](https://kraina-ai.github.io/quackosm/0.12.0/examples/advanced_examples/osm_extracts/#query-osm-extract-by-name)  
+  > #dataviz #datavisualization
 
-**Inspiration:** ["building taxonomy of Milano, Stockholm and Amsterdam" ](https://www.linkedin.com/posts/daniel-gorokhov_30daymapchallenge-geospatial-maps-activity-7259234326775521280-melE?utm_source=share&utm_medium=member_desktop) by [Daniel Gorokhov ](https://thisisdaniel.co/)
+## How do I read it?
 
-**Further works:** ["Visualizing a building shapes taxonomy - The City Summit 🏙️🗻 project" ](https://kamilraczycki.com/blog/City-Summit) by [Kamil Raczycki ](https://kamilraczycki.com/)
+  The chart is a **small multiple** (grid chart). Each city is one panel. Inside each panel, the 100 buildings with the most exterior vertices are drawn as simplified outlines.
 
-## Method ?
+  Complexity here means vertex count on the exterior ring, not architectural fame. Courtyards and other inner rings are not counted explicitly.
+  Under this rule, "interesting" shapes often repeat: housing projects, industrial ponds, fuel storages, dockside structures, and similar construction patterns.
+  Some truly complex buildings are also poorly mapped in OSM and need case-by-case handling (multi-buildings, connections, and similar edge cases).
 
-The chart is a **small multiple** (grid chart):
+## Why did I make it?
 
-- Extract all mapped buildings within each city boundary.
-- Count exterior vertices (nodes) for each building polygon (inner courtyards/patios not explicitly counted).
-- Plot the 100 buildings with the most nodes.
+  I wanted to extend Daniel Gorokhov's Milano / Stockholm / Amsterdam taxonomy idea to a wider city set for [#30DayMapChallenge](https://30daymapchallenge.com/) Day 3 (Polygons), and to keep the pipeline reproducible in Python rather than as a one-off illustration.
 
-Key caveats:
+## What's under the hood?
 
-1. Under this methodology, “interesting” buildings can be repetitive due to construction patterns (housing projects, industrial structures, etc.).
-2. Some truly complex structures aren’t mapped well and require case-by-case handling (multi-buildings, connections, etc.).
+  Pipeline sketch: load OSM buildings for each city with QuackOSM, count exterior vertices, keep the top 100 per city, plot the small multiples with Matplotlib, orchestrated in Metaflow.
 
-<CollapsibleSection title="🏗️ How-to: Make this product" level={2} defaultOpen={false}>
+  <CollapsibleSection title="How-to: make this chart" level={2} defaultOpen={false}>
 
   <CodeSnippet
     title="★ Click to see code snippets"
@@ -174,42 +173,32 @@ Key caveats:
       return n_vertices`}
   />
 
-</CollapsibleSection>
+  </CollapsibleSection>
 
-## Method ?
+## Related work
 
-The chart is a **small multiple** (grid chart):
-
- 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, nunc eu interdum pharetra, turpis mi pellentesque mi, ac eleifend nunc orci eu diam. Phasellus consequat sed ipsum non suscipit. Sed tortor leo, pulvinar in odio quis, condimentum lacinia dui. Suspendisse ligula risus, iaculis vel sapien at, pretium tristique mauris. Nulla ac nunc fermentum, aliquet tortor quis, aliquam sapien. Nunc sodales lacinia ante eget maximus. Nullam placerat ligula vel tellus blandit porttitor. Nullam quis tempor orci. Proin non orci vel lectus finibus pellentesque quis at elit. In ultricies diam a mauris porta, porta scelerisque felis lacinia. Nulla ligula arcu, interdum at felis id, ultricies facilisis orci. Ut sollicitudin hendrerit est quis congue. Nullam auctor auctor ligula.
- 2. Cras in mauris ut quam ullamcorper mollis. Sed augue diam, suscipit eu ex quis, rhoncus tempus nisi. Sed purus purus, consequat in mattis eu, mattis nec lorem. Vivamus imperdiet hendrerit leo, at varius sapien tempor ut. Fusce ut leo sit amet nunc suscipit vulputate. Integer nec pretium mi. Morbi in nisi velit. Nam a semper purus.
- 3. Generated 5 paragraphs, 369 words, 2457 bytes of Lorem Ipsum
-
- [example link](building-taxonomy)
+  * ["Building taxonomy of Milano, Stockholm and Amsterdam"](https://www.linkedin.com/posts/daniel-gorokhov_30daymapchallenge-geospatial-maps-activity-7259234326775521280-melE?utm_source=share&utm_medium=member_desktop) by [Daniel Gorokhov](https://thisisdaniel.co/)
+  * ["Visualizing a building shapes taxonomy - The City Summit project"](https://kamilraczycki.com/blog/City-Summit) by [Kamil Raczycki](https://kamilraczycki.com/)
 
 <MediaPresence
   items={[
     {
-      label: "LinkedIn post ",
+      label: "LinkedIn post",
       href: "https://www.linkedin.com/posts/vital-yevtushenko_30daymapchallenge-python-osm-activity-7261763492032991234-c244"
     },
     {
-      label: "kaggle notebook ",
+      label: "Kaggle notebook",
       href: "https://www.kaggle.com/code/witold1/building-taxonomy-visualization-of-urban-shapes"
     },
     {
-      label: "imgur storage ",
+      label: "Imgur album",
       href: "https://imgur.com/a/post-building-taxonomy-of-rK4hLzF"
     },
     {
-      label: "'Data Visualization Picks / Nov 17, 2024' by BI Bites 🍪  (weekly news of dataviz and BI)",
+      label: "Data Visualization Picks / Nov 17, 2024 by BI Bites",
       href: "https://nastengraph.substack.com/i/151770350/data-visualization-picks"
-    },
-    {
-      label: "Example lynk to inner website",
-      href: "building-taxonomy"
     }
   ]}
 />
 
-
-<CitationBox title="How to cite this work" />
+<CitationBox />

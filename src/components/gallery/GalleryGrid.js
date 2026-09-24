@@ -28,19 +28,19 @@ const GalleryGrid = memo(({ items, onCardClick, layout = 'uniform' }) => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
       {items.map((item) => {
         const { className: itemClassName, ...cardProps } = item;
-        const showTitleBelow = Boolean(item.showTitleBelow);
+        const captionTile = Boolean(item.showTitleBelow || item.showTitleOnMedia);
         return (
           <div
             key={item.id}
             className={
-              showTitleBelow
+              captionTile
                 ? 'relative w-full'
                 : 'relative w-full aspect-square overflow-hidden rounded-lg shadow-md bg-white dark:bg-gray-800'
             }
           >
             <GalleryGridCard
               {...cardProps}
-              className={[showTitleBelow ? '' : 'absolute inset-0', itemClassName].filter(Boolean).join(' ')}
+              className={[captionTile ? '' : 'absolute inset-0', itemClassName].filter(Boolean).join(' ')}
               gridType="uniform"
               onClick={onCardClick}
             />

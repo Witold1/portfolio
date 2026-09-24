@@ -30,8 +30,10 @@ const GalleryGridCard = memo(
     showCardSubtitle = false,
     showCategoryOnHover = false,
     showTitleBelow = false,
+    showTitleOnMedia = false,
   }) => {
     const isUniform = gridType === 'uniform';
+    const isCaptionTile = showTitleBelow || showTitleOnMedia;
     const [peek, setPeek] = useState(false);
     const cardRef = useRef(null);
     const touchUi = usePrimaryInputIsHoverNone();
@@ -41,7 +43,7 @@ const GalleryGridCard = memo(
     }, [src, id]);
 
     useEffect(() => {
-      if (!touchUi || !peek) return;
+      if (!touchUi || !peek || showTitleOnMedia) return;
       const onDocPointerDown = (ev) => {
         const el = cardRef.current;
         if (el && ev.target instanceof Node && !el.contains(ev.target)) {
@@ -50,7 +52,7 @@ const GalleryGridCard = memo(
       };
       document.addEventListener('pointerdown', onDocPointerDown, true);
       return () => document.removeEventListener('pointerdown', onDocPointerDown, true);
-    }, [touchUi, peek]);
+    }, [touchUi, peek, showTitleOnMedia]);
 
     const hoverMeta = buildGalleryCardHoverMeta({
       title,
@@ -63,6 +65,7 @@ const GalleryGridCard = memo(
     const { titleTrimmed } = hoverMeta;
     const imageAlt = buildGalleryCardImageAlt({ alt, titleTrimmed, categoryLine: hoverMeta.categoryLine, id });
     const slideCount = Array.isArray(slides) ? slides.length : 0;
+    const overlayStrip = showTitleOnMedia ? Boolean(titleTrimmed) : showHoverStrip;
 
     const openModal = useCallback(() => {
       onClick(
@@ -82,7 +85,8 @@ const GalleryGridCard = memo(
 
     const handleCardClick = useCallback(() => {
       if (disabled) return;
-      if (touchUi && showHoverStrip) {
+      // Persistent on-media titles: skip the touch "peek" step
+      if (touchUi && overlayStrip && !showTitleOnMedia) {
         if (!peek) {
           setPeek(true);
           return;
@@ -90,16 +94,21 @@ const GalleryGridCard = memo(
       }
       setPeek(false);
       openModal();
-    }, [disabled, touchUi, showHoverStrip, peek, openModal]);
+    }, [disabled, touchUi, overlayStrip, showTitleOnMedia, peek, openModal]);
 
-    const peekClass = touchUi && peek ? 'gallery-card--peek' : '';
+    const peekClass = touchUi && peek && !showTitleOnMedia ? 'gallery-card--peek' : '';
+    const chromeClass = isCaptionTile
+      ? `gallery-card--caption-tile${showTitleOnMedia ? ' gallery-card--title-on-media' : ' gallery-card--below-title'}`
+      : 'bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden';
 
     return (
       <div
         ref={cardRef}
-        className={`gallery-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden ${className} ${disabled ? 'gallery-card--disabled' : 'cursor-pointer'}${peekClass ? ` ${peekClass}` : ''}`}
+        className={`gallery-card ${chromeClass} ${className} ${disabled ? 'gallery-card--disabled' : 'cursor-pointer'}${peekClass ? ` ${peekClass}` : ''}`}
         onClick={handleCardClick}
-        aria-expanded={touchUi && showHoverStrip && !disabled ? peek : undefined}
+        aria-expanded={
+          touchUi && overlayStrip && !showTitleOnMedia && !disabled ? peek : undefined
+        }
         aria-disabled={disabled ? true : undefined}
       >
         <GalleryGridCardPreview
@@ -107,12 +116,16 @@ const GalleryGridCard = memo(
           src={src}
           slides={slides}
           isUniform={isUniform}
-          showTitleBelow={showTitleBelow}
+          useMediaBand={isCaptionTile}
           uniformObjectFit={uniformObjectFit}
           imageAlt={imageAlt}
           slideCount={slideCount}
-          showHoverStrip={showHoverStrip}
-          hoverStripProps={hoverStripProps}
+          showHoverStrip={overlayStrip}
+          hoverStripProps={
+            showTitleOnMedia
+              ? { ...hoverStripProps, titleTrimmed, subTrimmed: '', categoryLine: '', showCategoryMeta: false, hoverMultiline: false }
+              : hoverStripProps
+          }
         />
         {showTitleBelow && titleTrimmed ? (
           <p className="gallery-card-below-title" title={titleTrimmed}>

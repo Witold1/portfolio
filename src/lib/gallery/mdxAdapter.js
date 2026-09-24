@@ -10,7 +10,14 @@ const NAV_IMAGE_FIT = {
 
 function resolveMdxMedia(src) {
   if (typeof src !== 'string' || !src.trim()) return '';
-  return resolveMediaUrl(src.trim(), getMediaBaseUrl(galleryConfig.mediaBaseUrl));
+  const trimmed = src.trim();
+  // App public/ assets (not CDN), e.g. "~/placeholders/here-be-dragons.svg"
+  if (trimmed.startsWith('~/') || trimmed.startsWith('public:')) {
+    const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/$/, '');
+    const path = trimmed.replace(/^(~\/|public:)/, '').replace(/^\/+/, '');
+    return `${basePath}/${path}`;
+  }
+  return resolveMediaUrl(trimmed, getMediaBaseUrl(galleryConfig.mediaBaseUrl));
 }
 
 function getMdxNavMediaSource(item) {
@@ -22,38 +29,45 @@ function getMdxNavMediaSource(item) {
 }
 
 /**
- * Map an MDX MediaGrid / NavigatorGrid entry into a normalized gallery grid item.
+ * Map an MDX AssetsGrid entry into a normalized gallery grid item.
  * Prefer `notes` for lightbox Details (flags, caveats, etc.); `flags` is a legacy alias.
+ * `@param {'navigate'|'lightbox'} onClick`
  */
-export function mdxNavItemToGalleryItem(entry, index, { interactionMode, imageFit = 'none' }) {
+export function mdxNavItemToGalleryItem(entry, index, { onClick = 'lightbox', imageFit = 'cover' }) {
   const hrefString = typeof entry.href === 'string' ? entry.href : '';
   const isPlaceholder =
-    interactionMode === 'link' &&
+    onClick === 'navigate' &&
     (hrefString === '#' || hrefString.toLowerCase().startsWith('javascript:'));
   const src = resolveMdxMedia(getMdxNavMediaSource(entry));
   const notes = entry.notes ?? entry.flags;
+  const label = typeof entry.label === 'string' ? entry.label.trim() : '';
+  const title =
+    onClick === 'navigate' && label && !isPlaceholder && !/→\s*$/.test(label)
+      ? `${label} →`
+      : label;
 
   return {
     id: entry.id ?? `nav-${index}-${entry.label}`,
     type: getGalleryItemType(entry),
     src,
     alt: entry.alt,
-    title: entry.label,
+    title,
     subtitle: entry.subtitle,
-    link: interactionMode === 'link' ? (isPlaceholder ? undefined : entry.href) : entry.link,
+    link: onClick === 'navigate' ? (isPlaceholder ? undefined : entry.href) : entry.link,
     notes,
     disabled: isPlaceholder,
-    uniformObjectFit: NAV_IMAGE_FIT[imageFit] ?? 'none',
-    showTitleBelow: true,
+    uniformObjectFit: NAV_IMAGE_FIT[imageFit] ?? 'cover',
+    showTitleOnMedia: true,
   };
 }
 
-export function filterMdxNavItems(items, interactionMode) {
+/** `@param {'navigate'|'lightbox'} onClick` */
+export function filterMdxNavItems(items, onClick) {
   if (!Array.isArray(items)) return [];
   return items.filter((entry) => {
     if (!entry?.label) return false;
     if (!getMdxNavMediaSource(entry)) return false;
-    if (interactionMode === 'modal') return true;
+    if (onClick === 'lightbox') return true;
     return Boolean(entry?.href);
   });
 }

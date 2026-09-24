@@ -42,7 +42,7 @@ export default function GalleryGridCardPreview({
   src,
   slides,
   isUniform,
-  showTitleBelow,
+  useMediaBand = false,
   uniformObjectFit = 'cover',
   imageAlt,
   slideCount,
@@ -78,6 +78,7 @@ export default function GalleryGridCardPreview({
 
   const uniformBackdrop =
     isUniform &&
+    !useMediaBand &&
     showsAsImage &&
     isReady &&
     (uniformObjectFit === 'contain' || uniformObjectFit === 'none');
@@ -107,10 +108,16 @@ export default function GalleryGridCardPreview({
       );
     }
 
+    const mediaFrameClass = isUniform
+      ? useMediaBand
+        ? 'gallery-card-media--band'
+        : 'h-full'
+      : `h-auto ${isReady || isError ? '' : 'min-h-[12rem] sm:min-h-[14rem]'}`;
+    const mediaSurfaceClass =
+      (!isUniform && isReady) || uniformBackdrop || isError ? 'bg-zinc-100 dark:bg-zinc-950/50' : '';
+
     return (
-      <div
-        className={`relative isolate w-full ${isUniform ? (showTitleBelow ? 'aspect-square' : 'h-full') : `h-auto ${isReady || isError ? '' : 'min-h-[12rem] sm:min-h-[14rem]'}`} ${(!isUniform && isReady) || uniformBackdrop || isError ? 'bg-zinc-100 dark:bg-zinc-950/50' : ''}`}
-      >
+      <div className={`relative isolate w-full ${mediaFrameClass} ${mediaSurfaceClass}`}>
         {isLoading ? (
           <div className="gallery-card-skeleton absolute inset-0 z-[1]" aria-hidden />
         ) : null}

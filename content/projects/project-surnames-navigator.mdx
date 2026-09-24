@@ -21,17 +21,8 @@
     - name: Vitaliy Yevtushenko
 ---
 
-## What is this about?
-
-This is a **meta-post** to ease navigation across surname wordcloud visualizations by world region.
-
-Political boundaries are mostly shown according to their “de facto” status<FootnoteRef id="ref 1" />.
-Raw data came from [Forebears.io](https://forebears.io/).
-
-## Regions
-
-<NavigatorGrid
-  title="Click a tile to open"
+<AssetsGrid
+  onClick="navigate"
   items={[
     {
       href: "/blog/project-surnames/viz-surnames-central-asia",
@@ -91,13 +82,20 @@ Raw data came from [Forebears.io](https://forebears.io/).
     },
     {
       href: "#",
-      image: "https://picsum.photos/800/500?random=777",
-      label: "More regions upcoming soon",
-      notes: "☺️",
+      image: "~/placeholders/here-be-dragons.svg",
+      label: "More regions upcoming soon — here be dragons",
+      notes: "🐉",
       subtitle: "Additional regional surname maps are in progress."
     }
   ]}
 />
+
+## What is this about?
+
+This is a **meta-post** to ease navigation across surname wordcloud visualizations by world region.
+
+Political boundaries are mostly shown according to their “de facto” status<FootnoteRef id="ref 1" />.
+Raw data came from [Forebears.io](https://forebears.io/).
 
 ## FAQ
 
@@ -129,4 +127,3 @@ Raw data came from [Forebears.io](https://forebears.io/).
 <MediaPresence items={[]} />
 
 <CitationBox title="How to cite this work" />
-

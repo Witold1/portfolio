@@ -7,8 +7,7 @@ import MediaPresence from './MediaPresence';
 import Toc from './Toc';
 import { FootnoteDefinition, FootnoteRef, Footnotes } from './Footnotes';
 import { H2, H3, H4 } from './Headings';
-import NavigatorGrid from './NavigatorGrid';
-import MediaGrid from './MediaGrid';
+import AssetsGrid from './AssetsGrid';
 import CodeSnippet from './CodeSnippet';
 import CollapsibleSection from './CollapsibleSection';
 import MdxLink from './MdxLink';
@@ -29,8 +28,7 @@ export const mdxComponents = {
   h2: H2,
   h3: H3,
   h4: H4,
-  MediaGrid,
-  NavigatorGrid,
+  AssetsGrid,
   CodeSnippet,
   a: MdxLink,
   img: MdxImg,

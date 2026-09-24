@@ -3,21 +3,19 @@
 
   title: Project "Cars Made in USA"
   subtitle: "28 Days later tariffs: exploring roots of cars retailing in America"
-  excerpt: "See vehicles distributed by share of American components, from 0% to 100%, across perspectives: vehicle type, manufacturing corporation, and region of those corporations"
+  excerpt: "Vehicles distributed by share of American components, from 0% to 100%, across vehicle type, manufacturing corporation, and region of those corporations."
 
   created: "2025-02"
   version: public beta (tool), public alpha (dataset), and AI-draft (this page text)
   wip: true
 
   tags:
-    - tag-one
-    - history
-    - timeline
+    - cars
+    - manufacturing
+    - beeswarm
     - data visualization
-    - python
-    - matplotlib
-    - Kazakhstan 
-    - Central Asia
+    - United States
+    - tariffs
 
   coverImage: projects/project-cars-made-in-usa/summary.webp
 
@@ -32,7 +30,7 @@
 />
 
 <Carousel
-  caption="Visualization of cars sorted by the percentages of American-made components."
+  caption="Cars sorted by the share of American-made components"
   items={[
     { type: "image", src: "projects/project-cars-made-in-usa/summary.svg", alt: "Widget of carlines by share of US/Canadian components" },
     { type: "image", src: "projects/project-cars-made-in-usa/widget.webp", alt: "Distribution of carlines by share of US/Canadian components" },
@@ -41,18 +39,30 @@
 
 ## What is this about?
 
-Check vehicles distributed by share of American components, from 0% to 100%, across filters: vehicle type, manufacturing corporation, and region of those corporations. Currently for selected model years only.
-For best experience, open with your personal computer or laptop.
+  This project shows how carlines sit along a 0% to 100% scale of American (US/Canadian) component content.
+  You can cut the same distribution by vehicle type, manufacturing corporation, and the region of those corporations. Coverage is limited to selected model years for now.
 
-## Try it yourself
+  For the best experience, open it on a personal computer or laptop.
 
-  See the source code now on [GitHub](https://github.com/Witold1/cars-made-in-usa).
+## How do I read it?
 
-## Inspiration
+  Each mark is a carline. Position along the axis is the reported share of American components.
+  Filters reshape which carlines stay in view, so the same scale can answer different questions: which vehicle types cluster near fully domestic content, which corporations sit in the middle, and how regional ownership patterns look against the same axis.
 
-* [Better Data Visualization Using Beeswarm Chart by Martin Heinz](https://martinheinz.dev/blog/27)
-* [James Trimble, Dataviz at Office for National Statistics (UK) notebooks on Beeswarm, Jitter, and Histogram plots](https://observablehq.com/@jtrim-ons?page=2)
-* [Ken Flerage's article on beeswarms in Tableau](https://www.flerlagetwins.com/2020/11/beeswarm.html)
+## Why did I make it?
+
+  Tariff debates often talk about "American-made" cars as if that were a binary label.
+  I wanted a view that keeps the continuum visible: many vehicles are partly American by content, and the interesting story is where they fall between the extremes.
+
+## What's under the hood?
+
+  Open the [interactive web tool](https://witold1.github.io/cars-made-in-usa/). See the source code now on [GitHub](https://github.com/Witold1/cars-made-in-usa).
+
+## Related work
+
+  * [Better Data Visualization Using Beeswarm Chart by Martin Heinz](https://martinheinz.dev/blog/27)
+  * [James Trimble, Dataviz at Office for National Statistics (UK) notebooks on Beeswarm, Jitter, and Histogram plots](https://observablehq.com/@jtrim-ons?page=2)
+  * [Ken Flerage's article on beeswarms in Tableau](https://www.flerlagetwins.com/2020/11/beeswarm.html)
 
 <MediaPresence
   items={[

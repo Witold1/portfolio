@@ -45,6 +45,7 @@ export { GALLERY_BLUR_DATA_URL } from './placeholders';
 export {
   mdxNavItemToGalleryItem,
   filterMdxNavItems,
+  normalizeMediaBackground,
 } from './mdxAdapter';
 
 export { useGalleryLightbox } from './useGalleryLightbox';

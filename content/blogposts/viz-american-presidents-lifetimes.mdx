@@ -3,7 +3,7 @@
 
   title: Visualization "American Presidents - Lifetimes & Service"
   subtitle: Circular lifetime glyphs for U.S. presidents life arcs
-  excerpt: An interactive recreation of the Roman Emperors circular lifetime chart applied to U.S. presidents. We can see lifespan arcs, terms in office, and manner-of-death. Work is scalable for other historical periods.
+  excerpt: An interactive recreation of the Roman Emperors circular lifetime chart applied to U.S. presidents. Lifespan arcs, terms in office, and manner of death, built so the same approach can scale to other historical periods.
 
   created: "2026-07"
   version: public beta (tool), public alpha (dataset), and AI-draft (this page text)
@@ -30,7 +30,7 @@
 />
 
 <Carousel
-  caption="American Presidents - lifetimes and time in office as circular glyphs"
+  caption="American Presidents: lifetimes and time in office as circular glyphs"
   items={[
     {
       type: "image",
@@ -42,37 +42,42 @@
 
 ## What is this about?
 
-  An interactive recreation of the well-known *Roman Emperors* circular lifetime chart by [@dataisinteresting’s WRE-Emperors](https://github.com/dataisinteresting/WRE-Emperors), applied to U.S. presidents.
+  An interactive recreation of the well-known *Roman Emperors* circular lifetime chart by [@dataisinteresting's WRE-Emperors](https://github.com/dataisinteresting/WRE-Emperors), applied to U.S. presidents.
+  Each glyph combines lifespan, time in office, and manner of death in one compact mark, so career length and life length can be compared across the full presidential set.
 
-  Related earlier work on this site: [Rulers of the Kazakh Khanate](/blog/viz-rulers-of-kazakh-khanate).
-
-## How does it work?
+## How do I read it?
 
   Each president is one glyph.
 
-  A thin white arc shows lifespan (full circle = 100 years), starting at birth (12 o’clock) and running clockwise.
+  A thin white arc shows lifespan (full circle = 100 years), starting at birth (12 o'clock) and running clockwise.
   A thick red arc shows time served in office (Cleveland and Trump show two segments for non-consecutive terms).
-  An icon at the arc’s end marks manner of death, or a living marker for presidents still alive.
+  An icon at the arc's end marks manner of death, or a living marker for presidents still alive.
 
   Sort, filter by manner of death, switch theme, and export SVG/PNG from the page chrome.
 
-## Try it yourself
+## Why did I make it?
 
-  See the source code now on [GitHub](https://github.com/Witold1/rulers-lifetimes-and-reign-arcs).
+  I wanted the same circular lifetime language as the Roman Emperors chart, but as a browser tool that is easy to update and reusable for other historical periods.
+  U.S. presidents are a clean first dataset: a fixed roster, clear office dates, and a familiar cast for readers testing the encoding.
 
-## Data
+## What's under the hood?
 
-JSON under `data/` is the source of truth:
+  JSON under `data/` is the source of truth:
 
-* `meta.json` - “as of” date for living presidents’ open arcs
-* `presidents.json` - one object per unique president
+  * `meta.json` - "as of" date for living presidents' open arcs
+  * `presidents.json` - one object per unique president
 
-No bundler: serve `index.html` over HTTP so ES modules and `fetch` work. See the repo’s `CONTRIBUTING.md` for corrections.
+  No bundler: serve `index.html` over HTTP so ES modules and `fetch` work. See the repo's `CONTRIBUTING.md` for corrections.
 
-## License
+  * **Code** (HTML, CSS, JS): MIT
+  * **Dataset** under `data/`: CC BY-SA 4.0
 
-* **Code** (HTML, CSS, JS): MIT  
-* **Dataset** under `data/`: CC BY-SA 4.0
+  Open the [interactive web tool](https://witold1.github.io/rulers-lifetimes-and-reign-arcs/). See the source code now on [GitHub](https://github.com/Witold1/rulers-lifetimes-and-reign-arcs).
+
+## Related work
+
+  The encoding follows [@dataisinteresting's WRE-Emperors](https://github.com/dataisinteresting/WRE-Emperors).
+  Related earlier work on this site: [Rulers of the Kazakh Khanate](/blog/viz-rulers-of-kazakh-khanate).
 
 <MediaPresence items={[]} />
 

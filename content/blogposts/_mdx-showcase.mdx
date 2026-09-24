@@ -78,11 +78,11 @@ On blog and project pages, a **collapsible table of contents** is rendered autom
 
   MDX mixes **markdown** and **JSX**. Block-level JSX (`<div>…</div>` split across lines) must sit in its own “paragraph” in the AST: put **blank lines** before the opening tag and after the closing tag. If you glue `<div>` to prose without a blank line, you can get compile errors like `Expected a closing tag for <div> … before the end of paragraph`. **Do not put `<div>` inside a markdown paragraph.** The renderer wraps prose in `<p>…</p>`, and `<p>` cannot contain `<div>`, which breaks HTML and can cause hydration errors like `Expected server HTML to contain a matching <div> in <p>`. For **inline** chips or highlights, use `<span style={{ display: 'inline-block', … }}>` (or plain `<span>`) instead; reserve `<div>` for blocks separated by blank lines.
 
-  Long posts often put **several paragraphs**, **markdown lists**, **`<NavigatorGrid />`**, and **`<Carousel />`** in the same `<CollapsibleSection>`. Use a **blank line** between paragraphs, between a paragraph and a list, and **before and after** block JSX so MDX does not merge invalid nesting.
+  Long posts often put **several paragraphs**, **markdown lists**, **`<AssetsGrid />`**, and **`<Carousel />`** in the same `<CollapsibleSection>`. Use a **blank line** between paragraphs, between a paragraph and a list, and **before and after** block JSX so MDX does not merge invalid nesting.
 
   Open the **parent** section below for copy-pasteable **`level={4}`** demos (all under one **`level={3}`** parent). Nested `<details>` is valid HTML.
 
-  <CollapsibleSection title="Prose, blocks, NavigatorGrid, lists, and carousels" level={3} defaultOpen={false}>
+  <CollapsibleSection title="Prose, blocks, AssetsGrid, lists, and carousels" level={3} defaultOpen={false}>
 
     <CollapsibleSection title="Plain markdown only (safest default)" level={4} defaultOpen={false}>
 
@@ -118,13 +118,12 @@ On blog and project pages, a **collapsible table of contents** is rendered autom
       Inline with text: <span style={{ display: 'inline-block', background: '#f4f4f5', padding: '0 0.25rem', borderRadius: '2px' }}>highlight strip</span> - use `<span>` (not `<div>`) inside markdown paragraphs so the output stays valid `<p>…</p>`. For a full-width strip, use a block `<div>` with blank lines above and below.
     </CollapsibleSection>
 
-    <CollapsibleSection title="NavigatorGrid nested inside a collapsible" level={4} defaultOpen={false}>
+    <CollapsibleSection title="AssetsGrid nested inside a collapsible" level={4} defaultOpen={false}>
 
-      Short intro in markdown. Block components like `<NavigatorGrid />` and `<MediaGrid />` need the same blank-line discipline: isolate the grid from paragraphs above and below. The **grid** control defaults to **Uniform** (square tiles, like **`/gallery`**). Default **`imageFit` is `none`** for uniform tiles; use **`imageFit="cover"`** to match the gallery, **`imageFit="contain"`** to letterbox (e.g. maps), or set **`grid="variable"`** (or the toolbar) for masonry.
+      Short intro in markdown. Block components like `<AssetsGrid />` need the same blank-line discipline: isolate the grid from paragraphs above and below. Use **`onClick="navigate"`** for tiles that follow `href`, or **`onClick="lightbox"`** (default) to open media. Layout toggle is **Grid | List**. Default **`imageFit` is `cover`**; use **`imageFit="contain"`** to letterbox (e.g. maps).
 
-      <NavigatorGrid
-        title="Toy tiles (styleguide only)"
-        mode="link"
+      <AssetsGrid
+        onClick="navigate"
         size="md"
         imageFit="contain"
         items={[
@@ -145,8 +144,7 @@ On blog and project pages, a **collapsible table of contents** is rendered autom
         ]}
       />
 
-      <MediaGrid
-        title="Compact modal image grid (inline content pattern)"
+      <AssetsGrid
         size="sm"
         showGridToggle={false}
         imageFit="contain"
@@ -154,7 +152,7 @@ On blog and project pages, a **collapsible table of contents** is rendered autom
           {
             image: "https://picsum.photos/500/350?random=511",
             label: "Figure A",
-            subtitle: "Opens in modal"
+            subtitle: "Opens in lightbox"
           },
           {
             image: "https://picsum.photos/500/350?random=512",
@@ -165,7 +163,7 @@ On blog and project pages, a **collapsible table of contents** is rendered autom
             type: "video",
             video: "https://www.w3schools.com/html/mov_bbb.mp4",
             label: "Video tile",
-            subtitle: "Video also opens in modal"
+            subtitle: "Video also opens in lightbox"
           }
         ]}
       />

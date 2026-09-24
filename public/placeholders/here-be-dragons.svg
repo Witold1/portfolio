@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Here be dragons">
+  <defs>
+    <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(32)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#3f3f46" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#52525b"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="#18181b"/>
+  <rect width="800" height="500" fill="url(#hatch)" opacity="0.5"/>
+  <rect width="800" height="500" fill="url(#dots)" opacity="0.3"/>
+
+  <g stroke="#71717a" stroke-width="1" opacity="0.28" fill="none">
+    <path d="M30 140 C200 110, 600 170, 770 130"/>
+    <path d="M30 260 C220 240, 580 280, 770 255"/>
+    <path d="M30 390 C200 420, 600 360, 770 400"/>
+  </g>
+
+  <g transform="translate(100,100)" fill="none" stroke="#d4d4d8" stroke-width="1.4" opacity="0.75">
+    <circle r="36"/>
+    <circle r="6.5"/>
+    <path d="M0 -36 V36 M-36 0 H36"/>
+    <path d="M-25 -25 L25 25 M25 -25 L-25 25" stroke-width="1"/>
+    <path d="M0 -42 L5.5 -27 L0 -30.5 L-5.5 -27 Z" fill="#d4d4d8" stroke="none"/>
+  </g>
+
+  <!-- classic chart sea-dragon: coiled body, crest, open jaws -->
+  <g transform="translate(-120 10)" fill="#a1a1aa" stroke="#d4d4d8" stroke-width="1.2" stroke-linejoin="round">
+    <!-- body coils -->
+    <path d="
+      M120 370
+      C135 310, 200 275, 270 285
+      C320 292, 350 255, 395 235
+      C450 208, 520 220, 560 255
+      C590 280, 630 275, 665 250
+      C685 236, 700 230, 712 228
+      L715 250
+      C695 254, 675 262, 655 278
+      C615 305, 565 312, 525 288
+      C495 270, 450 258, 410 275
+      C380 288, 360 320, 335 338
+      C295 362, 240 358, 200 335
+      C170 318, 145 335, 130 360
+      Z"/>
+
+    <!-- rising neck -->
+    <path d="
+      M700 235
+      C735 200, 752 160, 748 120
+      C745 95, 760 78, 778 76
+      C788 115, 782 155, 765 188
+      C752 212, 732 230, 712 245
+      Z"/>
+
+    <!-- head -->
+    <path d="
+      M755 88
+      C772 62, 805 60, 822 76
+      C836 88, 838 112, 824 128
+      C810 144, 782 146, 762 132
+      C748 122, 746 102, 755 88
+      Z"/>
+
+    <!-- upper jaw -->
+    <path d="
+      M815 90
+      C842 82, 865 90, 872 105
+      C858 100, 840 102, 825 110
+      Z"/>
+
+    <!-- lower jaw -->
+    <path d="
+      M818 116
+      C845 124, 862 140, 866 158
+      C850 144, 832 132, 814 126
+      Z"/>
+
+    <!-- teeth -->
+    <path fill="#e4e4e7" stroke="none" d="
+      M832 98 L836 90 L840 99 Z
+      M846 100 L850 91 L854 102 Z
+      M834 126 L838 136 L842 127 Z
+      M848 130 L852 141 L856 131 Z"/>
+
+    <!-- eye -->
+    <circle cx="788" cy="98" r="6" fill="#18181b" stroke="#e4e4e7" stroke-width="1.6"/>
+    <circle cx="789.5" cy="96.5" r="2" fill="#e4e4e7" stroke="none"/>
+
+    <!-- twin crest horns -->
+    <path d="M758 82 C742 48, 768 34, 780 52 C770 64, 764 74, 760 84 Z"/>
+    <path d="M774 72 C768 40, 795 32, 804 52 C792 60, 782 68, 778 80 Z"/>
+
+    <!-- dorsal spines on coils -->
+    <path d="M255 278 C268 245, 292 244, 302 268 C284 266, 268 270, 255 278 Z"/>
+    <path d="M420 228 C438 192, 468 194, 478 226 C458 222, 438 224, 420 228 Z"/>
+    <path d="M575 250 C590 216, 618 218, 626 250 C606 246, 588 248, 575 250 Z"/>
+
+    <!-- flippers -->
+    <path d="
+      M225 330
+      C190 360, 160 400, 148 435
+      C180 415, 215 385, 245 355
+      C255 340, 242 328, 225 330
+      Z"/>
+    <path d="
+      M490 295
+      C470 335, 458 380, 462 415
+      C490 385, 515 345, 528 310
+      C522 298, 505 292, 490 295
+      Z"/>
+
+    <!-- forked tongue -->
+    <path fill="none" stroke="#e4e4e7" stroke-width="2.2" stroke-linecap="round"
+          d="M870 108 C888 102, 900 92, 910 82 M870 116 C890 124, 902 138, 912 152"/>
+  </g>
+
+  <g transform="translate(-120 10)" fill="none" stroke="#71717a" stroke-width="1" opacity="0.5">
+    <path d="M210 318 Q228 305, 245 318"/>
+    <path d="M280 305 Q298 292, 315 308"/>
+    <path d="M350 325 Q368 312, 385 328"/>
+    <path d="M450 272 Q468 258, 485 275"/>
+    <path d="M530 282 Q548 268, 562 285"/>
+    <path d="M610 282 Q628 268, 642 285"/>
+  </g>
+</svg>

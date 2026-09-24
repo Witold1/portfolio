@@ -72,7 +72,7 @@
   > Data: OECD land use  
   > #dataviz #datavisualization
 
-## How does it work?
+## How do I read it?
 
   Each repetative "block" is one country. Countries are placed in ["small multiple"](https://en.wikipedia.org/wiki/Small_multiple) grid and ordered by their [total land area](https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area).
   Four "petals" show land use types reported by Organization for Economic Co-operation and Development (OECD) and Food and Agriculture Organization of the U.N. (FAO). Petal length is that category’s percent share.
@@ -81,9 +81,9 @@
   The underlying numbers come from [OECD land-use statistics](https://data-explorer.oecd.org/vis?df[ds]=DisseminateFinalDMZ&df[id]=DSD_LAND_USE@DF_LAND_USE&df[ag]=OECD.ENV.EPI) (built on FAO land-cover measures): for each country, the four category shares are percentages of that country’s land, so the petals are comparable as composition rather than as absolute area.
   Absolute km² in the subtitle is derived from those shares and total land area, which is why sorting countries by total area still matters when reading across the small multiples.
 
-## Try it yourself
+## What's under the hood?
 
-  See the source code now on [GitHub](https://github.com/Witold1/petal-land-use-chart) and see refactored notebook on [nbviewer](https://nbviewer.org/github/Witold1/petal-land-use-chart/blob/main/notebooks/petal-type-chart-land-use-by-country.ipynb).
+  Open the [interactive web tool](https://witold1.github.io/petal-land-use-chart/). See the source code now on [GitHub](https://github.com/Witold1/petal-land-use-chart) and see refactored notebook on [nbviewer](https://nbviewer.org/github/Witold1/petal-land-use-chart/blob/main/notebooks/petal-type-chart-land-use-by-country.ipynb).
 
 ## Related work
 

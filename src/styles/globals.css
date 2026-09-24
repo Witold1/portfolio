@@ -23,8 +23,9 @@
   --border-strong: rgb(212 212 216); /* zinc-300 */
   --surface: rgb(244 244 245); /* zinc-100 */
   --surface-elevated: rgb(250 250 250); /* zinc-50 */
-  --surface-hover: rgba(0, 0, 0, 0.04);
-  --surface-wash: rgba(0, 0, 0, 0.035);
+  /* Distinct from wash so list zebra + hover read as three steps (like dark) */
+  --surface-hover: rgb(228 228 231); /* zinc-200 */
+  --surface-wash: rgb(244 244 245); /* zinc-100 */
   --chrome-bg: rgb(244 244 245 / 0.75); /* zinc-100 */
   --focus-ring: rgb(113 113 122); /* zinc-500 */
   --radius-sm: 0.25rem;
