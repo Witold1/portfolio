@@ -1,0 +1,16 @@
+title: Selected demographic profiles of Russia
+subtitle: Population by age, sex, and urban/rural residence, Rosstat (Russia's Federal State Statistics Service) estimates as of January 1, 2024
+created: 2026-09
+
+series: dataset
+categories: [visualizations, analytics]
+tags: [Russia, population, age-sex, pyramid, Rosstat]
+
+type: carousel
+slides:
+  - src: gallery/dataset-census-russia-population-structure-2024/dataset-census-russia-population-structure-2024--balance.webp
+    alt: Age-sex balance as of January 1, 2024
+  - src: gallery/dataset-census-russia-population-structure-2024/dataset-census-russia-population-structure-2024--urban.webp
+    alt: Urban population by age and sex
+  - src: gallery/dataset-census-russia-population-structure-2024/dataset-census-russia-population-structure-2024--rural.webp
+    alt: Rural population by age and sex

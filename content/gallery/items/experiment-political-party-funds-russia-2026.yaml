@@ -1,0 +1,14 @@
+title: Campaign cash of political parties in the 2026 Russian parliamentary elections
+subtitle: Experimental improvements in visualizing different scales of campaign funds raised and spent during federal lower-house election
+created: 2026-09
+
+series: experiment
+categories: [visualizations, analytics]
+tags: [Russia, elections, campaign funds, parties, Central Election Commission]
+
+type: carousel
+slides:
+  - src: gallery/experiment-political-party-funds-russia-2026/experiment-political-party-funds-russia-2026--snake.webp
+    alt: Wrapped bar chart of raised and spent funds
+  - src: gallery/experiment-political-party-funds-russia-2026/experiment-political-party-funds-russia-2026--pictogram.webp
+    alt: Pictogram chart of raised and spent funds
