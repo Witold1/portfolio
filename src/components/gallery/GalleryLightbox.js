@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import GalleryLightboxChrome from './GalleryLightboxChrome';
 import GalleryLightboxItemMedia from './GalleryLightboxItemMedia';
@@ -23,6 +23,7 @@ function getCarouselSlides(item) {
 
 export default function GalleryLightbox({ isOpen, onClose, item }) {
   const [mounted, setMounted] = useState(false);
+  const backdropRef = useRef(null);
   useEscapeToClose(onClose, { enabled: isOpen });
 
   const shareUrl = useMemo(() => buildGalleryShareUrl(item), [item]);
@@ -37,6 +38,43 @@ export default function GalleryLightbox({ isOpen, onClose, item }) {
   useEffect(() => {
     setSlideIndex(0);
   }, [item?.id]);
+
+  // Open with the title in view. Controls stay pinned (sticky nav) while the
+  // image is scrolled up. Follow layout growth until the viewer scrolls.
+  useEffect(() => {
+    if (!isOpen || !mounted) return undefined;
+    const el = backdropRef.current;
+    if (!el) return undefined;
+
+    let follow = true;
+    const pinToTitle = () => {
+      if (!follow) return;
+      const max = el.scrollHeight - el.clientHeight;
+      if (max <= 0) return;
+      el.scrollTop = max;
+    };
+
+    pinToTitle();
+    const raf = requestAnimationFrame(pinToTitle);
+    const frame = el.querySelector('.gallery-lightbox-frame');
+    const ro = new ResizeObserver(pinToTitle);
+    if (frame) ro.observe(frame);
+
+    const release = () => {
+      follow = false;
+    };
+    el.addEventListener('wheel', release, { passive: true });
+    el.addEventListener('touchmove', release, { passive: true });
+    el.addEventListener('pointerdown', release);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      el.removeEventListener('wheel', release);
+      el.removeEventListener('touchmove', release);
+      el.removeEventListener('pointerdown', release);
+    };
+  }, [isOpen, mounted, item?.id, slideIndex]);
 
   const goPrev = useCallback(() => {
     setSlideIndex((i) => (slideCount <= 1 ? 0 : i === 0 ? slideCount - 1 : i - 1));
@@ -75,6 +113,7 @@ export default function GalleryLightbox({ isOpen, onClose, item }) {
 
   return createPortal(
     <div
+      ref={backdropRef}
       className="gallery-lightbox-backdrop fixed inset-0 z-50"
       onClick={onClose}
       role="dialog"
